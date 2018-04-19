@@ -1,1 +1,6 @@
 connector tag for intellij download: mysql:mysql-connector-java:5.1.46
+
+
+URL: jdbc:mysql://festivalproject.mysql.database.azure.com/festivals_project
+User: festival_admin@festivalproject
+Password: muK43her
