@@ -3,7 +3,7 @@ use festivals_project;
 
 create table Festival(
  festID Decimal(9,0) primary key,
- fullname varchar(50),
+ user_name varchar(50),
  location varchar(50),
  production_comp bool,
  start_date date,
@@ -48,15 +48,24 @@ create table Providers(
 create table Music(
   festID       Decimal(9,0) references Festival(festID),
   musicians    varchar(20)  references Providers(festID, name),
+  type_fest    char(10),
   genre        varchar(20),
   outdoor      bool,
   camping      bool
 );
 
+create trigger type_check_music before insert on Music
+  for each row set NEW.type_fest = 'Music'
+;
+
 create table Comedy(
   festID       Decimal(9,0) references Festival(festID),
   comedians    varchar(50)  references Providers(festID, name)
 );
+
+create trigger type_check_comedy before insert on Comedy
+  for each row set NEW.type_fest = 'Comedy'
+;
 
 create table Art(
   festID       Decimal(9,0) references Festival(festID),
@@ -64,9 +73,16 @@ create table Art(
   genre        varchar(20)
 );
 
+create trigger type_check_art before insert on Art
+  for each row set NEW.type_fest = 'Art'
+;
+
 create table Beer(
   festID       Decimal(9,0) references Festival(festID),
+  type         char('Beer'),
   breweries    varchar(50) references Providers(festID, name)
 );
 
-
+create trigger type_check before insert on Beer
+  for each row set NEW.type_fest = 'Beer'
+;
