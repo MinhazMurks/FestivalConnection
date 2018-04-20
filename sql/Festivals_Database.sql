@@ -2,7 +2,7 @@ create database if not exists festivals_project;
 use festivals_project;
 
 create table Festival(
- festID Decimal(9,0) primary key,
+ festID varchar(36) primary key,
  user_name varchar(50),
  location varchar(50),
  production_comp bool,
@@ -12,22 +12,22 @@ create table Festival(
 );
 
 create table Users(
- userID         Decimal(9,0) primary key,
- fullname       varchar(50),
+ userID         varchar(36) primary key,
+ username       varchar(50),
  birthdate      date,
  user_location  varchar(50) references Location(city, state, streetAddress),
  is_company     bool
 );
 
 create table Friends(
-  user1         Decimal(9,0) references Users(userID),
-  user2         Decimal(9,0) references Users(userID),
+  user1         varchar(36) references Users(userID),
+  user2         varchar(36) references Users(userID),
   primary key (user1, user2)
 );
 
 create table Bookmarks(
-  userID       Decimal(9,0) references Users(userID),
-  festID       Decimal(9,0) references Festival(festID),
+  userID       varchar(36) references Users(userID),
+  festID       varchar(36) references Festival(festID),
   primary key (userID, festID)
 );
 
@@ -40,18 +40,19 @@ create table Location(
 );
 
 create table Providers(
-  festID       Decimal(9, 0) references Festival(festID),
+  festID       varchar(36) references Festival(festID),
   name         varchar(50),
   primary key (festID, name)
 );
 
 create table Music(
-  festID       Decimal(9,0) references Festival(festID),
-  musicians    varchar(20)  references Providers(festID, name),
+  festID       varchar(36) NOT NULL,
+  musicians    varchar(20) references Providers(festID, name),
   type_fest    char(10),
   genre        varchar(20),
   outdoor      bool,
-  camping      bool
+  camping      bool,
+  FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
 create trigger type_check_music before insert on Music
@@ -59,8 +60,10 @@ create trigger type_check_music before insert on Music
 ;
 
 create table Comedy(
-  festID       Decimal(9,0) references Festival(festID),
-  comedians    varchar(50)  references Providers(festID, name)
+  festID       varchar(36) NOT NULL,
+  type_fest    char(10),
+  comedians    varchar(50)  references Providers(festID, name),
+  FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
 create trigger type_check_comedy before insert on Comedy
@@ -68,9 +71,11 @@ create trigger type_check_comedy before insert on Comedy
 ;
 
 create table Art(
-  festID       Decimal(9,0) references Festival(festID),
+  festID       varchar(36) NOT NULL,
+  type_fest    char(10),
   artist       varchar(20) references Providers(festID, name),
-  genre        varchar(20)
+  genre        varchar(20),
+  FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
 create trigger type_check_art before insert on Art
@@ -78,9 +83,10 @@ create trigger type_check_art before insert on Art
 ;
 
 create table Beer(
-  festID       Decimal(9,0) references Festival(festID),
-  type         char('Beer'),
-  breweries    varchar(50) references Providers(festID, name)
+  festID       varchar(36) NOT NULL,
+  type_fest    char(10),
+  breweries    varchar(50) references Providers(festID, name),
+  FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
 create trigger type_check before insert on Beer
