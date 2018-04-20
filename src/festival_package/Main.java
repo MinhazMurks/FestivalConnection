@@ -18,12 +18,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        Database database = new Database();
+
+        database.refresh_users();
+
         Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));
 
         root.getStylesheets().add("festival_package/Styles.css");
 
         primaryStage.setScene(new Scene(root,1280, 800));
-        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/Festival Logo2.png"));
+        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/Festival_Logo2.png"));
         primaryStage.setTitle("Festival Connection");
         primaryStage.show();
     }
@@ -34,22 +39,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        try(
-                Connection connection = DriverManager.getConnection
-                        (
-                                "jdbc:mysql://festivalproject.mysql.database.azure.com/festivals_project",
-                                "festival_admin@festivalproject",
-                                "muK43her"
-                        );
-
-                Statement statement = connection.createStatement())
-        {
-
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
 
 
         launch(args);

@@ -1,14 +1,46 @@
 package festival_package;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.swing.plaf.nimbus.State;
+import javax.swing.text.DateFormatter;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 
 public class Database {
 
+
+
+
+
+    Database() throws SQLException {}
+
+
     public static ArrayList<Festival> Festivals = new ArrayList<>();
     public static ArrayList<User> Users = new ArrayList<>();
+
+    static private Connection connection;
+
+
+    static {
+        try {
+            connection = DriverManager.getConnection
+                        (
+                                "jdbc:mysql://festivalproject.mysql.database.azure.com/festivals_project",
+                                "festival_admin@festivalproject",
+                                "muK43her"
+                        );
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 
@@ -40,7 +72,7 @@ public class Database {
 
         return table.substring(0, first_paranthesis_index);
     }
-    public static ResultSet select_from_table(Statement statement, ArrayList<String> columns, String table) throws SQLException
+    public static ResultSet select_from_table(ArrayList<String> columns, String table) throws SQLException
     {
 
         String new_table = table;
@@ -67,9 +99,11 @@ public class Database {
         query = query.concat("\nFROM " + new_table + ";");
 
         System.out.println("Query: " + query);
+
+        Statement statement = connection.createStatement();
         return statement.executeQuery(query);
     }
-    public static ResultSet select_from_table(Statement statement, String column, String table) throws SQLException
+    public static ResultSet select_from_table(String column, String table) throws SQLException
     {
 
         String new_table = table;
@@ -84,6 +118,9 @@ public class Database {
         String sql = "SELECT " + column + " FROM " + new_table + ";";
 
         System.out.println("Query: " + sql);
+
+        Statement statement = connection.createStatement();
+
         return statement.executeQuery(sql);
     }
     public static ResultSet select_all_from_table(Statement statement, String table) throws SQLException
@@ -105,7 +142,60 @@ public class Database {
         return statement.executeQuery(sql);
     }
 
-    Database(){}
+    public static LocalDate date_from_string(String date)
+    {
+        return LocalDate.parse(date);
+    }
+
+
+
+
+    public static void refresh_lists()
+    {
+
+    }
+
+    public static void refresh_festivals()
+    {
+
+    }
+
+    public static void refresh_users() throws SQLException, ParseException {
+
+
+        Users.clear();
+
+        ArrayList<String> columns = new ArrayList<>();
+
+        columns.add("userId");
+        columns.add("user_name");
+        columns.add("birthdate");
+        columns.add("user_location");
+        columns.add("is_company");
+
+        ResultSet rows_user_IDs = select_from_table( columns,"users");
+        System.out.println("GOT TO RESULTSET");
+
+        while(rows_user_IDs.next())
+        {
+            LocalDate birth_date = date_from_string(rows_user_IDs.getDate("birthdate").toString());
+
+            User cur_user = new User(rows_user_IDs.getString("userID"),
+                    rows_user_IDs.getString("user_name"),
+                    birth_date,
+                    rows_user_IDs.getString("user_location"),
+                    rows_user_IDs.getBoolean("is_company"));
+
+            //Users.add(cur_user);
+            System.out.println(cur_user.toString());
+        }
+
+
+
+
+    }
+
+
 
 
 }

@@ -53,5 +53,10 @@
                 <Font size="14.0" />
             </font>
         </Text>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="245.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Festival_Logo2.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
