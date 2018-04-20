@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -12,21 +13,38 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="festival_package.Controller_Main">
     <children>
-        <TextField fx:id="search_field" layoutX="40.0" layoutY="40.0" prefHeight="66.0" prefWidth="248.0" promptText="Search here...">
+        <TextField fx:id="search_field" layoutX="40.0" layoutY="40.0" prefHeight="66.0" prefWidth="275.0" promptText="Search here...">
             <font>
                 <Font size="18.0" />
             </font>
         </TextField>
-        <ChoiceBox fx:id="search_dropdown" layoutX="288.0" layoutY="40.0" prefHeight="66.0" prefWidth="61.0" />
-        <Button fx:id="search_button" layoutX="449.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="66.0" prefWidth="61.0" text="Search">
+        <ChoiceBox fx:id="search_dropdown" layoutX="315.0" layoutY="40.0" prefHeight="66.0" prefWidth="61.0" />
+        <Button fx:id="search_button" layoutX="449.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="66.0" prefWidth="61.0">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+         <graphic>
+            <ImageView fitHeight="61.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/magnifying_glass.png" />
+               </image>
+            </ImageView>
+         </graphic>
         </Button>
         <ListView fx:id="search_listview" layoutX="40.0" layoutY="146.0" prefHeight="618.0" prefWidth="471.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="142.0" />
-        <Button fx:id="advanced_button" layoutX="349.0" layoutY="40.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="100.0" text="Advanced" />
+        <Button fx:id="advanced_button" layoutX="376.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_advanced_button" prefHeight="66.0" prefWidth="64.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="61.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/settings.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
         <ListView fx:id="information_listview" layoutX="760.0" layoutY="40.0" prefHeight="418.0" prefWidth="671.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="569.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0" />
-        <Button fx:id="friends_button" layoutX="569.0" layoutY="509.0" mnemonicParsing="false" prefHeight="251.0" prefWidth="303.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="569.0">
+        <Button fx:id="friends_button" layoutX="569.0" layoutY="509.0" mnemonicParsing="false" onAction="#on_friend_button" prefHeight="251.0" prefWidth="303.0" stylesheets="@Styles.css" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="569.0">
             <font>
                 <Font size="48.0" />
             </font>
@@ -41,7 +59,7 @@
             </ImageView>
          </graphic>
         </Button>
-        <Button fx:id="favorites_button" layoutX="937.0" layoutY="509.0" mnemonicParsing="false" prefHeight="251.0" prefWidth="303.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="937.0">
+        <Button fx:id="favorites_button" blendMode="SRC_ATOP" cache="true" layoutX="937.0" layoutY="509.0" mnemonicParsing="false" onAction="#on_favorite_button" prefHeight="251.0" prefWidth="303.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="937.0">
             <font>
                 <Font size="48.0" />
             </font>
@@ -55,6 +73,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
         </Button>
     </children>
 </AnchorPane>

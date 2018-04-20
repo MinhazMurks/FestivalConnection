@@ -1,0 +1,22 @@
+
+
+
+
+.button:hover
+{
+    -fx-scale-x: .95;
+    -fx-scale-y: .95;
+    -fx-effect: innershadow(gaussian, rgba(255, 25, 0, 0.24), 10000, 100, 0, 0);
+}
+
+
+
+.choice-box:hover
+{
+    -fx-scale-x: .95;
+    -fx-scale-y: .95;
+    -fx-effect: innershadow(gaussian, rgba(255, 25, 0, 0.24), 10000, 100, 0, 0);
+}
+
+
+
