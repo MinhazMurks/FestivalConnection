@@ -1026,168 +1026,163 @@ festID</ColNames>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="256" parent="233" name="user_name">
+    <column id="256" parent="233" name="location">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="233" name="location">
+    <column id="257" parent="233" name="production_comp">
       <Position>3</Position>
-      <DataType>varchar(50)|0s</DataType>
+      <DataType>decimal(9)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="258" parent="233" name="production_comp">
+    <column id="258" parent="233" name="start_date">
       <Position>4</Position>
-      <DataType>tinyint(1)|0s</DataType>
+      <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="233" name="start_date">
+    <column id="259" parent="233" name="end_date">
       <Position>5</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="260" parent="233" name="end_date">
+    <column id="260" parent="233" name="price">
       <Position>6</Position>
-      <DataType>date|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="261" parent="233" name="price">
-      <Position>7</Position>
       <DataType>decimal(9,2 digit)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="262" parent="233" name="PRIMARY">
+    <key id="261" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>festID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="263" parent="234" name="user1">
+    <column id="262" parent="234" name="user1">
       <Position>1</Position>
       <DataType>decimal(9)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="234" name="user2">
+    <column id="263" parent="234" name="user2">
       <Position>2</Position>
       <DataType>decimal(9)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="265" parent="234" name="PRIMARY">
+    <key id="264" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user1
 user2</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="266" parent="235" name="city">
+    <column id="265" parent="235" name="city">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="267" parent="235" name="state">
+    <column id="266" parent="235" name="state">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="235" name="streetAddress">
+    <column id="267" parent="235" name="streetAddress">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="235" name="address">
+    <column id="268" parent="235" name="address">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="270" parent="235" name="PRIMARY">
+    <key id="269" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>city
 state
 streetAddress</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="271" parent="236" name="festID">
+    <column id="270" parent="236" name="festID">
       <Position>1</Position>
       <DataType>decimal(9)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="236" name="musicians">
+    <column id="271" parent="236" name="musicians">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="236" name="type_fest">
+    <column id="272" parent="236" name="type_fest">
       <Position>3</Position>
       <DataType>char(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="274" parent="236" name="genre">
+    <column id="273" parent="236" name="genre">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="236" name="outdoor">
+    <column id="274" parent="236" name="outdoor">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="236" name="camping">
+    <column id="275" parent="236" name="camping">
       <Position>6</Position>
       <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <trigger id="277" parent="236" name="type_check_music">
+    <trigger id="276" parent="236" name="type_check_music">
       <Turn>before-row</Turn>
       <Events>I</Events>
     </trigger>
-    <column id="278" parent="237" name="festID">
+    <column id="277" parent="237" name="festID">
       <Position>1</Position>
       <DataType>decimal(9)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="237" name="name">
+    <column id="278" parent="237" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="280" parent="237" name="PRIMARY">
+    <key id="279" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>festID
 name</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="281" parent="238" name="userID">
+    <column id="280" parent="238" name="userID">
       <Position>1</Position>
       <DataType>decimal(9)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="238" name="fullname">
+    <column id="281" parent="238" name="user_name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="238" name="birthdate">
+    <column id="282" parent="238" name="birthdate">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="238" name="user_location">
+    <column id="283" parent="238" name="user_location">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="238" name="is_company">
+    <column id="284" parent="238" name="is_company">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="286" parent="238" name="PRIMARY">
+    <key id="285" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userID</ColNames>
       <Primary>1</Primary>
