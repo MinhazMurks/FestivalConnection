@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -20,7 +21,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));
-        primaryStage.setScene(new Scene(root, 200, 200));
+
+        primaryStage.setScene(new Scene(root,1280, 800));
         primaryStage.getIcons().add(new Image("file:resources/test-image.png"));
         primaryStage.setTitle("Festival Connection");
         primaryStage.show();
