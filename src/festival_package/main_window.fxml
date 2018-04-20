@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -21,21 +23,38 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <ListView fx:id="search_listview" layoutX="40.0" layoutY="146.0" prefHeight="618.0" prefWidth="471.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" />
+        <ListView fx:id="search_listview" layoutX="40.0" layoutY="146.0" prefHeight="618.0" prefWidth="471.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="142.0" />
         <Button fx:id="advanced_button" layoutX="349.0" layoutY="40.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="100.0" text="Advanced" />
         <ListView fx:id="information_listview" layoutX="760.0" layoutY="40.0" prefHeight="418.0" prefWidth="671.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="569.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0" />
-        <Button fx:id="friends_button" layoutX="569.0" layoutY="509.0" mnemonicParsing="false" prefHeight="251.0" prefWidth="303.0" AnchorPane.bottomAnchor="40.0">
+        <Button fx:id="friends_button" layoutX="569.0" layoutY="509.0" mnemonicParsing="false" prefHeight="251.0" prefWidth="303.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="569.0">
             <font>
                 <Font size="48.0" />
             </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <graphic>
+            <ImageView fitHeight="210.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/friend_smaller.png" />
+               </image>
+            </ImageView>
+         </graphic>
         </Button>
-        <Button fx:id="favorites_button" layoutX="937.0" layoutY="509.0" mnemonicParsing="false" prefHeight="251.0" prefWidth="303.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
+        <Button fx:id="favorites_button" layoutX="937.0" layoutY="509.0" mnemonicParsing="false" prefHeight="251.0" prefWidth="303.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="937.0">
             <font>
                 <Font size="48.0" />
             </font>
+         <graphic>
+            <ImageView fitHeight="210.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/favorite_smaller.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
         </Button>
     </children>
 </AnchorPane>
