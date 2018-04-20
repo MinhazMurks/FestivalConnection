@@ -3,7 +3,7 @@ package festival_package;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class Controller {
+public class Controller_Main {
 
 
     @FXML

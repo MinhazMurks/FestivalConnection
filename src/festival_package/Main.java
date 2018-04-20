@@ -21,7 +21,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));
 
         primaryStage.setScene(new Scene(root,1280, 800));
-        primaryStage.getIcons().add(new Image("file:resources/test-image.png"));
+        primaryStage.getIcons().add(new Image("file:resources/Festival Logo2.png"));
         primaryStage.setTitle("Festival Connection");
         primaryStage.show();
     }
