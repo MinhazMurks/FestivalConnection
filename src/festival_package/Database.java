@@ -72,6 +72,35 @@ public class Database {
 
         return table.substring(0, first_paranthesis_index);
     }
+    public static String fix_title(String word)
+    {
+        String result = word;
+
+
+        if(result.endsWith(".fxml"))
+        {
+            result = result.substring(0, result.indexOf(".fxml"));
+        }
+        if(result.contains("_"))
+        {
+            result = result.replace('_', ' ');
+        }
+
+
+        for(int i = 0; i < result.length(); i++)
+        {
+            if(Character.isLowerCase(result.charAt(i)) && i + 1 < result.length() && Character.isUpperCase(result.charAt(i + 1)))
+            {
+                System.out.println("character: " + result.charAt(i) + " is lowercase and " + result.charAt(i + 1) + " is uppercase");
+                System.out.println("Old result: " + result);
+                result = word.substring(0, i + 1) + " " + result.substring(i + 1, result.length());
+                System.out.println("New Result: " + result);
+            }
+
+        }
+
+        return result;
+    }
     public static ResultSet select_from_table(ArrayList<String> columns, String table) throws SQLException
     {
 
