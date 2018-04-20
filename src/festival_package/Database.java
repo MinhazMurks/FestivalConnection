@@ -1,4 +1,4 @@
-package sample;
+package festival_package;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Database {
 
-    public static ArrayList<Festival> Festivals = new ArrayList<Festival>();
-    public static ArrayList<User> Users = new ArrayList<User>();
+    public static ArrayList<Festival> Festivals = new ArrayList<>();
+    public static ArrayList<User> Users = new ArrayList<>();
 
 
 
@@ -31,19 +31,14 @@ public class Database {
 
         for(; i >= 0; i--)
         {
-            if(table.charAt(i) == ')')
-            {
-                continue;
-            }
-            else if(table.charAt(i) == '(')
+            if(table.charAt(i) == '(')
             {
                 first_paranthesis_index = i;
                 break;
             }
         }
 
-        String result = table.substring(0, first_paranthesis_index);
-        return result;
+        return table.substring(0, first_paranthesis_index);
     }
     public static ResultSet select_from_table(Statement statement, ArrayList<String> columns, String table) throws SQLException
     {
@@ -110,7 +105,7 @@ public class Database {
         return statement.executeQuery(sql);
     }
 
-    Database(){};
+    Database(){}
 
 
 }

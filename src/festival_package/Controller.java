@@ -1,4 +1,4 @@
-package sample;
+package festival_package;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

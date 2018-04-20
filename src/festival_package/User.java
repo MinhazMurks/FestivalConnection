@@ -1,12 +1,12 @@
-package sample;
+package festival_package;
 
 public class User {
 
-    String userID;
-    String user_name;
-    String birth_date;
-    String user_location;
-    boolean is_company;
+    private String userID;
+    private String user_name;
+    private String birth_date;
+    private String user_location;
+    private boolean is_company;
 
 
     User(String userID, String user_name, boolean is_company)

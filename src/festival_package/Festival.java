@@ -1,13 +1,13 @@
-package sample;
+package festival_package;
 
 public class Festival {
 
-    String festID;
-    String location;
-    String production_comp;
-    String start_date;
-    String end_date;
-    float price;
+    private String festID;
+    private String location;
+    private String production_comp;
+    private String start_date;
+    private String end_date;
+    private float price;
 
     Festival(String festID, String production_comp,float price)
     {
