@@ -242,8 +242,7 @@ public class Database {
         }
     }
 
-    public static void refresh_festivals()
-    {
+    public static void refresh_festivals() throws SQLException {
         Festivals.clear();
 
         ArrayList<String> columns = new ArrayList<>();
@@ -288,6 +287,16 @@ public class Database {
         query += "\n JOIN " + comedy_table + " ON " + festival_table + ".fest_id = " + comedy_table + ".fest_id";
         query += "\n JOIN " + music_table + " ON " + festival_table + ".fest_id = " + music_table + ".fest_id";
         query += "\n JOIN " + providers_table + " ON " + festival_table + ".fest_id = " + providers_table + ".fest_id";
+
+        query += ";";
+
+        Statement statement = connection.createStatement();
+
+
+    }
+
+    public static void re_add_fest_names()
+    {
 
     }
 

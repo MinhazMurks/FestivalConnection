@@ -6,7 +6,7 @@
     -transition: -fx-background-color 5s;
 
 }
-.label
+.customlabel
 {
     -fx-background-color: WHITE;
     -fx-border-width: 1;
@@ -20,18 +20,17 @@
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
-.choice-box
+.choiceboxcustom
 {
     -fx-background-color: linear-gradient(#ffffff, #ebebeb);
 }
 
-.choice-box:hover
+.choiceboxcustom:hover
 {
 
     -fx-scale-x: .95;
     -fx-scale-y: .95;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
-    transition: all 1s ease;
 }
 
 

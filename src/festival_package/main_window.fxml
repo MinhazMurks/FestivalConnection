@@ -21,7 +21,7 @@
                 <Font size="18.0" />
             </font>
         </TextField>
-        <ChoiceBox fx:id="search_dropdown" layoutX="315.0" layoutY="40.0" prefHeight="66.0" prefWidth="61.0">
+        <ChoiceBox fx:id="search_dropdown" layoutX="315.0" layoutY="40.0" prefHeight="66.0" prefWidth="61.0" styleClass="choiceboxcustom">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="User" />
@@ -86,7 +86,7 @@
             <Insets />
          </opaqueInsets>
         </Button>
-      <Label fx:id="description_pane" alignment="CENTER" contentDisplay="CENTER" layoutX="569.0" layoutY="40.0" prefHeight="414.0" prefWidth="669.0" text="Click an entry to see more information" textAlignment="CENTER" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+      <Label fx:id="description_pane" alignment="CENTER" contentDisplay="CENTER" layoutX="569.0" layoutY="40.0" prefHeight="414.0" prefWidth="669.0" styleClass="customlabel" text="Click an entry to see more information" textAlignment="CENTER" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font size="36.0" />
          </font></Label>
