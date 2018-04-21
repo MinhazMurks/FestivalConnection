@@ -1,14 +1,11 @@
 package festival_package;
 
-import javax.swing.plaf.nimbus.State;
-import javax.swing.text.DateFormatter;
+
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 
 
 public class Database {
@@ -22,6 +19,9 @@ public class Database {
 
     public static ArrayList<Festival> Festivals = new ArrayList<>();
     public static ArrayList<User> Users = new ArrayList<>();
+    public static ArrayList<String> Locations = new ArrayList<>();
+
+    public static ArrayList<String> test_values = new ArrayList<>();
 
     static private Connection connection;
 
@@ -177,21 +177,13 @@ public class Database {
     }
 
 
-
-
     public static void refresh_lists()
     {
 
     }
 
-    public static void refresh_festivals()
+    public static void refresh_users() throws SQLException, ParseException
     {
-
-    }
-
-    public static void refresh_users() throws SQLException, ParseException {
-
-
         Users.clear();
 
         ArrayList<String> columns = new ArrayList<>();
@@ -215,15 +207,34 @@ public class Database {
                     rows_user_IDs.getString("user_location"),
                     rows_user_IDs.getBoolean("is_company"));
 
-            //Users.add(cur_user);
+            Users.add(cur_user);
             System.out.println(cur_user.toString());
         }
 
-
+        rows_user_IDs.close();
 
 
     }
 
+    public static void refresh_festivals()
+    {
+        Festivals.clear();
+
+        ArrayList<String> columns = new ArrayList<>();
+
+        columns.add("festID");
+        columns.add("location");
+        columns.add("production_comp");
+        columns.add("type_fest");
+        columns.add("start_date");
+        columns.add("end_date");
+        columns.add("price");
+
+        columns.add("type_fest");
+
+        columns.add("name");
+
+    }
 
 
 

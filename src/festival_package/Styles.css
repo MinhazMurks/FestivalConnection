@@ -6,8 +6,7 @@
 {
     -fx-scale-x: .95;
     -fx-scale-y: .95;
-    -fx-effect: innershadow(gaussian, rgba(255, 25, 0, 0.24), 10000, 100, 0, 0);
-}
+    -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);}
 
 
 
@@ -15,8 +14,35 @@
 {
     -fx-scale-x: .95;
     -fx-scale-y: .95;
-    -fx-effect: innershadow(gaussian, rgba(255, 25, 0, 0.24), 10000, 100, 0, 0);
+    -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);}
+
+.list-cell
+{
+    -fx-cell-size: 30;
+    -fx-font-size: 15;
 }
 
 
 
+
+.list-cell:odd
+{
+    -fx-background-color: rgba(255, 0, 208, 0);
+
+}
+
+
+
+.list-cell:filled:selected:focused
+{
+    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.64));
+    -fx-text-fill: rgb(255, 255, 255);;
+}
+
+
+
+.list-cell:filled:hover
+{
+    -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
+
+}
