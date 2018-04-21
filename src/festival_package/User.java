@@ -6,11 +6,11 @@ import java.util.Date;
 
 public class User {
 
-    private String userID;
-    private String user_name;
-    private LocalDate birth_date;
-    private String user_location;
-    private boolean is_company;
+    String userID;
+    String user_name;
+    LocalDate birth_date;
+    String user_location;
+    boolean is_company;
 
 
     User(String userID, String user_name, boolean is_company)

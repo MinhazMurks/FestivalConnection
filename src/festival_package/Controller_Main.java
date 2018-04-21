@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 
 
@@ -37,9 +38,6 @@ public class Controller_Main {
     ListView search_listview;
 
     ListProperty<String> listProperty = new SimpleListProperty<>();
-
-    ObservableList observableList = FXCollections.observableArrayList();
-
 
 
 
@@ -62,7 +60,7 @@ public class Controller_Main {
         System.out.println("Fuuuuck!");
 
         Database.test_values.add("Cool");
-        listProperty.set(FXCollections.observableArrayList(Database.test_values));
+        listProperty.set(FXCollections.observableArrayList(Database.User_Names));
 
         search_listview.itemsProperty().bind(listProperty);
 

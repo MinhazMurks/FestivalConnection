@@ -19,9 +19,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Database database = new Database();
 
-        database.refresh_users();
+        Database.refresh_users();
 
         Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));
 

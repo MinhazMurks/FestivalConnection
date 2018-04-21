@@ -13,12 +13,12 @@ public class Database {
 
 
 
-
-    Database() throws SQLException {}
-
-
+    //Globals
     public static ArrayList<Festival> Festivals = new ArrayList<>();
+
     public static ArrayList<User> Users = new ArrayList<>();
+    public static ArrayList<String> User_Names = new ArrayList<>();
+
     public static ArrayList<String> Locations = new ArrayList<>();
 
     public static ArrayList<String> test_values = new ArrayList<>();
@@ -216,6 +216,14 @@ public class Database {
 
     }
 
+    public static void re_add_user_names()
+    {
+        for(int i = 0; i < Users.size(); i++)
+        {
+            User_Names.add(Users.get(i).user_name);
+        }
+    }
+
     public static void refresh_festivals()
     {
         Festivals.clear();
@@ -235,6 +243,7 @@ public class Database {
         columns.add("name");
 
     }
+
 
 
 
