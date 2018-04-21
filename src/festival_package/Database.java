@@ -291,6 +291,39 @@ public class Database {
         query += ";";
 
         Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        while(resultSet.next())
+        {
+            LocalDate start_date = date_from_string(resultSet.getDate("start_date").toString());
+            LocalDate end_date = date_from_string(resultSet.getDate("end_date").toString());
+
+            Festival temp = new Festival(resultSet.getString("fest_ID"),
+                                         resultSet.getString("location"),
+                                         resultSet.getString("production_comp"),
+                                         resultSet.getString("fest_type"),
+                                         start_date, end_date,
+                                         resultSet.getFloat("price")
+                    );
+
+            if (temp.type.equals("Music"))
+            {
+
+            }
+            if (temp.type.equals("Comedy"))
+            {
+
+            }
+            if (temp.type.equals("Art"))
+            {
+
+            }
+            if(temp.type.equals("Beer"))
+            {
+                
+            }
+
+        }
 
 
     }
