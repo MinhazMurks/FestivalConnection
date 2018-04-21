@@ -6,6 +6,8 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,15 +16,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.xml.soap.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -37,7 +43,15 @@ public class Controller_Main {
     @FXML
     ListView search_listview;
 
+    @FXML
+    Button search_button;
+
+    @FXML
+    Label description_pane;
+
     ListProperty<String> listProperty = new SimpleListProperty<>();
+
+
 
 
 
@@ -53,19 +67,30 @@ public class Controller_Main {
 
     }
 
+    @FXML
+    public void initialize()
+    {
+        listProperty.set(FXCollections.observableArrayList(Database.User_Names));
 
+        search_listview.itemsProperty().bind(listProperty);
+
+        search_listview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue)
+            {
+                description_pane.setText((Database.Users.get(Database.User_Names.indexOf(search_listview.getSelectionModel().getSelectedItem())).description()));
+            }
+        });
+
+    }
 
     public void on_search_button(ActionEvent event)
     {
         System.out.println("Fuuuuck!");
 
-        Database.test_values.add("Cool");
-        listProperty.set(FXCollections.observableArrayList(Database.User_Names));
-
-        search_listview.itemsProperty().bind(listProperty);
 
 
-        System.out.println(Database.test_values.toString());
     }
 
 

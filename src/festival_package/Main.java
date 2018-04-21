@@ -30,16 +30,15 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image("file:src/festival_package/resources/Festival Logo2.png"));
         primaryStage.setTitle("Festival Connection");
         primaryStage.show();
+
     }
 
 
 
 
 
-    public static void main(String[] args) {
-
-
-
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }

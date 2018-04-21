@@ -40,9 +40,7 @@ public class Database {
         }
     }
 
-
-
-
+    
 
 
     public static void insert_to_table(Statement statement, String table, String value) throws SQLException
@@ -177,6 +175,17 @@ public class Database {
     }
 
 
+    public static User user_from_user_name(String username)
+    {
+        User result;
+
+        User temp = new User(username);
+
+        result = Users.get(Users.indexOf(temp));
+
+        return result;
+    }
+
     public static void refresh_lists()
     {
 
@@ -212,12 +221,15 @@ public class Database {
         }
 
         rows_user_IDs.close();
+        re_add_user_names();
 
 
     }
 
     public static void re_add_user_names()
     {
+        User_Names.clear();
+
         for(int i = 0; i < Users.size(); i++)
         {
             User_Names.add(Users.get(i).user_name);

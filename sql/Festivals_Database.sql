@@ -17,28 +17,28 @@ drop table Beer;
 create table Festival(
   festID Decimal(9,0) primary key,
   location varchar(50),
-  production_comp Decimal(9,0) references Users(userID),
+  production_comp varchar(36) references Users(userID),
   start_date date,
   end_date date,
   price decimal(9,2)
 );
 
 create table Users(
-  userID         Decimal(9,0) primary key,
-  user_name       varchar(50),
+  userID         varchar(36) primary key,
+  user_name      varchar(50) unique,
   birthdate      date,
   user_location  varchar(50) references Location(city, state, streetAddress),
   is_company     bool
 );
 
 create table Friends(
-  user1         Decimal(9,0) references Users(userID),
-  user2         Decimal(9,0) references Users(userID),
+  user1         varchar(36) references Users(userID),
+  user2         varchar(36) references Users(userID),
   primary key (user1, user2)
 );
 
 create table Bookmarks(
-  userID       Decimal(9,0) references Users(userID),
+  userID       varchar(36) references Users(userID),
   festID       Decimal(9,0) references Festival(festID),
   primary key (userID, festID)
 );

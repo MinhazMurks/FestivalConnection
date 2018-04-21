@@ -6,14 +6,18 @@
     -transition: -fx-background-color 5s;
 
 }
+.label
+{
+    -fx-background-color: WHITE;
+    -fx-border-width: 1;
+    -fx-border-color: rgba(0, 0, 0, 0.21);
+}
 
 .button:hover
 {
     -fx-scale-x: .95;
     -fx-scale-y: .95;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
-
-
 }
 
 .choice-box
@@ -30,14 +34,17 @@
     transition: all 1s ease;
 }
 
+
+.list-view
+{
+    -fx-border-color: #c9c9c9;
+}
+
 .list-cell
 {
     -fx-cell-size: 30;
     -fx-font-size: 15;
 }
-
-
-
 
 .list-cell:odd
 {
@@ -58,5 +65,4 @@
 .list-cell:filled:hover
 {
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
-
 }
