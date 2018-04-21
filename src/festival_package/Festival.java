@@ -16,6 +16,12 @@ public class Festival {
     LocalDate end_date;
     float price;
 
+    //not every festival has the below attributes:
+    String genre = "";
+    boolean camping = false;
+    boolean outdoor = false;
+
+
     Festival(String festID, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price)
     {
         this.festID = festID;
@@ -26,6 +32,34 @@ public class Festival {
         this.end_date = end_date;
         this.price = price;
     }
+
+    Festival(String festID, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price, String genre)
+    {
+        this.festID = festID;
+        this.location = location;
+        this.production_comp = production_comp;
+        this.type = type;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.price = price;
+        this.genre = genre;
+    }
+
+    Festival(String festID, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price, String genre, boolean camping, boolean outdoor)
+    {
+        this.festID = festID;
+        this.location = location;
+        this.production_comp = production_comp;
+        this.type = type;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.price = price;
+        this.genre = genre;
+        this.camping = camping;
+        this.outdoor = outdoor;
+    }
+
+
 
     boolean providers_empty()
     {

@@ -15,9 +15,15 @@ public class Database {
 
     //Globals
     public static ArrayList<Festival> Festivals = new ArrayList<>();
+    public static ArrayList<Festival> Festivals_Names = new ArrayList<>();
 
     public static ArrayList<User> Users = new ArrayList<>();
     public static ArrayList<String> User_Names = new ArrayList<>();
+
+
+    public static ArrayList<User> Displayed_Users = new ArrayList<>();
+    public static ArrayList<String> Displayed_User_Names = new ArrayList<>();
+
 
     public static ArrayList<String> Locations = new ArrayList<>();
 
@@ -40,7 +46,7 @@ public class Database {
         }
     }
 
-    
+
 
 
     public static void insert_to_table(Statement statement, String table, String value) throws SQLException
@@ -119,7 +125,7 @@ public class Database {
 
             if(i + 1 != columns.size())
             {
-                query = query.concat(", ");
+                query += ", ";
             }
         }
 
@@ -163,7 +169,7 @@ public class Database {
 
         String sql = "SELECT *";
 
-        sql = sql.concat("\nFROM " + new_table + ";");
+        sql += "\nFROM " + new_table + ";";
 
         System.out.println("Query: " + sql);
         return statement.executeQuery(sql);
@@ -249,10 +255,39 @@ public class Database {
         columns.add("start_date");
         columns.add("end_date");
         columns.add("price");
+        String festival_table = "festival";
 
         columns.add("type_fest");
 
+        //all the subtables of festival
+        String art_table = "art";
+        String beer_table = "beer";
+        String comedy_table = "comedy";
+        String music_table = "music";
+
+
         columns.add("name");
+        String providers_table = "providers";
+
+        String query = "SELECT ";
+
+        for(int i = 0; i < columns.size(); i++)
+        {
+            query += columns.get(i);
+
+            if((i + 1) < columns.size())
+            {
+                query += " ,";
+            }
+        }
+
+        query += " FROM " + festival_table;
+
+        query += "\n JOIN " + art_table + " ON " + festival_table + ".fest_id = " + art_table + ".fest_id";
+        query += "\n JOIN " + beer_table + " ON " + festival_table + ".fest_id = " + beer_table + ".fest_id";
+        query += "\n JOIN " + comedy_table + " ON " + festival_table + ".fest_id = " + comedy_table + ".fest_id";
+        query += "\n JOIN " + music_table + " ON " + festival_table + ".fest_id = " + music_table + ".fest_id";
+        query += "\n JOIN " + providers_table + " ON " + festival_table + ".fest_id = " + providers_table + ".fest_id";
 
     }
 

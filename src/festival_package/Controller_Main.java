@@ -30,6 +30,8 @@ import javafx.util.Duration;
 
 import javax.xml.soap.Text;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -85,12 +87,14 @@ public class Controller_Main {
 
     }
 
-    public void on_search_button(ActionEvent event)
-    {
+    public void on_search_button(ActionEvent event) throws SQLException, ParseException {
         System.out.println("Fuuuuck!");
 
+        Database.refresh_users();
 
+        listProperty.set(FXCollections.observableArrayList(Database.User_Names));
 
+        search_listview.itemsProperty().bind(listProperty);
     }
 
 
