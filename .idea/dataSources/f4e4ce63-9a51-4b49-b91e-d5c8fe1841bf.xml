@@ -942,7 +942,8 @@
     </table>
     <column id="239" parent="229" name="festID">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="240" parent="229" name="type_fest">
@@ -960,229 +961,277 @@
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <trigger id="243" parent="229" name="type_check_art">
+    <index id="243" parent="229" name="festID">
+      <ColNames>festID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="244" parent="229" name="art_ibfk_1">
+      <ColNames>festID</ColNames>
+      <RefSchemaName>festivals_project</RefSchemaName>
+      <RefTableName>festival</RefTableName>
+      <RefColNames>festID</RefColNames>
+    </foreign-key>
+    <trigger id="245" parent="229" name="type_check_art">
       <Turn>before-row</Turn>
       <Events>I</Events>
     </trigger>
-    <column id="244" parent="230" name="festID">
+    <column id="246" parent="230" name="festID">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="230" name="type_fest">
+    <column id="247" parent="230" name="type_fest">
       <Position>2</Position>
       <DataType>char(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="230" name="breweries">
+    <column id="248" parent="230" name="breweries">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <trigger id="247" parent="230" name="type_check">
+    <index id="249" parent="230" name="festID">
+      <ColNames>festID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="250" parent="230" name="beer_ibfk_1">
+      <ColNames>festID</ColNames>
+      <RefSchemaName>festivals_project</RefSchemaName>
+      <RefTableName>festival</RefTableName>
+      <RefColNames>festID</RefColNames>
+    </foreign-key>
+    <trigger id="251" parent="230" name="type_check">
       <Turn>before-row</Turn>
       <Events>I</Events>
     </trigger>
-    <column id="248" parent="231" name="userID">
+    <column id="252" parent="231" name="userID">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="231" name="festID">
+    <column id="253" parent="231" name="festID">
       <Position>2</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="250" parent="231" name="PRIMARY">
+    <key id="254" parent="231" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userID
 festID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="251" parent="232" name="festID">
+    <column id="255" parent="232" name="festID">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="252" parent="232" name="type_fest">
+    <column id="256" parent="232" name="type_fest">
       <Position>2</Position>
       <DataType>char(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="253" parent="232" name="comedians">
+    <column id="257" parent="232" name="comedians">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <trigger id="254" parent="232" name="type_check_comedy">
+    <index id="258" parent="232" name="festID">
+      <ColNames>festID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="259" parent="232" name="comedy_ibfk_1">
+      <ColNames>festID</ColNames>
+      <RefSchemaName>festivals_project</RefSchemaName>
+      <RefTableName>festival</RefTableName>
+      <RefColNames>festID</RefColNames>
+    </foreign-key>
+    <trigger id="260" parent="232" name="type_check_comedy">
       <Turn>before-row</Turn>
       <Events>I</Events>
     </trigger>
-    <column id="255" parent="233" name="festID">
+    <column id="261" parent="233" name="festID">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="256" parent="233" name="location">
+    <column id="262" parent="233" name="user_name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="233" name="production_comp">
+    <column id="263" parent="233" name="location">
       <Position>3</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="258" parent="233" name="start_date">
+    <column id="264" parent="233" name="production_comp">
       <Position>4</Position>
-      <DataType>date|0s</DataType>
+      <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="233" name="end_date">
+    <column id="265" parent="233" name="start_date">
       <Position>5</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="260" parent="233" name="price">
+    <column id="266" parent="233" name="end_date">
       <Position>6</Position>
+      <DataType>date|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="267" parent="233" name="price">
+      <Position>7</Position>
       <DataType>decimal(9,2 digit)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="261" parent="233" name="PRIMARY">
+    <key id="268" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>festID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="262" parent="234" name="user1">
+    <column id="269" parent="234" name="user1">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="234" name="user2">
+    <column id="270" parent="234" name="user2">
       <Position>2</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="264" parent="234" name="PRIMARY">
+    <key id="271" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user1
 user2</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="265" parent="235" name="city">
+    <column id="272" parent="235" name="city">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="266" parent="235" name="state">
+    <column id="273" parent="235" name="state">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="267" parent="235" name="streetAddress">
+    <column id="274" parent="235" name="streetAddress">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="235" name="address">
+    <column id="275" parent="235" name="address">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="269" parent="235" name="PRIMARY">
+    <key id="276" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>city
 state
 streetAddress</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="270" parent="236" name="festID">
+    <column id="277" parent="236" name="festID">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="236" name="musicians">
+    <column id="278" parent="236" name="musicians">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="236" name="type_fest">
+    <column id="279" parent="236" name="type_fest">
       <Position>3</Position>
       <DataType>char(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="236" name="genre">
+    <column id="280" parent="236" name="genre">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="274" parent="236" name="outdoor">
+    <column id="281" parent="236" name="outdoor">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="236" name="camping">
+    <column id="282" parent="236" name="camping">
       <Position>6</Position>
       <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <trigger id="276" parent="236" name="type_check_music">
+    <index id="283" parent="236" name="festID">
+      <ColNames>festID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="284" parent="236" name="music_ibfk_1">
+      <ColNames>festID</ColNames>
+      <RefSchemaName>festivals_project</RefSchemaName>
+      <RefTableName>festival</RefTableName>
+      <RefColNames>festID</RefColNames>
+    </foreign-key>
+    <trigger id="285" parent="236" name="type_check_music">
       <Turn>before-row</Turn>
       <Events>I</Events>
     </trigger>
-    <column id="277" parent="237" name="festID">
+    <column id="286" parent="237" name="festID">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="237" name="name">
+    <column id="287" parent="237" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="279" parent="237" name="PRIMARY">
+    <key id="288" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>festID
 name</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="280" parent="238" name="userID">
+    <column id="289" parent="238" name="userID">
       <Position>1</Position>
-      <DataType>decimal(9)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="238" name="user_name">
+    <column id="290" parent="238" name="user_name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="238" name="birthdate">
+    <column id="291" parent="238" name="birthdate">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="238" name="user_location">
+    <column id="292" parent="238" name="user_location">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="238" name="is_company">
+    <column id="293" parent="238" name="is_company">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="285" parent="238" name="PRIMARY">
+    <key id="294" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userID</ColNames>
       <Primary>1</Primary>
