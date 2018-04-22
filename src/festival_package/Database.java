@@ -29,7 +29,14 @@ public class Database {
 
     public static ArrayList<String> test_values = new ArrayList<>();
 
+    public static ArrayList<String> viewed_lis = new ArrayList<>();
+
+    public static String cur_user_name = "";
+    public static String cur_user_guid = "";
+
     static private Connection connection;
+
+
 
 
     static {
@@ -56,7 +63,8 @@ public class Database {
      * @return
      * @throws SQLException
      */
-    public static String authenticate(String username, String password) throws SQLException{
+    public static String authenticate(String username, String password) throws SQLException
+    {
         String query = ("SELECT userID " +
                 "FROM Users " +
                 "WHERE user_name = '" + username + "';");
@@ -81,7 +89,8 @@ public class Database {
      * @return
      * @throws SQLException
      */
-    public static boolean usernameAvailable(String username) throws SQLException{
+    public static boolean usernameAvailable(String username) throws SQLException
+    {
         String query = ("SELECT user_name " +
                 "FROM Users " +
                 "WHERE user_name = '" + username + "';");

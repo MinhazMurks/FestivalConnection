@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -100,8 +101,9 @@ public class Controller_Login {
         stage.getIcons().add(new Image("file:src/festival_package/resources/Festival_Logo2.png"));
         stage.setTitle("Festival Connection - Welcome " + username);
 
-        Controller_Main controller = loader.<Controller_Main>getController();
-        controller.initData(guid);
+        Database.cur_user_guid = guid;
+        Database.cur_user_name = username;
+
 
         stage.show();
     }

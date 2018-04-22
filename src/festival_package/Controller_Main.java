@@ -28,7 +28,6 @@ public class Controller_Main {
     private AnchorPane rootPane;
 
     //the guid of the logged in User. Used for many queries
-    private String userGuid;
 
 
     @FXML
@@ -42,13 +41,7 @@ public class Controller_Main {
 
     ListProperty<String> listProperty = new SimpleListProperty<>();
 
-    /**
-     * Used in the Controller_Login.java class. Stores the guid of the current logged in user in userGuid field.
-     * @param guid
-     */
-    void initData(String guid){
-        this.userGuid = guid;
-    }
+
 
     public void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(

@@ -51,7 +51,15 @@
 
 }
 
+.list-cell.text:hover
+{
+    -fx-text-fill: #ff0000;
+}
 
+.jfx-rippler
+{
+    -jfx-rippler-fill: red;
+}
 
 .list-cell:filled:selected:focused
 {

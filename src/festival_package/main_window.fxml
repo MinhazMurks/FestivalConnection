@@ -21,7 +21,7 @@
                 <Font size="18.0" />
             </font>
         </TextField>
-        <ChoiceBox fx:id="search_dropdown" layoutX="315.0" layoutY="40.0" prefHeight="66.0" prefWidth="61.0" styleClass="choiceboxcustom">
+        <ChoiceBox fx:id="search_dropdown" layoutX="315.0" layoutY="40.0" prefHeight="66.0" prefWidth="61.0" styleClass="choiceboxcustom" stylesheets="@Styles.css">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="User" />
@@ -29,7 +29,7 @@
                 </FXCollections>
             </items>
         </ChoiceBox>
-        <Button fx:id="search_button" layoutX="449.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="66.0" prefWidth="61.0">
+        <Button fx:id="search_button" layoutX="449.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="66.0" prefWidth="61.0" stylesheets="@Styles.css">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -41,8 +41,8 @@
             </ImageView>
          </graphic>
         </Button>
-        <ListView fx:id="search_listview" layoutX="40.0" layoutY="146.0" prefHeight="618.0" prefWidth="471.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="142.0" />
-        <Button fx:id="advanced_button" layoutX="376.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_advanced_button" prefHeight="66.0" prefWidth="64.0">
+        <ListView fx:id="search_listview" layoutX="40.0" layoutY="146.0" prefHeight="618.0" prefWidth="471.0" stylesheets="@Styles.css" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="142.0" />
+        <Button fx:id="advanced_button" layoutX="376.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_advanced_button" prefHeight="66.0" prefWidth="64.0" stylesheets="@Styles.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -68,7 +68,7 @@
             </ImageView>
          </graphic>
         </Button>
-        <Button fx:id="favorites_button" blendMode="SRC_ATOP" cache="true" layoutX="937.0" layoutY="509.0" mnemonicParsing="false" onAction="#on_favorite_button" prefHeight="251.0" prefWidth="303.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="937.0">
+        <Button fx:id="favorites_button" blendMode="SRC_ATOP" cache="true" layoutX="937.0" layoutY="509.0" mnemonicParsing="false" onAction="#on_favorite_button" prefHeight="251.0" prefWidth="303.0" stylesheets="@Styles.css" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="937.0">
             <font>
                 <Font size="48.0" />
             </font>
@@ -86,7 +86,7 @@
             <Insets />
          </opaqueInsets>
         </Button>
-      <Label fx:id="description_pane" alignment="CENTER" contentDisplay="CENTER" layoutX="569.0" layoutY="40.0" prefHeight="414.0" prefWidth="669.0" styleClass="customlabel" text="Click an entry to see more information" textAlignment="CENTER" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+      <Label fx:id="description_pane" alignment="CENTER" contentDisplay="CENTER" layoutX="569.0" layoutY="40.0" prefHeight="414.0" prefWidth="669.0" styleClass="customlabel" stylesheets="@Styles.css" text="Click an entry to see more information" textAlignment="CENTER" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font size="36.0" />
          </font></Label>
