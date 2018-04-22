@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -18,16 +19,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        Scene scene = new Scene(new StackPane());
 
         Database.refresh_users();
 
-        Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login_window.fxml"));
+        scene.setRoot(root);
 
         root.getStylesheets().add("festival_package/Styles.css");
 
-        primaryStage.setScene(new Scene(root,1280, 800));
-        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/Festival Logo2.png"));
+        primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/Festival_Logo2.png"));
         primaryStage.setTitle("Festival Connection");
         primaryStage.show();
 

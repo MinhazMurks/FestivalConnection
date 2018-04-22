@@ -1,15 +1,10 @@
 package festival_package;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.FillTransition;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,28 +13,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-import javax.xml.soap.Text;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Observable;
 
 
 public class Controller_Main {
 
     private Stage primaryStage = new Stage();
     private AnchorPane rootPane;
+
+    //the guid of the logged in User. Used for many queries
+    private String userGuid;
 
 
     @FXML
@@ -53,9 +42,13 @@ public class Controller_Main {
 
     ListProperty<String> listProperty = new SimpleListProperty<>();
 
-
-
-
+    /**
+     * Used in the Controller_Login.java class. Stores the guid of the current logged in user in userGuid field.
+     * @param guid
+     */
+    void initData(String guid){
+        this.userGuid = guid;
+    }
 
     public void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(
@@ -63,7 +56,7 @@ public class Controller_Main {
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/Festival Logo2.png"));
+        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/Festival_Logo2.png"));
         primaryStage.setTitle(Database.fix_title(fxml));
         primaryStage.show();
 

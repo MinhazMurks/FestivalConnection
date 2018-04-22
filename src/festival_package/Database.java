@@ -47,7 +47,33 @@ public class Database {
     }
 
 
+    /**
+     * Queries the DB for a given username and returns the guid for that user if found.
+     * Returns an empty String "" if the username is not found
+     * TODO: Add password authentication
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
+    public static String authenticate(String username, String password) throws SQLException{
+        String query = ("SELECT userID " +
+                "FROM Users " +
+                "WHERE user_name = '" + username + "';");
+        System.out.println(query);
 
+        String guid = "";
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        while (resultSet.next()){
+            guid = resultSet.getString("userID");
+            System.out.println(guid);
+        }
+
+        return guid;
+    }
 
     public static void insert_to_table(Statement statement, String table, String value) throws SQLException
     {
