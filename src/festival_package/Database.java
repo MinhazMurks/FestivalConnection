@@ -178,6 +178,7 @@ public class Database {
 
         return result;
     }
+
     public static ResultSet select_from_table(ArrayList<String> columns, String table) throws SQLException
     {
 
@@ -209,6 +210,7 @@ public class Database {
         Statement statement = connection.createStatement();
         return statement.executeQuery(query);
     }
+
     public static ResultSet select_from_table(String column, String table) throws SQLException
     {
 
@@ -277,32 +279,61 @@ public class Database {
 
         ArrayList<String> columns = new ArrayList<>();
 
-        columns.add("userId");
-        columns.add("user_name");
-        columns.add("birthdate");
-        columns.add("user_location");
-        columns.add("is_company");
+        String user_table = "users";
+        String location_table = "location";
 
-        ResultSet rows_user_IDs = select_from_table( columns,"users");
-        System.out.println("GOT TO RESULTSET");
+        columns.add("users.userId");
+        columns.add("users.user_name");
+        columns.add("users.birthdate");
+        columns.add("users.is_company");
+
+        columns.add("location.city");
+        columns.add("location.state");
+
+
+        String query = "SELECT ";
+
+        for(int i = 0; i < columns.size(); i++)
+        {
+            query += columns.get(i);
+
+            if((i + 1) < columns.size())
+            {
+                query += " ,";
+            }
+        }
+
+        query += " FROM " + user_table;
+
+        query += "\n JOIN " + location_table + " ON " + user_table + ".userID = " + location_table + ".userID;";
+
+        Statement statement = connection.createStatement();
+        ResultSet rows_user_IDs = statement.executeQuery(query);
+        System.out.println("Query: " + query);
+
+
 
         while(rows_user_IDs.next())
         {
             LocalDate birth_date = date_from_string(rows_user_IDs.getDate("birthdate").toString());
 
+            System.out.println("Row: " + rows_user_IDs.getString("user_name") + " " + rows_user_IDs.getString("city") + ", " + rows_user_IDs.getString("state"));
+
             User cur_user = new User(rows_user_IDs.getString("userID"),
                     rows_user_IDs.getString("user_name"),
                     birth_date,
-                    rows_user_IDs.getString("user_location"),
+                    rows_user_IDs.getString("city") + ", " + rows_user_IDs.getString("state"),
                     rows_user_IDs.getBoolean("is_company"));
 
             Users.add(cur_user);
-            System.out.println(cur_user.toString());
+            System.out.println("Added user: " + cur_user.toString());
         }
+
 
         rows_user_IDs.close();
         re_add_user_names();
 
+        System.out.println("Users: " + User_Names.toString());
 
     }
 
@@ -357,11 +388,11 @@ public class Database {
 
         query += " FROM " + festival_table;
 
-        query += "\n JOIN " + art_table + " ON " + festival_table + ".fest_id = " + art_table + ".fest_id";
-        query += "\n JOIN " + beer_table + " ON " + festival_table + ".fest_id = " + beer_table + ".fest_id";
-        query += "\n JOIN " + comedy_table + " ON " + festival_table + ".fest_id = " + comedy_table + ".fest_id";
-        query += "\n JOIN " + music_table + " ON " + festival_table + ".fest_id = " + music_table + ".fest_id";
-        query += "\n JOIN " + providers_table + " ON " + festival_table + ".fest_id = " + providers_table + ".fest_id";
+        query += "\n JOIN " + art_table + " ON " + festival_table + ".festID = " + art_table + ".festID";
+        query += "\n JOIN " + beer_table + " ON " + festival_table + ".festID = " + beer_table + ".festID";
+        query += "\n JOIN " + comedy_table + " ON " + festival_table + ".festID = " + comedy_table + ".festID";
+        query += "\n JOIN " + music_table + " ON " + festival_table + ".festID = " + music_table + ".festID";
+        query += "\n JOIN " + providers_table + " ON " + festival_table + ".festID = " + providers_table + ".festID";
 
         query += ";";
 
