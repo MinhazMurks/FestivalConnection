@@ -5,6 +5,8 @@ import java.sql.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
+import java.util.UUID.*;
 
 
 
@@ -106,20 +108,26 @@ public class Database {
     }
 
     /**
-     * TODO:CHANGE UUID GENERATION TO HAPPEN IN JAVA NOT SQL
+     * Adds a row to both Users and Location. A single UUID is created and used in both tables.
      * @param username
      * @param password
-     * @param date
+     * @param dob
      * @param state
      * @param city
      * @param address
      * @param zip
      */
-    public static void insertNewUser(String username, String password, LocalDate date, String state, String city, String address, int zip){
-        String dob = date.toString();
-        String cityState = (city + ", " + state);
-        String insertLocationSQL = ("INSERT INTO Location VALUES (" + city + ", " + state + ", " + address + ", " + zip + ", " + cityState);
-        //String insertUserSQL = "INSERT INTO User VALUES (UUID(), " + username + ", " + dob + ", "
+    public static void insertNewUser(String username, String password, String dob, String state, String city, String address, int zip) throws SQLException{
+        String guid = UUID.randomUUID().toString();
+        String insertUserSQL = ("INSERT INTO Users VALUES ('" + guid + "', '" + username + "', '" + dob + "', " + "0);");
+        String insertLocationSQL = ("INSERT INTO Location VALUES ('" + guid + "', NULL, '"  +  city + "', '" + state + "', '" + address + "', " + zip + ");");
+
+        System.out.println(insertUserSQL);
+        System.out.println(insertLocationSQL);
+
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(insertUserSQL);
+        statement.executeUpdate(insertLocationSQL);
     }
 
     /**

@@ -25,6 +25,9 @@ import java.time.LocalDate;
 public class Controller_CreateAccount {
 
     @FXML
+    AnchorPane create_account_anchor;
+
+    @FXML
     TextField username_field;
 
     @FXML
@@ -69,12 +72,15 @@ public class Controller_CreateAccount {
     /**
      * Does basic checks to see if all fields are properly filled out before inserting data into
      * User and Location tables. Checks availability of username with Database.usernameAvailable(String)
+     * Closes window upon successful creation.
      * @param event
      * @throws SQLException
      */
-    public void on_create_account_button(ActionEvent event) throws SQLException{
+    public void on_create_account_button(ActionEvent event){
         //Reset error messages
         username_error_text.setVisible(false); retype_password_error_text.setVisible(false); sql_error_text.setVisible(false);
+        //Get the create account page anchor so we can close it later
+        Stage stage = (Stage) create_account_anchor.getScene().getWindow();
 
         String emptyString = "";
         String username = username_field.getText();
@@ -111,14 +117,21 @@ public class Controller_CreateAccount {
             return;
         }
 
-        if (!Database.usernameAvailable(username)){
-            username_error_text.setVisible(true);
+        try {
+            if (!Database.usernameAvailable(username)) {
+                username_error_text.setVisible(true);
+                return;
+            }
+            System.out.println("Creating Account...");
+            System.out.print(username + "\n" + password + "\n" + dob.toString() + "\n" + address + "\n" + city + "\n" + state + "\n" + zip + "\n");
+            Database.insertNewUser(username, password, dob.toString(), state, city, address, zip);
+            stage.close();
+        }
+        catch (SQLException e){
+            sql_error_text.setVisible(true);
+            e.printStackTrace();
             return;
         }
-
-        System.out.println("Creating Account...");
-        System.out.print(username + "\n" + password + "\n" + dob.toString() + "\n" + address + "\n" + city + "\n" + state + "\n" + zip + "\n");
-
     }
 
 }
