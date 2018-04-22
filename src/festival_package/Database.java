@@ -106,7 +106,7 @@ public class Database {
     }
 
     /**
-     * TODO:FIX LOCATION ISSUE. MAKE ZIP CODE WORK WITH USERLOCATION.
+     * TODO:CHANGE UUID GENERATION TO HAPPEN IN JAVA NOT SQL
      * @param username
      * @param password
      * @param date
@@ -120,6 +120,59 @@ public class Database {
         String cityState = (city + ", " + state);
         String insertLocationSQL = ("INSERT INTO Location VALUES (" + city + ", " + state + ", " + address + ", " + zip + ", " + cityState);
         //String insertUserSQL = "INSERT INTO User VALUES (UUID(), " + username + ", " + dob + ", "
+    }
+
+    /**
+     * Takes the current user_guid and queries the Location table for it.
+     * TODO: ADD CONDITION CHECKS FOR INCORRECT OR NONEXISTENT GUID
+     * @return The concatenated city and state columns corresponding with current guid
+     */
+    public static String getUserLocation() throws SQLException{
+        String query = ("SELECT city, state " +
+                "FROM Location " +
+                "WHERE userID = '" + cur_user_guid + "';");
+        System.out.println(query);
+
+        String userLocation = "";
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        while (resultSet.next()){
+            userLocation += resultSet.getString("city");
+            userLocation += ", ";
+            userLocation += resultSet.getString("state");
+        }
+
+        System.out.println(userLocation);
+        return userLocation;
+    }
+
+    /**
+     * TODO:FINISH
+     * @param guid
+     * @return
+     * @throws SQLException
+     */
+    public static String getFestivalLocation(String guid) throws SQLException{
+        String query = ("SELECT city, state " +
+                "FROM Location " +
+                "WHERE festID = '" + guid + "';");
+        System.out.println(query);
+
+        String userLocation = "";
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        while (resultSet.next()){
+            userLocation += resultSet.getString("city");
+            userLocation += ", ";
+            userLocation += resultSet.getString("state");
+        }
+
+        System.out.println(userLocation);
+        return userLocation;
     }
 
     public static void insert_to_table(Statement statement, String table, String value) throws SQLException
