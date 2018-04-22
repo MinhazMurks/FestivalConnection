@@ -117,4 +117,8 @@ public class Controller_Main {
         System.out.println("advanced search");
     }
 
+    public void add_friend_button(ActionEvent event) {
+
+    }
+
 }

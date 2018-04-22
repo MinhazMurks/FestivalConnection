@@ -93,5 +93,20 @@
          <font>
             <Font size="36.0" />
          </font></Label>
+        <Button fx:id="add_friends" layoutX="606.0" layoutY="372.0" mnemonicParsing="false" onAction="#add_friend_button" prefHeight="66.0" prefWidth="90.0">
+            <graphic>
+                <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/add_friend_icon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </Button>
     </children>
 </AnchorPane>
