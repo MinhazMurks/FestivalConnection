@@ -15,7 +15,7 @@ public class Database {
 
     //Globals
     public static ArrayList<Festival> Festivals = new ArrayList<>();
-    public static ArrayList<Festival> Festivals_Names = new ArrayList<>();
+    public static ArrayList<String> Festivals_Names = new ArrayList<>();
 
     public static ArrayList<User> Users = new ArrayList<>();
     public static ArrayList<String> User_Names = new ArrayList<>();
@@ -29,7 +29,7 @@ public class Database {
 
     public static ArrayList<String> test_values = new ArrayList<>();
 
-    public static ArrayList<String> viewed_lis = new ArrayList<>();
+    public static ArrayList<String> viewed_list = new ArrayList<>();
 
     public static String cur_user_name = "";
     public static String cur_user_guid = "";
@@ -265,9 +265,10 @@ public class Database {
         return result;
     }
 
-    public static void refresh_lists()
+    public static void refresh_lists() throws SQLException, ParseException
     {
-
+        refresh_users();
+        refresh_festivals();
     }
 
     public static void refresh_users() throws SQLException, ParseException
@@ -321,6 +322,7 @@ public class Database {
         ArrayList<String> columns = new ArrayList<>();
 
         columns.add("festID");
+        columns.add("festival.name");
         columns.add("location");
         columns.add("production_comp");
         columns.add("type_fest");
@@ -338,7 +340,7 @@ public class Database {
         String music_table = "music";
 
 
-        columns.add("name");
+        columns.add("providers.name as providers");
         String providers_table = "providers";
 
         String query = "SELECT ";
@@ -372,6 +374,7 @@ public class Database {
             LocalDate end_date = date_from_string(resultSet.getDate("end_date").toString());
 
             Festival temp = new Festival(resultSet.getString("fest_ID"),
+                                         resultSet.getString("festival.name"),
                                          resultSet.getString("location"),
                                          resultSet.getString("production_comp"),
                                          resultSet.getString("fest_type"),
@@ -379,33 +382,58 @@ public class Database {
                                          resultSet.getFloat("price")
                     );
 
-            if (temp.type.equals("Music"))
-            {
 
-            }
-            if (temp.type.equals("Comedy"))
+            if(Festivals.contains(temp))
             {
-
+                Festivals.get(Festivals.indexOf(temp)).providers.add(resultSet.getString("name"));
+                continue;
             }
-            if (temp.type.equals("Art"))
+            else if (temp.type.equals("Music"))
             {
-
+                temp.genre = resultSet.getString("genre");
+                temp.outdoor = resultSet.getBoolean("outdoor");
+                temp.camping = resultSet.getBoolean("camping");
+                temp.providers.add(resultSet.getString("name"));
             }
-            if(temp.type.equals("Beer"))
+            else if (temp.type.equals("Comedy"))
             {
-                
+                temp.providers.add(resultSet.getString("name"));
+            }
+            else if (temp.type.equals("Art"))
+            {
+                temp.genre = resultSet.getString("genre");
+                temp.providers.add(resultSet.getString("name"));
+            }
+            else if(temp.type.equals("Beer"))
+            {
+                temp.providers.add(resultSet.getString("name"));
             }
 
+            Festivals.add(temp);
         }
-
+        re_add_fest_names();
 
     }
 
     public static void re_add_fest_names()
     {
+        Festivals_Names.clear();
 
+        for(int i = 0; i < Festivals.size(); i++)
+        {
+            Festivals_Names.add(Festivals.get(i).name);
+        }
     }
 
+    public static void set_viewed_list(ArrayList<String> new_list)
+    {
+        viewed_list.clear();
+
+        for(int i = 0; i < new_list.size(); i++)
+        {
+            viewed_list.add(new_list.get(i));
+        }
+    }
 
 
 

@@ -16,20 +16,23 @@
 
 <AnchorPane fx:id="root_anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="festival_package.Controller_Main">
     <children>
-        <TextField fx:id="search_field" layoutX="40.0" layoutY="40.0" prefHeight="66.0" prefWidth="275.0" promptText="Search here...">
+        <TextField fx:id="search_field" layoutX="40.0" layoutY="40.0" prefHeight="66.0" prefWidth="471.0" promptText="Search here...">
             <font>
                 <Font size="18.0" />
             </font>
         </TextField>
-        <ChoiceBox fx:id="search_dropdown" layoutX="315.0" layoutY="40.0" prefHeight="66.0" prefWidth="61.0" styleClass="choiceboxcustom" stylesheets="@Styles.css">
+        <ChoiceBox fx:id="search_dropdown" layoutX="314.0" layoutY="39.0" prefHeight="66.0" prefWidth="61.0" styleClass="choiceboxcustom" stylesheets="@Styles.css">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="User" />
                     <String fx:value="Festival" />
                 </FXCollections>
             </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
         </ChoiceBox>
-        <Button fx:id="search_button" layoutX="449.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="66.0" prefWidth="61.0" stylesheets="@Styles.css">
+        <Button fx:id="search_button" layoutX="448.0" layoutY="39.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="66.0" prefWidth="61.0" styleClass="choiceboxcustom" stylesheets="@Styles.css">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -42,7 +45,7 @@
          </graphic>
         </Button>
         <ListView fx:id="search_listview" layoutX="40.0" layoutY="146.0" prefHeight="618.0" prefWidth="471.0" stylesheets="@Styles.css" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="142.0" />
-        <Button fx:id="advanced_button" layoutX="376.0" layoutY="40.0" mnemonicParsing="false" onAction="#on_advanced_button" prefHeight="66.0" prefWidth="64.0" stylesheets="@Styles.css">
+        <Button fx:id="advanced_button" layoutX="375.0" layoutY="39.0" mnemonicParsing="false" onAction="#on_advanced_button" prefHeight="66.0" prefWidth="64.0" styleClass="choiceboxcustom" stylesheets="@Styles.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

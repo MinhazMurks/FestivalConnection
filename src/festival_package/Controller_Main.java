@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -32,6 +33,9 @@ public class Controller_Main {
 
     @FXML
     ListView search_listview;
+
+    @FXML
+    ChoiceBox<String> search_dropdown;
 
     @FXML
     Button search_button;
@@ -62,6 +66,14 @@ public class Controller_Main {
 
         search_listview.itemsProperty().bind(listProperty);
 
+        search_dropdown.setValue("User");
+
+        search_dropdown.setOnAction(
+                event -> {
+                    //logic for changing dropdown goes here
+                }
+        );
+
         search_listview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
 
             @Override
@@ -69,6 +81,8 @@ public class Controller_Main {
             {
                 description_pane.setText((Database.Users.get(Database.User_Names.indexOf(search_listview.getSelectionModel().getSelectedItem())).description()));
             }
+
+
         });
 
     }
@@ -77,8 +91,9 @@ public class Controller_Main {
         System.out.println("Fuuuuck!");
 
         Database.refresh_users();
+        Database.set_viewed_list(Database.User_Names);
 
-        listProperty.set(FXCollections.observableArrayList(Database.User_Names));
+        listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
 
         search_listview.itemsProperty().bind(listProperty);
     }

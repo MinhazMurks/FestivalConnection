@@ -9,6 +9,7 @@ public class Festival {
     ArrayList<String> providers = new ArrayList<>();
 
     String festID;
+    String name;
     String location;
     String production_comp;
     String type;
@@ -22,9 +23,10 @@ public class Festival {
     boolean outdoor = false;
 
 
-    Festival(String festID, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price)
+    Festival(String festID, String name, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price)
     {
         this.festID = festID;
+        this.name = name;
         this.location = location;
         this.production_comp = production_comp;
         this.type = type;
@@ -33,9 +35,10 @@ public class Festival {
         this.price = price;
     }
 
-    Festival(String festID, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price, String genre)
+    Festival(String festID, String name, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price, String genre)
     {
         this.festID = festID;
+        this.name = name;
         this.location = location;
         this.production_comp = production_comp;
         this.type = type;
@@ -45,9 +48,10 @@ public class Festival {
         this.genre = genre;
     }
 
-    Festival(String festID, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price, String genre, boolean camping, boolean outdoor)
+    Festival(String festID, String name, String location, String production_comp, String type, LocalDate start_date, LocalDate end_date, float price, String genre, boolean camping, boolean outdoor)
     {
         this.festID = festID;
+        this.name = name;
         this.location = location;
         this.production_comp = production_comp;
         this.type = type;
@@ -69,6 +73,39 @@ public class Festival {
     boolean contains_provider(String provider)
     {
         return this.providers.contains(provider);
+    }
+
+
+    @Override
+    public boolean equals(Object other)
+    {
+        if(other == null)
+        {
+            return false;
+        }
+
+        if(!Festival.class.isAssignableFrom(other.getClass()))
+        {
+            return false;
+        }
+
+        Festival other_festival = (Festival)other;
+
+        if(!this.festID.equals(other_festival.festID))
+        {
+            return false;
+        }
+        if(!this.type.equals(other_festival.type))
+        {
+            return false;
+        }
+        if(!this.name.equals(other_festival.name))
+        {
+            return false;
+        }
+
+
+        return true;
     }
 
 }

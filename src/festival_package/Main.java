@@ -29,7 +29,7 @@ public class Main extends Application {
         root.getStylesheets().add("festival_package/Styles.css");
 
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/Festival_Logo2.png"));
+        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
         primaryStage.setTitle("Festival Connection");
         primaryStage.show();
 

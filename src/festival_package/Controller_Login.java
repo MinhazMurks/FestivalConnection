@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -44,7 +45,29 @@ public class Controller_Login {
      * Sets error text to invisible.
      */
     @FXML
-    public void initialize(){login_error_text.setVisible(false);}
+    public void initialize(){
+        login_error_text.setVisible(false);
+        username_field.setOnKeyPressed(
+                event ->
+                {
+                    if(event.getCode() == KeyCode.ENTER)
+                    {
+                        login_button.fire();
+                    }
+                }
+        );
+
+        password_field.setOnKeyPressed(
+                event ->
+                {
+                    if(event.getCode() == KeyCode.ENTER)
+                    {
+                        login_button.fire();
+                    }
+                }
+        );
+    }
+
 
 
     /**

@@ -16,6 +16,7 @@ drop table Beer;
 
 create table Festival(
   festID varchar(36) primary key,
+  name   varchar(50),
   location varchar(50),
   production_comp varchar(36) references Users(userID),
   start_date date,

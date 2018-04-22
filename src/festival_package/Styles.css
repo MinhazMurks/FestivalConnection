@@ -15,21 +15,34 @@
 
 .button:hover
 {
-    -fx-scale-x: .95;
-    -fx-scale-y: .95;
+
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
 .choiceboxcustom
 {
-    -fx-background-color: linear-gradient(#ffffff, #ebebeb);
+    -fx-background-color: transparent;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
 }
+
+.cornerbuttoncustom
+{
+    -fx-background-color: transparent;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+
+.cornerbuttoncustom:hover
+{
+    -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
+}
+
+
 
 .choiceboxcustom:hover
 {
 
-    -fx-scale-x: .95;
-    -fx-scale-y: .95;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
@@ -45,9 +58,14 @@
     -fx-font-size: 15;
 }
 
+.list-cell:even
+{
+    -fx-background-color: linear-gradient(#ffffff, #f7f7f7);
+}
+
 .list-cell:odd
 {
-    -fx-background-color: rgba(255, 0, 208, 0);
+    -fx-background-color: linear-gradient(#f0f0f0, #eeeeee);
 
 }
 
@@ -56,10 +74,6 @@
     -fx-text-fill: #ff0000;
 }
 
-.jfx-rippler
-{
-    -jfx-rippler-fill: red;
-}
 
 .list-cell:filled:selected:focused
 {
