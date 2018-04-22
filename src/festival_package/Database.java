@@ -149,30 +149,36 @@ public class Database {
     }
 
     /**
-     * TODO:FINISH
-     * @param guid
-     * @return
+     * Takes in a Fesival's guid and gives back the Fesival's full address
+     * in the form "[Street Address], [City], [State] [Zip]"
+     * TODO:ADD CONDITION CHECKS FOR INCORRECT OR NONEXISTENT GUID
+     * @param guid A festival's guid
+     * @return A string of the above form
      * @throws SQLException
      */
     public static String getFestivalLocation(String guid) throws SQLException{
-        String query = ("SELECT city, state " +
+        String query = ("SELECT streetAddress, city, state, zip " +
                 "FROM Location " +
                 "WHERE festID = '" + guid + "';");
         System.out.println(query);
 
-        String userLocation = "";
+        String festLocation = "";
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
 
         while (resultSet.next()){
-            userLocation += resultSet.getString("city");
-            userLocation += ", ";
-            userLocation += resultSet.getString("state");
+            festLocation += resultSet.getString("streetAddress");
+            festLocation += ", ";
+            festLocation += resultSet.getString("city");
+            festLocation += ", ";
+            festLocation += resultSet.getString("state");
+            festLocation += " ";
+            festLocation += resultSet.getInt("zip");
         }
 
-        System.out.println(userLocation);
-        return userLocation;
+        System.out.println(festLocation);
+        return festLocation;
     }
 
     public static void insert_to_table(Statement statement, String table, String value) throws SQLException
