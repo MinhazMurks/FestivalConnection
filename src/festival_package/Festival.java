@@ -10,8 +10,8 @@ public class Festival {
 
     String festID;
     String name;
-    String location;
-    String production_comp;
+    String location = "";
+    String production_comp = "";
     String type;
     LocalDate start_date;
     LocalDate end_date;
@@ -108,4 +108,19 @@ public class Festival {
         return true;
     }
 
+
+    public String description()
+    {
+        String result = this.name + ": " + this.type + " Festival";
+
+        if(!this.location.equals(""))
+        {
+            result += "\n " + this.location;
+        }
+
+        result += "\n From: " + start_date + " to " + this.end_date;
+        result += "\n Ticket cost: " + price;
+
+        return result;
+    }
 }

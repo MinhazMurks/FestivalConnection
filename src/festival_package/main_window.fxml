@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -21,18 +19,7 @@
                 <Font size="18.0" />
             </font>
         </TextField>
-        <ChoiceBox fx:id="search_dropdown" layoutX="314.0" layoutY="39.0" prefHeight="66.0" prefWidth="61.0" styleClass="choiceboxcustom" stylesheets="@Styles.css">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="User" />
-                    <String fx:value="Festival" />
-                </FXCollections>
-            </items>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-        </ChoiceBox>
-        <Button fx:id="search_button" layoutX="448.0" layoutY="39.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="66.0" prefWidth="61.0" styleClass="choiceboxcustom" stylesheets="@Styles.css">
+        <Button fx:id="search_button" layoutX="448.0" layoutY="39.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="66.0" prefWidth="61.0" styleClass="cornerbuttoncustom" stylesheets="@Styles.css">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -45,7 +32,7 @@
          </graphic>
         </Button>
         <ListView fx:id="search_listview" layoutX="40.0" layoutY="146.0" prefHeight="618.0" prefWidth="471.0" stylesheets="@Styles.css" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="142.0" />
-        <Button fx:id="advanced_button" layoutX="375.0" layoutY="39.0" mnemonicParsing="false" onAction="#on_advanced_button" prefHeight="66.0" prefWidth="64.0" styleClass="choiceboxcustom" stylesheets="@Styles.css">
+        <Button fx:id="advanced_button" layoutX="375.0" layoutY="39.0" mnemonicParsing="false" onAction="#on_advanced_button" prefHeight="66.0" prefWidth="64.0" styleClass="cornerbuttoncustom" stylesheets="@Styles.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -89,24 +76,28 @@
             <Insets />
          </opaqueInsets>
         </Button>
-      <Label fx:id="description_pane" alignment="CENTER" contentDisplay="CENTER" layoutX="569.0" layoutY="40.0" prefHeight="414.0" prefWidth="669.0" styleClass="customlabel" stylesheets="@Styles.css" text="Click an entry to see more information" textAlignment="CENTER" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+      <Label fx:id="description_pane" alignment="CENTER" contentDisplay="CENTER" layoutX="569.0" layoutY="40.0" prefHeight="414.0" prefWidth="669.0" styleClass="customlabel" stylesheets="@Styles.css" text="Click an entry to see more information" textAlignment="CENTER" AnchorPane.bottomAnchor="346.0" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font size="36.0" />
          </font></Label>
-        <Button fx:id="add_friends" layoutX="606.0" layoutY="372.0" mnemonicParsing="false" onAction="#add_friend_button" prefHeight="66.0" prefWidth="90.0">
-            <graphic>
-                <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@resources/add_friend_icon.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
-        </Button>
+      <ComboBox fx:id="search_dropdown" layoutX="273.0" layoutY="40.0" prefHeight="66.0" prefWidth="102.0" styleClass="combo-box-popup" stylesheets="@Styles.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
+      <Button fx:id="add_friend_button" layoutX="587.0" layoutY="375.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="54.0" stylesheets="@Styles.css" AnchorPane.bottomAnchor="356.0" AnchorPane.leftAnchor="581.0">
+         <graphic>
+            <ImageView fitHeight="66.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/add_friend.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
     </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </AnchorPane>

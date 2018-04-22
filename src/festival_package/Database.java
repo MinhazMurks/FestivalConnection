@@ -245,7 +245,6 @@ public class Database {
 
         return result;
     }
-
     public static ResultSet select_from_table(ArrayList<String> columns, String table) throws SQLException
     {
 
@@ -277,7 +276,6 @@ public class Database {
         Statement statement = connection.createStatement();
         return statement.executeQuery(query);
     }
-
     public static ResultSet select_from_table(String column, String table) throws SQLException
     {
 
@@ -316,13 +314,10 @@ public class Database {
         System.out.println("Query: " + sql);
         return statement.executeQuery(sql);
     }
-
     public static LocalDate date_from_string(String date)
     {
         return LocalDate.parse(date);
     }
-
-
     public static User user_from_user_name(String username)
     {
         User result;
@@ -333,13 +328,11 @@ public class Database {
 
         return result;
     }
-
     public static void refresh_lists() throws SQLException, ParseException
     {
         refresh_users();
         refresh_festivals();
     }
-
     public static void refresh_users() throws SQLException, ParseException
     {
         Users.clear();
@@ -403,7 +396,6 @@ public class Database {
         System.out.println("Users: " + User_Names.toString());
 
     }
-
     public static void re_add_user_names()
     {
         User_Names.clear();
@@ -413,29 +405,31 @@ public class Database {
             User_Names.add(Users.get(i).user_name);
         }
     }
-
     public static void refresh_festivals() throws SQLException {
         Festivals.clear();
 
         ArrayList<String> columns = new ArrayList<>();
 
-        columns.add("festID");
-        columns.add("festival.name");
-        columns.add("location");
-        columns.add("production_comp");
+        columns.add("festival.festID");
+        columns.add("festival.festival.name");
+        columns.add("festival.production_comp");
         columns.add("type_fest");
-        columns.add("start_date");
-        columns.add("end_date");
-        columns.add("price");
+        columns.add("festival.start_date");
+        columns.add("festival.end_date");
+        columns.add("festival.price");
         String festival_table = "festival";
 
-        columns.add("type_fest");
+        columns.add("location.streetAddress");
+        columns.add("location.city");
+        columns.add("location.zip");
 
-        //all the subtables of festival
+
+        //all the sub-tables of festival
         String art_table = "art";
         String beer_table = "beer";
         String comedy_table = "comedy";
         String music_table = "music";
+        String location_table = "location";
 
 
         columns.add("providers.name as providers");
@@ -460,6 +454,8 @@ public class Database {
         query += "\n JOIN " + comedy_table + " ON " + festival_table + ".festID = " + comedy_table + ".festID";
         query += "\n JOIN " + music_table + " ON " + festival_table + ".festID = " + music_table + ".festID";
         query += "\n JOIN " + providers_table + " ON " + festival_table + ".festID = " + providers_table + ".festID";
+        query += "\n JOIN " + location_table + " ON " + festival_table + ".festID = " + location_table + ".festID;";
+
 
         query += ";";
 
@@ -473,7 +469,10 @@ public class Database {
 
             Festival temp = new Festival(resultSet.getString("fest_ID"),
                                          resultSet.getString("festival.name"),
-                                         resultSet.getString("location"),
+                                         resultSet.getString("streetAddress") + " ," +
+                                                 resultSet.getString("city") + ", " +
+                                                 resultSet.getString("state") +
+                                                 resultSet.getString("zip"),
                                          resultSet.getString("production_comp"),
                                          resultSet.getString("fest_type"),
                                          start_date, end_date,
@@ -526,11 +525,9 @@ public class Database {
     public static void set_viewed_list(ArrayList<String> new_list)
     {
         viewed_list.clear();
+        viewed_list.addAll(new_list);
+        System.out.println("New list: " + viewed_list.toString());
 
-        for(int i = 0; i < new_list.size(); i++)
-        {
-            viewed_list.add(new_list.get(i));
-        }
     }
 
 

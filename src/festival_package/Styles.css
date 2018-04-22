@@ -4,7 +4,6 @@
 {
     -fx-background-color: linear-gradient(#ffffff, #ebebeb);
     -transition: -fx-background-color 5s;
-
 }
 .customlabel
 {
@@ -15,37 +14,51 @@
 
 .button:hover
 {
-
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
-}
-
-.choiceboxcustom
-{
-    -fx-background-color: transparent;
-    -fx-border-radius: 0 0 0 0;
-    -fx-background-radius: 0 0 0 0;
 }
 
 .cornerbuttoncustom
 {
     -fx-background-color: transparent;
-    -fx-border-radius: 0 0 0 0;
-    -fx-background-radius: 0 0 0 0;
 }
 
-.cornerbuttoncustom:hover
+
+.combo-box
+{
+    -fx-background-color: transparent;
+}
+.combo-box:hover
 {
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
-
-
-
-.choiceboxcustom:hover
+.combo-box-popup:selected
 {
-    -fx-text-fill:white;
+    -fx-background-color: transparent;
+}
+.combo-box-popup .list-cell:selected
+{
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+}
+.combo-box-base
+{
+    -fx-background-color: transparent;
+}
+.combo-box-popup .list-view .list-cell:odd
+{
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(#f0f0f0, #eeeeee);
+}
+.combo-box-popup .list-view .list-cell:even
+{
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(#ffffff, #f7f7f7);
+}
+.combo-box-popup .list-view .list-cell:hover
+{
+    -fx-text-fill: white;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
-
 
 .list-view
 {
@@ -66,7 +79,6 @@
 .list-cell:odd
 {
     -fx-background-color: linear-gradient(#f0f0f0, #eeeeee);
-
 }
 
 
@@ -77,9 +89,9 @@
 }
 
 
-
 .list-cell:filled:hover
 {
     -fx-text-fill:white;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
+

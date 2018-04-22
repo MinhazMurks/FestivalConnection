@@ -8,19 +8,20 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Controller_Main {
@@ -35,13 +36,16 @@ public class Controller_Main {
     ListView search_listview;
 
     @FXML
-    ChoiceBox<String> search_dropdown;
+    ComboBox<String> search_dropdown = new ComboBox<>();
 
     @FXML
     Button search_button;
 
     @FXML
     Label description_pane;
+
+    @FXML
+    TextField search_field;
 
     ListProperty<String> listProperty = new SimpleListProperty<>();
 
@@ -62,15 +66,69 @@ public class Controller_Main {
     @FXML
     public void initialize()
     {
-        listProperty.set(FXCollections.observableArrayList(Database.User_Names));
 
-        search_listview.itemsProperty().bind(listProperty);
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Festival");
+        choices.add("User");
+
+        search_dropdown.getItems().addAll(choices);
 
         search_dropdown.setValue("User");
 
+        search_dropdown.setButtonCell(new ListCell<String>()
+        {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(item);
+                    setAlignment(Pos.CENTER_RIGHT);
+                }
+            }
+
+        });
+
+
+
+        search_dropdown.setValue("User");
+        try {
+            Database.set_viewed_list(Database.User_Names);
+            Database.refresh_users();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
+        search_listview.itemsProperty().bind(listProperty);
+
+
         search_dropdown.setOnAction(
-                event -> {
-                    //logic for changing dropdown goes here
+                event ->
+                {
+                    if(search_dropdown.getSelectionModel().getSelectedItem().equals("User"))
+                    {
+                        search_field.setText("");
+                        Database.set_viewed_list(Database.User_Names);
+                    }
+                    else
+                    {
+                        search_field.setText("");
+                        Database.set_viewed_list(Database.Festivals_Names);
+                    }
+
+                    try {
+                        Database.refresh_users();
+                    } catch (SQLException e) {
+                        System.out.println("Empty");
+                    } catch (ParseException e)
+                    {
+                        System.out.println("Parse failed");
+                    }
+
+                    listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
+                    search_listview.itemsProperty().bind(listProperty);
                 }
         );
 
@@ -79,11 +137,20 @@ public class Controller_Main {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue)
             {
-                description_pane.setText((Database.Users.get(Database.User_Names.indexOf(search_listview.getSelectionModel().getSelectedItem())).description()));
+                if(search_dropdown.getSelectionModel().getSelectedItem().equals("User"))
+                {
+                    description_pane.setText((Database.Users.get(Database.User_Names.indexOf(search_listview.getSelectionModel().getSelectedItem())).description()));
+                }
+                else
+                {
+                    description_pane.setText((Database.Festivals.get(Database.Festivals_Names.indexOf(search_listview.getSelectionModel().getSelectedItem())).description()));
+                }
             }
 
 
         });
+
+
 
     }
 
