@@ -75,6 +75,44 @@ public class Database {
         return guid;
     }
 
+    /**
+     * Queries the database for a given username. If any results are returned in resultSet, returns false.
+     * @param username
+     * @return
+     * @throws SQLException
+     */
+    public static boolean usernameAvailable(String username) throws SQLException{
+        String query = ("SELECT user_name " +
+                "FROM Users " +
+                "WHERE user_name = '" + username + "';");
+        System.out.println(query);
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        while (resultSet.next()){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * TODO:FIX LOCATION ISSUE. MAKE ZIP CODE WORK WITH USERLOCATION.
+     * @param username
+     * @param password
+     * @param date
+     * @param state
+     * @param city
+     * @param address
+     * @param zip
+     */
+    public static void insertNewUser(String username, String password, LocalDate date, String state, String city, String address, int zip){
+        String dob = date.toString();
+        String cityState = (city + ", " + state);
+        String insertLocationSQL = ("INSERT INTO Location VALUES (" + city + ", " + state + ", " + address + ", " + zip + ", " + cityState);
+        //String insertUserSQL = "INSERT INTO User VALUES (UUID(), " + username + ", " + dob + ", "
+    }
+
     public static void insert_to_table(Statement statement, String table, String value) throws SQLException
     {
 
