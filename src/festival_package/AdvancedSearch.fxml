@@ -32,7 +32,14 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
-                <ChoiceBox fx:id="state" layoutX="225.0" layoutY="88.0" prefWidth="150.0" />
+             <ChoiceBox fx:id="festOrUser" layoutX="225.0" layoutY="88.0" prefWidth="150.0" >
+                 <items>
+                     <FXCollections fx:factory="observableArrayList">
+                         <String fx:value="User" />
+                         <String fx:value="Festival" />
+                     </FXCollections>
+                 </items>
+             </ChoiceBox>
                 <TextArea fx:id="festName" layoutX="191.0" layoutY="25.0" prefHeight="37.0" prefWidth="218.0" promptText="Festival Name" />
                 <DatePicker fx:id="endDate" layoutX="213.0" layoutY="211.0" />
                 <Button fx:id="SearchBtn" layoutX="34.0" layoutY="361.0" mnemonicParsing="false" onAction="#on_search_button" text="Search" />
@@ -44,7 +51,7 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
-                <ChoiceBox fx:id="city" layoutX="225.0" layoutY="281.0" prefWidth="150.0" />
+                <ChoiceBox fx:id="Optional" layoutX="225.0" layoutY="281.0" prefWidth="150.0" />
                 <DatePicker fx:id="startDate" layoutX="213.0" layoutY="244.0" />
          </children>
       </AnchorPane>

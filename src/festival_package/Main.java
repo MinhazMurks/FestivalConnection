@@ -23,7 +23,7 @@ public class Main extends Application {
 
         Database.refresh_users();
 
-        Parent root = FXMLLoader.load(getClass().getResource("login_window.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login_window.fxml"));//change fxml back to login
         scene.setRoot(root);
 
         root.getStylesheets().add("festival_package/Styles.css");

@@ -42,7 +42,7 @@
 
 .choiceboxcustom:hover
 {
-
+    -fx-text-fill:white;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
@@ -80,5 +80,6 @@
 
 .list-cell:filled:hover
 {
+    -fx-text-fill:white;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }

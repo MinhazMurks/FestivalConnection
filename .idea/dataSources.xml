@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="festivals_project@festivalproject.mysql.database.azure.com" uuid="0ea92651-be14-49ab-9caf-626a9670b7c5">
+    <data-source source="LOCAL" name="festivals_project@festivalproject.mysql.database.azure.com" uuid="b8d4d654-39cf-48ab-a40b-7ceb3cf85ca1">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
