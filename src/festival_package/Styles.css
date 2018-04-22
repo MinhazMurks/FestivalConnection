@@ -69,10 +69,7 @@
 
 }
 
-.list-cell.text:hover
-{
-    -fx-text-fill: #ff0000;
-}
+
 
 
 .list-cell:filled:selected:focused
