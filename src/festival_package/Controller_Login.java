@@ -78,7 +78,7 @@ public class Controller_Login {
 
     private void auto_log_in()
     {
-        username_field.setText("MinhazMurks");
+        username_field.setText("Goldenvoice");
         password_field.setText("pass");
     }
 
