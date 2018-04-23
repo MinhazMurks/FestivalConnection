@@ -18,6 +18,11 @@
 }
 
 
+.text-field-custom
+{
+    -fx-font-size: 24;
+}
+
 .text
 {
     -fx-font-family: "Raleway-Bold";
@@ -177,4 +182,8 @@
 .text-field
 {
     -fx-font-family: "Raleway-Bold";
+}
+.text-field .text
+{
+    -fx-font-size: 24;
 }

@@ -6,17 +6,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javax.xml.crypto.Data;
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -30,7 +31,7 @@ public class Controller_Login {
     TextField username_field;
 
     @FXML
-    TextField password_field;
+    PasswordField password_field;
 
     @FXML
     Button login_button;
@@ -46,6 +47,9 @@ public class Controller_Login {
      */
     @FXML
     public void initialize(){
+
+        // username_field.setFont(Font.loadFont("resources/Raleway-Bold.ttf", 200));
+
         login_error_text.setVisible(false);
         username_field.setOnKeyPressed(
                 event ->
@@ -79,28 +83,41 @@ public class Controller_Login {
      * @param event
      * @throws SQLException
      */
-    public void on_login_button(ActionEvent event) throws SQLException{
+    public void on_login_button(ActionEvent event) {
 
         Stage stage =(Stage) login_anchor.getScene().getWindow();
         String username = username_field.getText();
+        String password = password_field.getText();
 
         if (username.equals("")){
             login_error_text.setVisible(true);
         }
         else{
-            String guid = Database.authenticate(username, password_field.getText());
-            if (guid.equals("")){
-                login_error_text.setVisible(true);
-            }
-            else{
+
+            boolean authenticated = false;
+
                 try {
-                    launchMainWindow(username, guid);
-                    stage.close();
+                    authenticated = Database.authenticate(username, password);
+                    System.out.println("Authenticated? :" + authenticated);
+
+                } catch (SQLException | ArrayIndexOutOfBoundsException e) {
+                    login_error_text.setVisible(true);
                 }
-                catch (IOException e){
-                    e.printStackTrace();
+
+
+
+                if(authenticated)
+                {
+                    try {
+                        launchMainWindow();
+                        stage.close();
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
                 }
-            }
+
+
+
         }
 
         System.out.println("[" + username + "] Logging in...");
@@ -111,22 +128,17 @@ public class Controller_Login {
      * Launches the main window for the program.
      * Creates a Controller_Main object so the guid can be stored in the userGuid field in Controller_Main.java.
      * Sets the title of the main window to display the user's username.
-     * @param username
-     * @param guid THE USER'S GUID, STORED IN THE userGuid FIELD IN CONTROLLER_MAIN.JAVA
+
      *                  USING Controller_Main.initData(String) METHOD
      * @throws IOException
      */
-    public void launchMainWindow(String username, String guid) throws IOException{
+    public void launchMainWindow() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main_window.fxml"));
 
         Stage stage = new Stage();
         stage.setScene(new Scene((Pane) loader.load()));
         stage.getIcons().add(new Image("file:src/festival_package/resources/Festival_Logo2.png"));
-        stage.setTitle("Festival Connection - Welcome " + username);
-
-        Database.cur_user_guid = guid;
-        Database.cur_user_name = username;
-
+        stage.setTitle("Festival Connection - Welcome " + Database.cur_user.user_name);
 
         stage.show();
     }

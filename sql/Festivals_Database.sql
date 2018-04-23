@@ -25,6 +25,7 @@ create table Festival(
 create table Users(
   userID         varchar(36) primary key,
   user_name      varchar(50) unique,
+  password       varchar(12),
   birthdate      date,
   is_company     bool
 );
@@ -104,7 +105,8 @@ create table Beer(
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
-create table Login(
-  user_name   varchar(50) references Users(user_name),
-  password    varchar(10) unique
-);
+select * from users;
+
+update Users set password = 'pass' where user_name = 'Goldenvoice';
+
+SELECT userID, password FROM Users WHERE user_name = 'Goldenview' and password = 'pass';

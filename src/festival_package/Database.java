@@ -34,13 +34,10 @@ public class Database {
     public static ArrayList<String> viewed_list = new ArrayList<>();
     public static ArrayList<String> viewed_list_id = new ArrayList<>();
 
-    public static String cur_user_name = "";
-    public static String cur_user_guid = "";
+
+    public static User cur_user = null;
 
     static private Connection connection;
-
-
-
 
     static {
         try {
@@ -66,11 +63,12 @@ public class Database {
      * @return
      * @throws SQLException
      */
-    public static String authenticate(String username, String password) throws SQLException
+    public static boolean authenticate(String username, String password) throws SQLException, ArrayIndexOutOfBoundsException
     {
-        String query = ("SELECT userID " +
+
+        String query = ("SELECT userID, password " +
                 "FROM Users " +
-                "WHERE user_name = '" + username + "';");
+                "WHERE user_name = '" + username + "' and password = '" + password + "';");
         System.out.println(query);
 
         String guid = "";
@@ -83,7 +81,17 @@ public class Database {
             System.out.println(guid);
         }
 
-        return guid;
+        cur_user = user_from_userID(guid);
+
+        resultSet.close();
+
+        if(cur_user != null)
+        {
+            return true;
+        }
+
+        return false;
+
     }
 
     /**
@@ -139,7 +147,7 @@ public class Database {
     public static String getUserLocation() throws SQLException{
         String query = ("SELECT city, state " +
                 "FROM Location " +
-                "WHERE userID = '" + cur_user_guid + "';");
+                "WHERE userID = '" + cur_user.userID + "';");
         System.out.println(query);
 
         String userLocation = "";
@@ -337,7 +345,7 @@ public class Database {
 
         return result;
     }
-    public static User user_from_userID(String userID)
+    public static User user_from_userID(String userID) throws ArrayIndexOutOfBoundsException
     {
         User result;
 
@@ -351,6 +359,7 @@ public class Database {
             }
         }
 
+        System.out.println("Temp user is: " + temp + " and userID: " + userID);
         result = Users.get(Users.indexOf(temp));
 
         return result;

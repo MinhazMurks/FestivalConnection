@@ -176,8 +176,6 @@ public class Controller_Main {
 
         });
 
-
-
     }
 
     public void on_search_button(ActionEvent event) throws SQLException, ParseException {
