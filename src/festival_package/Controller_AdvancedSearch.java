@@ -67,11 +67,10 @@ public class Controller_AdvancedSearch {
     }
 
     public void on_search_button(ActionEvent event) {
-        city_field.setVisible(true);
     }
 
     public void on_state_dropdown(ActionEvent event){
-
+        city_field.setVisible(true);
     }
 
     /**
