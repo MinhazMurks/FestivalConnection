@@ -5,6 +5,7 @@ import java.sql.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.UUID.*;
 
@@ -120,7 +121,7 @@ public class Database {
      */
     public static void insertNewUser(String username, String password, String dob, String state, String city, String address, int zip) throws SQLException{
         String guid = UUID.randomUUID().toString();
-        String insertUserSQL = ("INSERT INTO Users VALUES ('" + guid + "', '" + username + "', '" + dob + "', " + "0);");
+        String insertUserSQL = ("INSERT INTO Users VALUES ('" + guid + "', '" + username + "', '" + dob + "', " + 0 + ", '" + password + "');");
         String insertLocationSQL = ("INSERT INTO Location VALUES ('" + guid + "', NULL, '"  +  city + "', '" + state + "', '" + address + "', " + zip + ");");
 
         System.out.println(insertUserSQL);
@@ -129,6 +130,57 @@ public class Database {
         Statement statement = connection.createStatement();
         statement.executeUpdate(insertUserSQL);
         statement.executeUpdate(insertLocationSQL);
+    }
+
+    public static void insertNewFestival(String festName, String type, String startDate, String endDate, double price, String address, String city, String state, int zip, List<String> providers, String genre, boolean outdoor, boolean camping) throws SQLException{
+        String guid = UUID.randomUUID().toString();
+        String insertFestivalSQL = ("INSERT INTO Festival VALUES ('" + guid + "', '" + type + "', '" + festName + "', '" + cur_user_guid + "', '" + startDate + "', '" + endDate + "', " + price + ");");
+        String insertLocationSQL = ("INSERT INTO Location VALUES (NULL" + ", '" + guid + "', '" +  city + "', '" + state + "', '" + address + "', " + zip + ");");
+
+        Statement statement = connection.createStatement();
+
+        System.out.println(insertFestivalSQL);
+        statement.executeUpdate(insertFestivalSQL);
+        System.out.println(insertLocationSQL);
+        statement.executeUpdate(insertLocationSQL);
+
+        for (String str: providers){
+            String insertProviderSQL = ("INSERT INTO Providers VALUES ('" + guid + "', '" + str + "');");
+            System.out.println(insertProviderSQL);
+            statement.executeUpdate(insertProviderSQL);
+        }
+
+        String insertSubTypeSQL = "";
+        switch (type) {
+            case "Music":
+                int out = 0;
+                int camp = 0;
+                if (outdoor) {
+                    out = 1;
+                }
+                if (camping) {
+                    camp = 1;
+                }
+                insertSubTypeSQL = ("INSERT INTO Music VALUES ('" + guid + "', '" + genre + "', " + out + ", " + camp + ");");
+                System.out.println(insertSubTypeSQL);
+                statement.executeUpdate(insertSubTypeSQL);
+                break;
+            case "Art":
+                insertSubTypeSQL = ("INSERT INTO Art VALUES ('" + guid + "', '" + genre + "');");
+                System.out.println(insertSubTypeSQL);
+                statement.executeUpdate(insertSubTypeSQL);
+                break;
+            case "Comedy":
+                insertSubTypeSQL = ("INSERT INTO Comedy VALUES ('" + guid + "');");
+                System.out.println(insertSubTypeSQL);
+                statement.executeUpdate(insertSubTypeSQL);
+                break;
+            case "Beer":
+                insertSubTypeSQL = ("INSERT INTO Beer VALUES ('" + guid + "');");
+                System.out.println(insertSubTypeSQL);
+                statement.executeUpdate(insertSubTypeSQL);
+                break;
+        }
     }
 
     /**
