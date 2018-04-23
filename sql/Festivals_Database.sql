@@ -1,8 +1,20 @@
 create database if not exists festivals_project;
 use festivals_project;
 
+drop table Festival;
+drop table Users;
+drop table Friends;
+drop table Bookmarks;
+drop table Location;
+drop table Providers;
+drop table Music;
+drop table Comedy;
+drop table Art;
+drop table Beer;
+
 create table Festival(
   festID varchar(36) primary key,
+  fest_type varchar(10),
   name   varchar(50),
   production_comp varchar(36) references Users(userID),
   start_date date,
@@ -42,6 +54,18 @@ create table Location(
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
+DROP TRIGGER IF EXISTS trg_check_location_id;
+
+CREATE TRIGGER trg_check_location_id BEFORE INSERT ON Location
+  FOR EACH ROW
+  BEGIN
+    DECLARE msg VARCHAR(128);
+    IF ((NEW.userID IS NOT NULL) AND (NEW.festId IS NOT NULL)) THEN
+      SET msg = 'Location table error: Either userID or festID must be NULL';
+      SIGNAL SQLSTATE '45000' SET message_text = msg;
+    END IF;
+  END;
+
 create table Providers(
   festID       varchar(36) references Festival(festID),
   name         varchar(50),
@@ -50,48 +74,34 @@ create table Providers(
 
 create table Music(
   festID       varchar(36) NOT NULL,
+  type_fest    char(10)     references Festival(fest_type),
   musicians    varchar(20) references Providers(festID, name),
-  type_fest    char(10),
   genre        varchar(20),
   outdoor      bool,
   camping      bool,
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
-create trigger type_check_music before insert on Music
-  for each row set NEW.type_fest = 'Music'
-;
-
 create table Comedy(
   festID       varchar(36) NOT NULL,
-  type_fest    char(10),
+  type_fest    char(10)     references Festival(fest_type),
   comedians    varchar(50)  references Providers(festID, name),
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
-create trigger type_check_comedy before insert on Comedy
-  for each row set NEW.type_fest = 'Comedy'
-;
-
 create table Art(
   festID       varchar(36) NOT NULL,
-  type_fest    char(10),
+  type_fest    char(10)     references Festival(fest_type),
   artist       varchar(20) references Providers(festID, name),
   genre        varchar(20),
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
-create trigger type_check_art before insert on Art
-  for each row set NEW.type_fest = 'Art'
-;
-
 create table Beer(
   festID       varchar(36) NOT NULL,
-  type_fest    char(10),
+  type_fest    char(10)     references Festival(fest_type),
   breweries    varchar(50) references Providers(festID, name),
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
-create trigger type_check before insert on Beer
-  for each row set NEW.type_fest = 'Beer'
-;
+

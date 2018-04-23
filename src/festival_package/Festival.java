@@ -119,7 +119,7 @@ public class Festival {
         }
 
         result += "\n From: " + start_date + " to " + this.end_date;
-        result += "\n Ticket cost: " + price;
+        result += "\n Ticket cost: $" + price;
 
         return result;
     }

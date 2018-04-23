@@ -60,6 +60,44 @@
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
+
+.combo-box-custom
+{
+    -fx-background-color: linear-gradient(#f0f0f0, #eeeeee);
+}
+.combo-box-custom:hover
+{
+    -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
+}
+.combo-box-custom-popup:selected
+{
+    -fx-background-color: transparent;
+}
+.combo-box-custom-popup .list-cell:selected
+{
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+}
+.combo-box-custom-base
+{
+    -fx-background-color: transparent;
+}
+.combo-box-custom-popup .list-view .list-cell:odd
+{
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(#f0f0f0, #eeeeee);
+}
+.combo-box-custom-popup .list-view .list-cell:even
+{
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(#ffffff, #f7f7f7);
+}
+.combo-box-custom-popup .list-view .list-cell:hover
+{
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
+}
+
 .list-view
 {
     -fx-border-color: #c9c9c9;
@@ -69,6 +107,13 @@
 {
     -fx-cell-size: 30;
     -fx-font-size: 15;
+}
+
+
+.list-cell .text:hover
+{
+    -fx-fill: white;
+    -fx-cursor: hand;
 }
 
 .list-cell:even

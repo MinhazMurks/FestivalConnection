@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -71,10 +72,18 @@ public class Controller_Main {
         choices.add("Festival");
         choices.add("User");
 
+        search_field.setOnKeyPressed(
+                event ->
+                {
+                    if(event.getCode() == KeyCode.ENTER)
+                    {
+                        search_button.fire();
+                    }
+                }
+        );
+
         search_dropdown.getItems().addAll(choices);
-
         search_dropdown.setValue("User");
-
         search_dropdown.setButtonCell(new ListCell<String>()
         {
             @Override
@@ -89,10 +98,10 @@ public class Controller_Main {
         });
 
 
-
         search_dropdown.setValue("User");
+
         try {
-            Database.set_viewed_list(Database.User_Names);
+            Database.set_viewed_list(Database.Users);
             Database.refresh_users();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,25 +116,28 @@ public class Controller_Main {
         search_dropdown.setOnAction(
                 event ->
                 {
-                    if(search_dropdown.getSelectionModel().getSelectedItem().equals("User"))
-                    {
-                        search_field.setText("");
-                        Database.set_viewed_list(Database.User_Names);
-                    }
-                    else
-                    {
-                        search_field.setText("");
-                        Database.set_viewed_list(Database.Festivals_Names);
-                    }
+
 
                     try {
-                        Database.refresh_users();
+                        Database.refresh_lists();
                     } catch (SQLException e) {
                         System.out.println("Empty");
                     } catch (ParseException e)
                     {
                         System.out.println("Parse failed");
                     }
+
+                    if(search_dropdown.getSelectionModel().getSelectedItem().equals("User"))
+                    {
+                        search_field.setText("");
+                        Database.set_viewed_list(Database.Users);
+                    }
+                    else if(search_dropdown.getSelectionModel().getSelectedItem().equals("Festival"))
+                    {
+                        search_field.setText("");
+                        Database.set_viewed_list(Database.Festivals);
+                    }
+
 
                     listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
                     search_listview.itemsProperty().bind(listProperty);
@@ -139,12 +151,26 @@ public class Controller_Main {
             {
                 if(search_dropdown.getSelectionModel().getSelectedItem().equals("User"))
                 {
-                    description_pane.setText((Database.Users.get(Database.User_Names.indexOf(search_listview.getSelectionModel().getSelectedItem())).description()));
+                    try
+                    {
+                        description_pane.setText(Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex())).description());
+                    }catch(ArrayIndexOutOfBoundsException e)
+                    {
+                        description_pane.setText("Click an entry to see more information");
+                    }
+
                 }
                 else
                 {
-                    description_pane.setText((Database.Festivals.get(Database.Festivals_Names.indexOf(search_listview.getSelectionModel().getSelectedItem())).description()));
+                    try
+                    {
+                        description_pane.setText(Database.fest_from_festID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex())).description());
+                    }catch(ArrayIndexOutOfBoundsException e)
+                    {
+                        description_pane.setText("Click an entry to see more information");
+                    }
                 }
+
             }
 
 
@@ -157,12 +183,22 @@ public class Controller_Main {
     public void on_search_button(ActionEvent event) throws SQLException, ParseException {
         System.out.println("Fuuuuck!");
 
-        Database.refresh_users();
-        Database.set_viewed_list(Database.User_Names);
+        System.out.println("dropdown val: " + search_dropdown.getValue());
+
+        if(!search_field.getText().isEmpty())
+        {
+            Database.name_search(search_field.getText(), search_dropdown.getValue());
+        }
+        else{
+            Database.reset_view_list(search_dropdown.getValue());
+        }
+
+        Database.refresh_lists();
+
 
         listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
-
         search_listview.itemsProperty().bind(listProperty);
+
     }
 
 

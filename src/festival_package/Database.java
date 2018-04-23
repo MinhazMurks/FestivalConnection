@@ -32,6 +32,7 @@ public class Database {
     public static ArrayList<String> test_values = new ArrayList<>();
 
     public static ArrayList<String> viewed_list = new ArrayList<>();
+    public static ArrayList<String> viewed_list_id = new ArrayList<>();
 
     public static String cur_user_name = "";
     public static String cur_user_guid = "";
@@ -322,12 +323,53 @@ public class Database {
     {
         User result;
 
-        User temp = new User(username);
+        User temp = null;
+
+        for(int i = 0; i < Users.size(); i++)
+        {
+            if(Users.get(i).user_name.equals(username))
+            {
+                temp = Users.get(i);
+            }
+        }
 
         result = Users.get(Users.indexOf(temp));
 
         return result;
     }
+    public static User user_from_userID(String userID)
+    {
+        User result;
+
+        User temp = null;
+
+        for(int i = 0; i < Users.size(); i++)
+        {
+            if(Users.get(i).userID.equals(userID))
+            {
+                temp = Users.get(i);
+            }
+        }
+
+        result = Users.get(Users.indexOf(temp));
+
+        return result;
+    }
+
+    public static Festival fest_from_festID(String festID)
+    {
+        Festival result = null;
+        for(int i = 0; i < Festivals.size(); i++)
+        {
+            if(Festivals.get(i).festID.equals(festID))
+            {
+                result = Festivals.get(i);
+            }
+        }
+
+        return result;
+    }
+
     public static void refresh_lists() throws SQLException, ParseException
     {
         refresh_users();
@@ -405,22 +447,32 @@ public class Database {
             User_Names.add(Users.get(i).user_name);
         }
     }
-    public static void refresh_festivals() throws SQLException {
+    public static void refresh_festivals()
+    {
         Festivals.clear();
 
         ArrayList<String> columns = new ArrayList<>();
 
         columns.add("festival.festID");
-        columns.add("festival.festival.name");
+        columns.add("festival.name");
         columns.add("festival.production_comp");
-        columns.add("type_fest");
+        columns.add("festival.fest_type");
         columns.add("festival.start_date");
         columns.add("festival.end_date");
         columns.add("festival.price");
+
+        columns.add("music.genre");
+        columns.add("music.outdoor");
+        columns.add("music.camping");
+
+        columns.add("art.genre");
+
+
         String festival_table = "festival";
 
         columns.add("location.streetAddress");
         columns.add("location.city");
+        columns.add("location.state");
         columns.add("location.zip");
 
 
@@ -432,7 +484,7 @@ public class Database {
         String location_table = "location";
 
 
-        columns.add("providers.name as providers");
+        columns.add("providers.name");
         String providers_table = "providers";
 
         String query = "SELECT ";
@@ -449,69 +501,76 @@ public class Database {
 
         query += " FROM " + festival_table;
 
-        query += "\n JOIN " + art_table + " ON " + festival_table + ".festID = " + art_table + ".festID";
-        query += "\n JOIN " + beer_table + " ON " + festival_table + ".festID = " + beer_table + ".festID";
-        query += "\n JOIN " + comedy_table + " ON " + festival_table + ".festID = " + comedy_table + ".festID";
-        query += "\n JOIN " + music_table + " ON " + festival_table + ".festID = " + music_table + ".festID";
+        query += "\n LEFT JOIN " + art_table + " ON " + festival_table + ".festID = " + art_table + ".festID";
+        query += "\n LEFT JOIN " + beer_table + " ON " + festival_table + ".festID = " + beer_table + ".festID";
+        query += "\n LEFT JOIN " + comedy_table + " ON " + festival_table + ".festID = " + comedy_table + ".festID";
+        query += "\n LEFT JOIN " + music_table + " ON " + festival_table + ".festID = " + music_table + ".festID";
         query += "\n JOIN " + providers_table + " ON " + festival_table + ".festID = " + providers_table + ".festID";
-        query += "\n JOIN " + location_table + " ON " + festival_table + ".festID = " + location_table + ".festID;";
+        query += "\n JOIN " + location_table + " ON " + festival_table + ".festID = " + location_table + ".festID";
 
 
         query += ";";
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        System.out.println("Query: " + query);
 
-        while(resultSet.next())
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+
+
+            ResultSet resultSet = statement.executeQuery(query);
+
+            System.out.println("num rows: " + resultSet.getFetchSize());
+
+            while (resultSet.next()) {
+                System.out.println("I got to the loop");
+
+                LocalDate start_date = date_from_string(resultSet.getDate("start_date").toString());
+                LocalDate end_date = date_from_string(resultSet.getDate("end_date").toString());
+
+                System.out.println("before creating temp fest");
+
+                Festival temp = new Festival(resultSet.getString("festival.festID"),
+                        resultSet.getString("festival.name"),
+                        resultSet.getString("location.streetAddress") + ", " +
+                                resultSet.getString("location.city") + ", " +
+                                resultSet.getString("state") + " " +
+                                resultSet.getString("zip"),
+                        resultSet.getString("production_comp"),
+                        resultSet.getString("festival.fest_type"),
+                        start_date, end_date,
+                        resultSet.getFloat("festival.price"));
+
+                System.out.println("Temp fest: " + temp.toString());
+
+
+                if (Festivals.contains(temp)) {
+                    Festivals.get(Festivals.indexOf(temp)).providers.add(resultSet.getString("name"));
+                    continue;
+                } else if (temp.type.equals("Music")) {
+                    temp.genre = resultSet.getString("genre");
+                    temp.outdoor = resultSet.getBoolean("outdoor");
+                    temp.camping = resultSet.getBoolean("camping");
+                    temp.providers.add(resultSet.getString("name"));
+                } else if (temp.type.equals("Comedy")) {
+                    temp.providers.add(resultSet.getString("name"));
+                } else if (temp.type.equals("Art")) {
+                    temp.genre = resultSet.getString("genre");
+                    temp.providers.add(resultSet.getString("name"));
+                } else if (temp.type.equals("Beer")) {
+                    temp.providers.add(resultSet.getString("name"));
+                }
+
+                Festivals.add(temp);
+            }
+            System.out.println("do i get here");
+            re_add_fest_names();
+
+        } catch(SQLException e)
         {
-            LocalDate start_date = date_from_string(resultSet.getDate("start_date").toString());
-            LocalDate end_date = date_from_string(resultSet.getDate("end_date").toString());
-
-            Festival temp = new Festival(resultSet.getString("fest_ID"),
-                                         resultSet.getString("festival.name"),
-                                         resultSet.getString("streetAddress") + " ," +
-                                                 resultSet.getString("city") + ", " +
-                                                 resultSet.getString("state") +
-                                                 resultSet.getString("zip"),
-                                         resultSet.getString("production_comp"),
-                                         resultSet.getString("fest_type"),
-                                         start_date, end_date,
-                                         resultSet.getFloat("price")
-                    );
-
-
-            if(Festivals.contains(temp))
-            {
-                Festivals.get(Festivals.indexOf(temp)).providers.add(resultSet.getString("name"));
-                continue;
-            }
-            else if (temp.type.equals("Music"))
-            {
-                temp.genre = resultSet.getString("genre");
-                temp.outdoor = resultSet.getBoolean("outdoor");
-                temp.camping = resultSet.getBoolean("camping");
-                temp.providers.add(resultSet.getString("name"));
-            }
-            else if (temp.type.equals("Comedy"))
-            {
-                temp.providers.add(resultSet.getString("name"));
-            }
-            else if (temp.type.equals("Art"))
-            {
-                temp.genre = resultSet.getString("genre");
-                temp.providers.add(resultSet.getString("name"));
-            }
-            else if(temp.type.equals("Beer"))
-            {
-                temp.providers.add(resultSet.getString("name"));
-            }
-
-            Festivals.add(temp);
+            e.printStackTrace();
         }
-        re_add_fest_names();
-
     }
-
     public static void re_add_fest_names()
     {
         Festivals_Names.clear();
@@ -521,15 +580,93 @@ public class Database {
             Festivals_Names.add(Festivals.get(i).name);
         }
     }
-
-    public static void set_viewed_list(ArrayList<String> new_list)
+    public static void set_viewed_list(ArrayList<?> new_list)
     {
         viewed_list.clear();
-        viewed_list.addAll(new_list);
+        viewed_list_id.clear();
+
+
+        if(!new_list.isEmpty())
+        {
+            if(Festival.class.isAssignableFrom(new_list.get(0).getClass()))
+            {
+                for(int i = 0; i < new_list.size(); i++)
+                {
+                    viewed_list.add(((Festival)new_list.get(i)).name);
+                    viewed_list_id.add(((Festival)new_list.get(i)).festID);
+                }
+            }
+            else
+            {
+                for(int i = 0; i < new_list.size(); i++)
+                {
+                    viewed_list.add(((User)new_list.get(i)).user_name);
+                    viewed_list_id.add(((User)new_list.get(i)).userID);
+                }
+            }
+        }
+
+
         System.out.println("New list: " + viewed_list.toString());
 
     }
+    public static void name_search(String search_val, String search_type) throws SQLException, ParseException
+    {
+
+        Database.refresh_lists();
+
+        viewed_list.clear();
+        viewed_list_id.clear();
+
+        String name_col = "";
+        String id_col = "";
+
+        String query = "SELECT ";
+
+        if(search_type.equals("User"))
+        {
+            query += "users.user_name, users.userID from users where users.user_name LIKE '%" + search_val + "%';";
+            name_col = "users.user_name";
+            id_col = "users.userID";
+        }
+        else if(search_type.equals("Festival"))
+        {
+            query += "festival.name, festival.festID from festival where festival.name LIKE '%" + search_val + "%';";
+            name_col = "festival.name";
+            id_col = "festival.festID";
+        }
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
 
 
+        while(resultSet.next())
+        {
+            viewed_list.add(resultSet.getString(name_col));
+            viewed_list_id.add(resultSet.getString(id_col));
+        }
+    }
+    public static void reset_view_list(String type)
+    {
+        viewed_list.clear();
+        viewed_list_id.clear();
+
+        if(type.equals("User"))
+        {
+            for(int i = 0; i < Users.size(); i++)
+            {
+                viewed_list.add(Users.get(i).user_name);
+                viewed_list_id.add(Users.get(i).userID);
+            }
+        }
+        else //then Festival
+        {
+            for(int i = 0; i < Festivals.size(); i++)
+            {
+                viewed_list.add(Festivals.get(i).name);
+                viewed_list_id.add(Festivals.get(i).festID);
+            }
+        }
+    }
 
 }
