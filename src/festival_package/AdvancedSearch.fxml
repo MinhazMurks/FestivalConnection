@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -11,8 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="festival_package.Controller_AdvancedSearch">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,15 +25,15 @@
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="495.0">
          <children>
                 <DatePicker fx:id="endDate_field" layoutX="300.0" layoutY="194.0" promptText="Ends on or before" />
-                <Button fx:id="search_button" layoutX="301.0" layoutY="324.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="55.0" prefWidth="182.0" text="Search">
+                <Button fx:id="search_button" layoutX="301.0" layoutY="334.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="45.0" prefWidth="150.0" text="Search">
                <font>
                   <Font size="24.0" />
                </font></Button>
                 <DatePicker fx:id="startDate_field" layoutX="300.0" layoutY="162.0" promptText="Starts on or after" />
             <TextField fx:id="name_field" alignment="CENTER" layoutX="11.0" layoutY="30.0" prefHeight="25.0" prefWidth="442.0" promptText="Festival name" />
             <TextField fx:id="price_field" layoutX="301.0" layoutY="97.0" promptText="Max Price" />
-            <TextField fx:id="providers_field" alignment="TOP_LEFT" layoutX="11.0" layoutY="65.0" prefHeight="320.0" prefWidth="270.0" promptText="Performers/Providers (separated by commas)" />
-            <ComboBox fx:id="fest_type_dropdown" layoutX="300.0" layoutY="65.0" onAction="#on_fest_type_dropdown" prefWidth="150.0" promptText="Festival Type" >
+            <TextField fx:id="providers_field" alignment="TOP_LEFT" layoutX="11.0" layoutY="66.0" prefHeight="319.0" prefWidth="270.0" promptText="Performers/Providers (separated by commas)" />
+            <ComboBox fx:id="fest_type_dropdown" layoutX="300.0" layoutY="65.0" onAction="#on_fest_type_dropdown" prefWidth="150.0" promptText="Festival Type">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Music" />
@@ -43,7 +43,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="price_order_dropdown" layoutX="300.0" layoutY="130.0" prefWidth="150.0" promptText="Price Order" >
+            <ComboBox fx:id="price_order_dropdown" layoutX="300.0" layoutY="130.0" prefWidth="150.0" promptText="Price Order">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="High to Low" />
@@ -51,9 +51,66 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <TextField fx:id="genre_field" layoutX="301.0" layoutY="227.0" promptText="Genre" />
-            <CheckBox fx:id="outdoor_check" layoutX="300.0" layoutY="267.0" mnemonicParsing="false" text="Outdoor" />
-            <CheckBox fx:id="camping_check" layoutX="299.0" layoutY="291.0" mnemonicParsing="false" text="Camping" />
+            <TextField fx:id="genre_field" layoutX="301.0" layoutY="258.0" promptText="Genre" />
+            <CheckBox fx:id="outdoor_check" layoutX="299.0" layoutY="291.0" mnemonicParsing="false" text="Outdoor" />
+            <CheckBox fx:id="camping_check" layoutX="299.0" layoutY="309.0" mnemonicParsing="false" text="Camping" />
+            <ComboBox fx:id="state_dropdown" layoutX="420.0" layoutY="226.0" onAction="#on_state_dropdown" prefHeight="25.0" prefWidth="70.0" promptText="State" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="AL" />
+                        <String fx:value="AK" />
+                        <String fx:value="AZ" />
+                        <String fx:value="AR" />
+                        <String fx:value="CA" />
+                        <String fx:value="CO" />
+                        <String fx:value="CT" />
+                        <String fx:value="DE" />
+                        <String fx:value="FL" />
+                        <String fx:value="GA" />
+                        <String fx:value="HI" />
+                        <String fx:value="ID" />
+                        <String fx:value="IL" />
+                        <String fx:value="IN" />
+                        <String fx:value="IA" />
+                        <String fx:value="KS" />
+                        <String fx:value="KY" />
+                        <String fx:value="LA" />
+                        <String fx:value="ME" />
+                        <String fx:value="MD" />
+                        <String fx:value="MA" />
+                        <String fx:value="MI" />
+                        <String fx:value="MN" />
+                        <String fx:value="MS" />
+                        <String fx:value="MO" />
+                        <String fx:value="MT" />
+                        <String fx:value="NE" />
+                        <String fx:value="NV" />
+                        <String fx:value="NH" />
+                        <String fx:value="NJ" />
+                        <String fx:value="NM" />
+                        <String fx:value="NY" />
+                        <String fx:value="NC" />
+                        <String fx:value="ND" />
+                        <String fx:value="OH" />
+                        <String fx:value="OK" />
+                        <String fx:value="OR" />
+                        <String fx:value="PA" />
+                        <String fx:value="RI" />
+                        <String fx:value="SC" />
+                        <String fx:value="SD" />
+                        <String fx:value="TN" />
+                        <String fx:value="TX" />
+                        <String fx:value="UT" />
+                        <String fx:value="VT" />
+                        <String fx:value="VA" />
+                        <String fx:value="WA" />
+                        <String fx:value="WV" />
+                        <String fx:value="WI" />
+                        <String fx:value="WY" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <TextField fx:id="city_field" layoutX="299.0" layoutY="226.0" prefHeight="25.0" prefWidth="119.0" promptText="City" />
          </children>
       </AnchorPane>
     </children>
