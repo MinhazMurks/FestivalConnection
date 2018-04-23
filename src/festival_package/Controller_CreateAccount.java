@@ -20,6 +20,7 @@ import javafx.util.StringConverter;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.LocalDate;
 
 public class Controller_CreateAccount {
@@ -125,10 +126,15 @@ public class Controller_CreateAccount {
             System.out.println("Creating Account...");
             System.out.print(username + "\n" + password + "\n" + dob.toString() + "\n" + address + "\n" + city + "\n" + state + "\n" + zip + "\n");
             Database.insertNewUser(username, password, dob.toString(), state, city, address, zip);
+            Database.refresh_users();
             stage.close();
         }
         catch (SQLException e){
             sql_error_text.setVisible(true);
+            e.printStackTrace();
+            return;
+        }
+        catch (ParseException e){
             e.printStackTrace();
             return;
         }

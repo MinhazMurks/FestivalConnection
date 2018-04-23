@@ -142,7 +142,7 @@ public class Database {
 
     public static void insertNewFestival(String festName, String type, String startDate, String endDate, double price, String address, String city, String state, int zip, List<String> providers, String genre, boolean outdoor, boolean camping) throws SQLException{
         String guid = UUID.randomUUID().toString();
-        String insertFestivalSQL = ("INSERT INTO Festival VALUES ('" + guid + "', '" + type + "', '" + festName + "', '" + cur_user_guid + "', '" + startDate + "', '" + endDate + "', " + price + ");");
+        String insertFestivalSQL = ("INSERT INTO Festival VALUES ('" + guid + "', '" + type + "', '" + festName + "', '" + cur_user.userID + "', '" + startDate + "', '" + endDate + "', " + price + ");");
         String insertLocationSQL = ("INSERT INTO Location VALUES (NULL" + ", '" + guid + "', '" +  city + "', '" + state + "', '" + address + "', " + zip + ");");
 
         Statement statement = connection.createStatement();
