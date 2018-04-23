@@ -16,6 +16,9 @@ public class User {
     boolean is_company;
 
     ArrayList<User> Friends = new ArrayList<>();
+    ArrayList<String> Friend_Names = new ArrayList<>();
+
+
     ArrayList<Festival> Bookmarks = new ArrayList<>();
 
 
@@ -75,6 +78,11 @@ public class User {
     {
         System.out.println(this.user_name + ":" + " added: " + friend.user_name + " as a friend!");
         this.Friends.add(friend);
+
+        if(!Friend_Names.contains(friend.user_name))
+        {
+            this.Friend_Names.add(friend.user_name);
+        }
     }
 
 
