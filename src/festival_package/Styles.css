@@ -17,6 +17,13 @@
     -transition: -fx-background-color 5s;
 }
 
+.button-delete
+{
+    -fx-background-color: linear-gradient(#ffffff, #ebebeb);
+    -transition: -fx-background-color 5s;
+    -fx-font-size: 24;
+}
+
 
 .text-field-custom
 {
