@@ -1,5 +1,7 @@
 package festival_package;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -68,7 +70,19 @@ public class Controller_CreateAccount {
      * Sets error texts to invisible.
      */
     @FXML
-    public void initialize(){username_error_text.setVisible(false); retype_password_error_text.setVisible(false); sql_error_text.setVisible(false);}
+    public void initialize(){
+        username_error_text.setVisible(false); retype_password_error_text.setVisible(false); sql_error_text.setVisible(false);
+
+        zip_field.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    zip_field.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+    }
 
     /**
      * Does basic checks to see if all fields are properly filled out before inserting data into
