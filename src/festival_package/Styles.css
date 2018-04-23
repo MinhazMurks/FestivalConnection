@@ -1,4 +1,15 @@
 
+@font-face {
+    -fx-font-family: 'Raleway-Bold';
+    src: url('resources/Raleway-Bold.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Raleway';
+    src: url('resources/Raleway-Thin.ttf');
+}
+
+
 
 .button
 {
@@ -7,6 +18,7 @@
 }
 .customlabel
 {
+    -fx-font-family: "Raleway-Bold";
     -fx-background-color: WHITE;
     -fx-border-width: 1;
     -fx-border-color: rgba(0, 0, 0, 0.21);
@@ -15,6 +27,10 @@
 .button:hover
 {
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
+}
+.button:pressed
+{
+    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.64));
 }
 
 .cornerbuttoncustom
@@ -31,8 +47,14 @@
 {
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
+.combo-box:pressed
+{
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.64));
+}
 .combo-box-popup:selected
 {
+    -fx-text-fill: black;
     -fx-background-color: transparent;
 }
 .combo-box-popup .list-cell:selected
@@ -56,7 +78,7 @@
 }
 .combo-box-popup .list-view .list-cell:hover
 {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
@@ -67,10 +89,12 @@
 }
 .combo-box-custom:hover
 {
+    -fx-text-fill: black;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 .combo-box-custom-popup:selected
 {
+    -fx-text-fill: black;
     -fx-background-color: transparent;
 }
 .combo-box-custom-popup .list-cell:selected
@@ -94,35 +118,40 @@
 }
 .combo-box-custom-popup .list-view .list-cell:hover
 {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
 .list-view
 {
+    -fx-text-fill: black;
     -fx-border-color: #c9c9c9;
 }
 
 .list-cell
 {
-    -fx-cell-size: 30;
-    -fx-font-size: 15;
+    -fx-text-fill: black;
+    -fx-font-family: "Raleway-Bold";
+    -fx-cell-size: 40;
+    -fx-font-size: 20;
 }
 
 
 .list-cell .text:hover
 {
-    -fx-fill: white;
+    -fx-fill: linear-gradient(#ffffff, #efefef);
     -fx-cursor: hand;
 }
 
 .list-cell:even
 {
+    -fx-text-fill: black;
     -fx-background-color: linear-gradient(#ffffff, #f7f7f7);
 }
 
 .list-cell:odd
 {
+    -fx-text-fill: black;
     -fx-background-color: linear-gradient(#f0f0f0, #eeeeee);
 }
 
@@ -133,10 +162,13 @@
     -fx-text-fill: rgb(255, 255, 255);
 }
 
-
 .list-cell:filled:hover
 {
     -fx-text-fill:white;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
+.text-field
+{
+    -fx-font-family: "Raleway-Bold";
+}

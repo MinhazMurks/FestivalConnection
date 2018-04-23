@@ -23,6 +23,7 @@ public class Main extends Application {
 
         Database.refresh_users();
 
+
         Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));//change fxml back to login
         scene.setRoot(root);
 
