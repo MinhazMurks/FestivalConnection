@@ -52,6 +52,9 @@ public class Controller_Main {
     Button add_friend_button;
 
     @FXML
+    Button add_bookmark_button;
+
+    @FXML
     Button add_festival_button;
 
     ListProperty<String> listProperty = new SimpleListProperty<>();
@@ -134,8 +137,6 @@ public class Controller_Main {
         search_dropdown.setOnAction(
                 event ->
                 {
-
-
                     try {
                         Database.refresh_lists();
                     } catch (SQLException e) {
@@ -149,11 +150,14 @@ public class Controller_Main {
                     {
                         search_field.setText("");
                         Database.set_viewed_list(Database.Users);
+                        search_listview.getSelectionModel().clearSelection();
                     }
                     else if(search_dropdown.getSelectionModel().getSelectedItem().equals("Festival"))
                     {
                         search_field.setText("");
                         Database.set_viewed_list(Database.Festivals);
+                        search_listview.getSelectionModel().clearSelection();
+                        //description_pane.setText("Click an entry to see more information");
                     }
 
 
@@ -168,47 +172,66 @@ public class Controller_Main {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue)
             {
+
+                if(search_listview.getSelectionModel().getSelectedIndex() == -1)
+                {
+                    description_pane.setText("Click an entry to see more information");
+                    add_bookmark_button.setVisible(false);
+                    add_friend_button.setVisible(false);
+                }
+
                 if(search_dropdown.getSelectionModel().getSelectedItem().equals("User"))
                 {
-                    User selected_user = Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex()));
+                    add_bookmark_button.setVisible(false);
+                    try {
 
-                    System.out.println("Selected user: " + selected_user.user_name + " userID: " + selected_user.userID);
-                    System.out.println("Current Logged in user: " + Database.cur_user.user_name + " userID: " + Database.cur_user.userID);
 
-                    if(!selected_user.equals(Database.cur_user) && !Database.cur_user.Friends.contains(selected_user))
-                    {
-                        add_friend_button.setVisible(true);
-                    }
-                    else
-                    {
+                        User selected_user = Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex()));
+
+                        System.out.println("Selected user: " + selected_user.user_name + " userID: " + selected_user.userID);
+                        System.out.println("Current Logged in user: " + Database.cur_user.user_name + " userID: " + Database.cur_user.userID);
+
+                        if (!selected_user.equals(Database.cur_user) && !Database.cur_user.Friends.contains(selected_user)) {
+                            add_friend_button.setVisible(true);
+                        } else {
+                            add_friend_button.setVisible(false);
+                        }
+
+                        try {
+                            description_pane.setText(Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex())).description());
+
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            description_pane.setText("Click an entry to see more information");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("No selection!");
                         add_friend_button.setVisible(false);
-                    }
-
-                    try
-                    {
-                        description_pane.setText(Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex())).description());
-
-                    }catch(ArrayIndexOutOfBoundsException e)
-                    {
-                        description_pane.setText("Click an entry to see more information");
                     }
 
                 }
                 else
                 {
                     add_friend_button.setVisible(false);
-                    try
+
+                    try{
+
+                    if(Database.cur_user.Bookmarks.contains(Database.Festivals.get(search_listview.getSelectionModel().getSelectedIndex())))
                     {
+                        add_bookmark_button.setVisible(false);
+                    }
+                    else
+                    {
+                        add_bookmark_button.setVisible(true);
+                    }
+
                         description_pane.setText(Database.fest_from_festID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex())).description());
                     }catch(ArrayIndexOutOfBoundsException e)
                     {
-                        description_pane.setText("Click an entry to see more information");
+                        System.out.println("No selection!");
                     }
                 }
 
             }
-
-
         });
 
     }
@@ -234,23 +257,25 @@ public class Controller_Main {
 
     }
 
-
     public void on_friend_button(ActionEvent event) throws IOException
     {
         changeScene("Bookmarks_and_Friends.fxml");
         System.out.println("Friend adding");
+
+        search_listview.getSelectionModel().clearSelection();
     }
-
-
     public void on_favorite_button(ActionEvent event) throws IOException
     {
         changeScene("Bookmarks_and_Friends.fxml");
         System.out.println("Favorite adding");
-    }
 
+        search_listview.getSelectionModel().clearSelection();
+    }
     public void on_advanced_button(ActionEvent event) throws IOException {
         changeScene("AdvancedSearch.fxml");
         System.out.println("advanced search");
+
+        search_listview.getSelectionModel().clearSelection();
     }
 
     public void add_friend_button(ActionEvent event) {
@@ -274,6 +299,28 @@ public class Controller_Main {
             System.out.println("Already Friends!");
         }
     }
+
+    public void add_bookmark_button(ActionEvent event)
+    {
+        Festival selected_festival = Database.fest_from_festID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex()));
+
+        String table = "Bookmarks(userID, festID)";
+
+        ArrayList<String> values = new ArrayList<>();
+        values.add(Database.cur_user.userID);
+        values.add(selected_festival.festID);
+
+        try {
+            Database.insert_to_table(table, values);
+            Database.refresh_bookmarks();
+            add_bookmark_button.setVisible(false);
+        } catch (SQLException e) {
+            System.out.println(Database.cur_user.Bookmarks.toString());
+            System.out.println("Already Bookmarked!");
+        }
+
+    }
+
 
     public void on_add_festival_button(ActionEvent event) throws IOException{
         changeScene("add_festival_window.fxml");

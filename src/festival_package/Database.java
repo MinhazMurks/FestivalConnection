@@ -25,9 +25,6 @@ public class Database {
     public static ArrayList<String> User_Names = new ArrayList<>();
 
 
-    public static ArrayList<User> Displayed_Users = new ArrayList<>();
-    public static ArrayList<String> Displayed_User_Names = new ArrayList<>();
-
 
     public static ArrayList<String> Locations = new ArrayList<>();
 
@@ -197,10 +194,10 @@ public class Database {
      * TODO: ADD CONDITION CHECKS FOR INCORRECT OR NONEXISTENT GUID
      * @return The concatenated city and state columns corresponding with current guid
      */
-    public static String getUserLocation(String userID) throws SQLException{
+    public static String getUserLocation() throws SQLException{
         String query = ("SELECT city, state " +
                 "FROM Location " +
-                "WHERE userID = '" + userID + "';");
+                "WHERE userID = '" + cur_user.userID + "';");
         System.out.println(query);
 
         String userLocation = "";
@@ -458,6 +455,7 @@ public class Database {
         refresh_users();
         refresh_friends();
         refresh_festivals();
+        refresh_bookmarks();
     }
     public static void refresh_users() throws SQLException, ParseException
     {
@@ -785,4 +783,58 @@ public class Database {
 
         }
     }
+    public static void refresh_bookmarks() throws SQLException {
+        for (int i = 0; i < Users.size(); i++)
+        {
+            Users.get(i).Bookmarks.clear();
+            Users.get(i).Bookmark_Names.clear();
+
+            String query = "SELECT * FROM bookmarks;";
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            if (!resultSet.isBeforeFirst()) {
+                System.out.println("Empty Bookmarks!");
+            }
+
+            while (resultSet.next()) {
+                User first_user = user_from_userID(resultSet.getString("userID"));
+                Festival bookmarked = fest_from_festID(resultSet.getString("festID"));
+
+                System.out.println("first_user: " + first_user.user_name);
+                System.out.println("Festival: " + bookmarked.name);
+
+                Users.get(Users.indexOf(first_user)).add_bookmark(bookmarked);
+            }
+
+            cur_user = Users.get(Users.indexOf(cur_user));
+
+        }
+    }
+    public static void remove_friend(String friend_ID) throws SQLException
+    {
+        String query = "call delete_friend(" + "\'" + cur_user.userID + "\'" + ", \'" + friend_ID + "\');";
+
+        System.out.println("Query: " + query);
+
+        Statement statement = connection.createStatement();
+        statement.executeQuery(query);
+
+        refresh_friends();
+    }
+
+    public static void remove_bookmark(String fest_ID) throws SQLException
+    {
+        String query = "call delete_bookmark(" + "\'" + cur_user.userID + "\'" + ", \'" + fest_ID + "\');";
+
+        System.out.println("Query: " + query);
+
+        Statement statement = connection.createStatement();
+        statement.executeQuery(query);
+
+        refresh_bookmarks();
+    }
+
+
 }
