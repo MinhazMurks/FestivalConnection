@@ -3,6 +3,7 @@ package festival_package;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
+import java.sql.SQLException;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,9 @@ public class User {
     boolean is_company;
 
     ArrayList<User> Friends = new ArrayList<>();
+    ArrayList<String> Friend_Names = new ArrayList<>();
+
+
     ArrayList<Festival> Bookmarks = new ArrayList<>();
 
 
@@ -55,7 +59,7 @@ public class User {
 
         if(this.is_company)
         {
-            result = result.concat("\n Established " + StringUtils.capitalize(birth_date.getMonth().toString().toLowerCase()) + " " + birth_date.getDayOfMonth() + ", " + birth_date.getYear());
+            result = result.concat("\n Established " + birth_date.getYear());
         }
         else
         {
@@ -75,6 +79,11 @@ public class User {
     {
         System.out.println(this.user_name + ":" + " added: " + friend.user_name + " as a friend!");
         this.Friends.add(friend);
+
+        if(!Friend_Names.contains(friend.user_name))
+        {
+            this.Friend_Names.add(friend.user_name);
+        }
     }
 
 

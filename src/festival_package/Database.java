@@ -1,6 +1,7 @@
 package festival_package;
 
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -82,7 +83,7 @@ public class Database {
             System.out.println(guid);
         }
 
-        cur_user = user_from_userID(guid);
+        cur_user = Database.Users.get(Database.Users.indexOf(user_from_userID(guid)));
 
         resultSet.close();
 
@@ -196,10 +197,10 @@ public class Database {
      * TODO: ADD CONDITION CHECKS FOR INCORRECT OR NONEXISTENT GUID
      * @return The concatenated city and state columns corresponding with current guid
      */
-    public static String getUserLocation() throws SQLException{
+    public static String getUserLocation(String userID) throws SQLException{
         String query = ("SELECT city, state " +
                 "FROM Location " +
-                "WHERE userID = '" + cur_user.userID + "';");
+                "WHERE userID = '" + userID + "';");
         System.out.println(query);
 
         String userLocation = "";
@@ -751,10 +752,12 @@ public class Database {
             }
         }
     }
-    public static void refresh_friends() throws SQLException {
+    public static void refresh_friends() throws SQLException
+    {
         for(int i = 0; i < Users.size(); i++)
         {
             Users.get(i).Friends.clear();
+            Users.get(i).Friend_Names.clear();
 
             String query = "SELECT * FROM Friends;";
 
