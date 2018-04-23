@@ -140,6 +140,7 @@ public class Controller_AddFestival {
         //Insert into database
         try{
             Database.insertNewFestival(festName, type, startDate.toString(), endDate.toString(), price, address, city, state, zip, providerList, genre, outdoor, camping);
+            Database.refresh_festivals();
             stage.close();
         }
         catch (SQLException e){

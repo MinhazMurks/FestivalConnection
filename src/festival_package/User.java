@@ -3,6 +3,7 @@ package festival_package;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
+import java.sql.SQLException;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,7 +56,7 @@ public class User {
 
         if(this.is_company)
         {
-            result = result.concat("\n Established " + StringUtils.capitalize(birth_date.getMonth().toString().toLowerCase()) + " " + birth_date.getDayOfMonth() + ", " + birth_date.getYear());
+            result = result.concat("\n Established " + birth_date.getYear());
         }
         else
         {

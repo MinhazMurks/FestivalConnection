@@ -51,6 +51,9 @@ public class Controller_Main {
     @FXML
     Button add_friend_button;
 
+    @FXML
+    Button add_festival_button;
+
     ListProperty<String> listProperty = new SimpleListProperty<>();
 
 
@@ -70,6 +73,10 @@ public class Controller_Main {
     @FXML
     public void initialize()
     {
+        add_festival_button.setVisible(false);
+        if (Database.cur_user.is_company){
+            add_festival_button.setVisible(true);
+        }
 
         ArrayList<String> choices = new ArrayList<>();
         choices.add("Festival");
@@ -153,6 +160,7 @@ public class Controller_Main {
                     listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
                     search_listview.itemsProperty().bind(listProperty);
                 }
+
         );
 
         search_listview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
@@ -267,4 +275,8 @@ public class Controller_Main {
         }
     }
 
+    public void on_add_festival_button(ActionEvent event) throws IOException{
+        changeScene("add_festival_window.fxml");
+        System.out.println("adding festival");
+    }
 }

@@ -196,10 +196,10 @@ public class Database {
      * TODO: ADD CONDITION CHECKS FOR INCORRECT OR NONEXISTENT GUID
      * @return The concatenated city and state columns corresponding with current guid
      */
-    public static String getUserLocation() throws SQLException{
+    public static String getUserLocation(String userID) throws SQLException{
         String query = ("SELECT city, state " +
                 "FROM Location " +
-                "WHERE userID = '" + cur_user.userID + "';");
+                "WHERE userID = '" + userID + "';");
         System.out.println(query);
 
         String userLocation = "";
