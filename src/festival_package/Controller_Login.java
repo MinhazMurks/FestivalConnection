@@ -50,6 +50,8 @@ public class Controller_Login {
 
         // username_field.setFont(Font.loadFont("resources/Raleway-Bold.ttf", 200));
 
+
+
         login_error_text.setVisible(false);
         username_field.setOnKeyPressed(
                 event ->
@@ -70,8 +72,15 @@ public class Controller_Login {
                     }
                 }
         );
+
+        this.auto_log_in();
     }
 
+    private void auto_log_in()
+    {
+        username_field.setText("MinhazMurks");
+        password_field.setText("pass");
+    }
 
 
     /**

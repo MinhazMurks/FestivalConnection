@@ -206,6 +206,29 @@ public class Database {
 
         statement.executeUpdate(sql);
     }
+    public static void insert_to_table(String table, ArrayList<String> values) throws SQLException
+    {
+
+        String sql = "INSERT INTO " + table + " VALUES (";
+
+        for(int i = 0; i < values.size(); i++)
+        {
+            sql += "\'" + values.get(i) + "\'";
+
+            if((i + 1) < values.size())
+            {
+                sql += ", ";
+            }
+        }
+
+        sql += ");";
+
+        System.out.println("Query: " + sql);
+
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate(sql);
+    }
     public static String remove_defs(String table)
     {
         int length = table.length();
@@ -359,12 +382,11 @@ public class Database {
             }
         }
 
-        System.out.println("Temp user is: " + temp + " and userID: " + userID);
+        //System.out.println("Temp user is: " + temp + " and userID: " + userID);
         result = Users.get(Users.indexOf(temp));
 
         return result;
     }
-
     public static Festival fest_from_festID(String festID)
     {
         Festival result = null;
@@ -378,10 +400,10 @@ public class Database {
 
         return result;
     }
-
     public static void refresh_lists() throws SQLException, ParseException
     {
         refresh_users();
+        refresh_friends();
         refresh_festivals();
     }
     public static void refresh_users() throws SQLException, ParseException
@@ -532,7 +554,7 @@ public class Database {
             System.out.println("num rows: " + resultSet.getFetchSize());
 
             while (resultSet.next()) {
-                System.out.println("I got to the loop");
+                //System.out.println("I got to the loop");
 
                 LocalDate start_date = date_from_string(resultSet.getDate("start_date").toString());
                 LocalDate end_date = date_from_string(resultSet.getDate("end_date").toString());
@@ -572,7 +594,7 @@ public class Database {
 
                 Festivals.add(temp);
             }
-            System.out.println("do i get here");
+            //System.out.println("do i get here");
             re_add_fest_names();
 
         } catch(SQLException e)
@@ -677,5 +699,35 @@ public class Database {
             }
         }
     }
+    public static void refresh_friends() throws SQLException {
+        for(int i = 0; i < Users.size(); i++)
+        {
+            Users.get(i).Friends.clear();
 
+            String query = "SELECT * FROM Friends;";
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            if(!resultSet.isBeforeFirst())
+            {
+                System.out.println("Empty Friends!");
+            }
+
+            while(resultSet.next())
+            {
+                User first_user = user_from_userID(resultSet.getString("user1"));
+                User second_user = user_from_userID(resultSet.getString("user2"));
+
+                System.out.println("first_user: " + first_user.user_name);
+                System.out.println("second_user: " + second_user.user_name);
+
+                Users.get(Users.indexOf(first_user)).add_friend(second_user);
+            }
+
+            cur_user = Users.get(Users.indexOf(cur_user));
+
+
+        }
+    }
 }

@@ -4,6 +4,7 @@ package festival_package;
 import com.sun.xml.internal.ws.util.StringUtils;
 
 import java.time.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
@@ -13,6 +14,9 @@ public class User {
     LocalDate birth_date;
     String user_location;
     boolean is_company;
+
+    ArrayList<User> Friends = new ArrayList<>();
+    ArrayList<Festival> Bookmarks = new ArrayList<>();
 
 
     User(String user_name)
@@ -65,6 +69,12 @@ public class User {
     public String toString()
     {
         return userID + " " + user_name + " " + user_location + " " + birth_date.toString() + " " + is_company;
+    }
+
+    public void add_friend(User friend)
+    {
+        System.out.println(this.user_name + ":" + " added: " + friend.user_name + " as a friend!");
+        this.Friends.add(friend);
     }
 
 
