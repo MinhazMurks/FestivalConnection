@@ -25,6 +25,7 @@ create table Festival(
 create table Users(
   userID         varchar(36) primary key,
   user_name      varchar(50) unique,
+  password       varchar(12),
   birthdate      date,
   is_company     bool
 );
@@ -104,4 +105,19 @@ create table Beer(
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
+select * from users;
 
+insert into users(userID, user_name, password, birthdate, is_company)
+values (uuid(), 'MinhazMurks', 'pass', '1990-08-17', false);
+
+delete from users where user_name = 'MinhaMurks';
+
+insert into location(userID, festId, city, state, streetAddress, zip) VALUES ('6306800b-46c1-11e8-b215-28841f0de34e', null, 'Richmond', 'VA', null, null);
+
+SELECT userID, password FROM Users WHERE user_name = 'MinhazMurks' and password = 'pass';
+
+select * from users;
+
+select * from Friends;
+
+SELECT * FROM Friends;

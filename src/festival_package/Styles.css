@@ -16,9 +16,21 @@
     -fx-background-color: linear-gradient(#ffffff, #ebebeb);
     -transition: -fx-background-color 5s;
 }
+
+
+.text-field-custom
+{
+    -fx-font-size: 24;
+}
+
+.text
+{
+    -fx-font-family: "Raleway-Bold";
+}
 .customlabel
 {
     -fx-font-family: "Raleway-Bold";
+    -fx-font-size: 33;
     -fx-background-color: WHITE;
     -fx-border-width: 1;
     -fx-border-color: rgba(0, 0, 0, 0.21);
@@ -30,7 +42,7 @@
 }
 .button:pressed
 {
-    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.64));
+    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.8));
 }
 
 .cornerbuttoncustom
@@ -50,7 +62,7 @@
 .combo-box:pressed
 {
     -fx-text-fill: black;
-    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.64));
+    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.8));
 }
 .combo-box-popup:selected
 {
@@ -139,7 +151,7 @@
 
 .list-cell .text:hover
 {
-    -fx-fill: linear-gradient(#ffffff, #efefef);
+    -fx-fill: linear-gradient(#eeeeee, #c3c3c3);
     -fx-cursor: hand;
 }
 
@@ -158,17 +170,20 @@
 
 .list-cell:filled:selected:focused
 {
-    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.64));
+    -fx-background-color: linear-gradient(#0051ff, rgba(0, 18, 255, 0.8));
     -fx-text-fill: rgb(255, 255, 255);
 }
 
 .list-cell:filled:hover
 {
-    -fx-text-fill:white;
     -fx-background-color: linear-gradient(#FFC39D, #ff8d7c);
 }
 
 .text-field
 {
     -fx-font-family: "Raleway-Bold";
+}
+.text-field .text
+{
+    -fx-font-size: 24;
 }

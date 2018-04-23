@@ -48,6 +48,9 @@ public class Controller_Main {
     @FXML
     TextField search_field;
 
+    @FXML
+    Button add_friend_button;
+
     ListProperty<String> listProperty = new SimpleListProperty<>();
 
 
@@ -71,6 +74,14 @@ public class Controller_Main {
         ArrayList<String> choices = new ArrayList<>();
         choices.add("Festival");
         choices.add("User");
+
+        try {
+            Database.refresh_lists();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         search_field.setOnKeyPressed(
                 event ->
@@ -151,9 +162,24 @@ public class Controller_Main {
             {
                 if(search_dropdown.getSelectionModel().getSelectedItem().equals("User"))
                 {
+                    User selected_user = Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex()));
+
+                    System.out.println("Selected user: " + selected_user.user_name + " userID: " + selected_user.userID);
+                    System.out.println("Current Logged in user: " + Database.cur_user.user_name + " userID: " + Database.cur_user.userID);
+
+                    if(!selected_user.equals(Database.cur_user) && !Database.cur_user.Friends.contains(selected_user))
+                    {
+                        add_friend_button.setVisible(true);
+                    }
+                    else
+                    {
+                        add_friend_button.setVisible(false);
+                    }
+
                     try
                     {
                         description_pane.setText(Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex())).description());
+
                     }catch(ArrayIndexOutOfBoundsException e)
                     {
                         description_pane.setText("Click an entry to see more information");
@@ -162,6 +188,7 @@ public class Controller_Main {
                 }
                 else
                 {
+                    add_friend_button.setVisible(false);
                     try
                     {
                         description_pane.setText(Database.fest_from_festID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex())).description());
@@ -175,8 +202,6 @@ public class Controller_Main {
 
 
         });
-
-
 
     }
 
@@ -222,6 +247,24 @@ public class Controller_Main {
 
     public void add_friend_button(ActionEvent event) {
 
+        User selected_user = Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex()));
+
+        String table = "Friends(user1, user2)";
+
+        ArrayList<String> values = new ArrayList<>();
+        values.add(Database.cur_user.userID);
+        values.add(selected_user.userID);
+
+        try {
+            Database.insert_to_table(table, values);
+            Database.refresh_friends();
+            add_friend_button.setVisible(false);
+
+        } catch (SQLException e) {
+
+            System.out.println(Database.cur_user.Friends.toString());
+            System.out.println("Already Friends!");
+        }
     }
 
 }
