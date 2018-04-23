@@ -888,4 +888,10 @@ public class Database {
         }
     }
 
+    public static ResultSet execute_query(String query)
+            throws SQLException {
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(query);
+    }
+
 }
