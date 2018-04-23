@@ -15,6 +15,7 @@
 {
     -fx-background-color: linear-gradient(#ffffff, #ebebeb);
     -transition: -fx-background-color 5s;
+    -fx-font-size: 15;
 }
 
 .button-delete

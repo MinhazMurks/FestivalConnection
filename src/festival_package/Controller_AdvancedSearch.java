@@ -45,7 +45,7 @@ public class Controller_AdvancedSearch {
     Button search_button;
 
     @FXML
-    TextField providers_field;
+    TextArea providers_field;
 
     @FXML
     public void initialize(){
@@ -54,6 +54,7 @@ public class Controller_AdvancedSearch {
         outdoor_check.setVisible(false);
         camping_check.setVisible(false);
         city_field.setVisible(false);
+        providers_field.setWrapText(true);
 
         price_field.textProperty().addListener(new ChangeListener<String>() {
             @Override

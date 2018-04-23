@@ -109,5 +109,6 @@
       </ChoiceBox>
       <TextField fx:id="zip_field" layoutX="15.0" layoutY="312.0" promptText="Zip" />
       <TextField fx:id="address_field" layoutX="15.0" layoutY="239.0" promptText="Address Line" />
+      <Text fx:id="price_error_text" fill="RED" layoutX="174.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Incorrect format, please input numbers only..." visible="false" />
    </children>
 </AnchorPane>
