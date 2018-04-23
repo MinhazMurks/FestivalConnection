@@ -27,6 +27,12 @@ public class Controller_AdvancedSearch {
     DatePicker endDate_field;
 
     @FXML
+    ComboBox<String> state_dropdown;
+
+    @FXML
+    TextField city_field;
+
+    @FXML
     TextField genre_field;
 
     @FXML
@@ -39,7 +45,7 @@ public class Controller_AdvancedSearch {
     Button search_button;
 
     @FXML
-    TextField providers_field;
+    TextArea providers_field;
 
     @FXML
     public void initialize(){
@@ -47,6 +53,8 @@ public class Controller_AdvancedSearch {
         genre_field.setVisible(false);
         outdoor_check.setVisible(false);
         camping_check.setVisible(false);
+        city_field.setVisible(false);
+        providers_field.setWrapText(true);
 
         price_field.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -59,9 +67,11 @@ public class Controller_AdvancedSearch {
         });
     }
 
-    public void on_search_button(ActionEvent event)
-    {
-        System.out.println("Fuuuuck!");
+    public void on_search_button(ActionEvent event) {
+    }
+
+    public void on_state_dropdown(ActionEvent event){
+        city_field.setVisible(true);
     }
 
     /**
