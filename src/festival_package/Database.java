@@ -752,7 +752,8 @@ public class Database {
             }
         }
     }
-    public static void refresh_friends() throws SQLException {
+    public static void refresh_friends() throws SQLException
+    {
         for(int i = 0; i < Users.size(); i++)
         {
             Users.get(i).Friends.clear();
