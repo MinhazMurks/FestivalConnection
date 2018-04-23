@@ -3,6 +3,7 @@ package festival_package;
 import java.sql.*;
 
 
+import javafx.scene.paint.Color;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +23,6 @@ public class Main extends Application {
         Scene scene = new Scene(new StackPane());
 
         Database.refresh_users();
-
 
         Parent root = FXMLLoader.load(getClass().getResource("login_window.fxml"));//change fxml back to login
         scene.setRoot(root);
