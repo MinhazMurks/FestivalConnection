@@ -1,5 +1,7 @@
 package festival_package;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -80,9 +82,22 @@ public class Controller_AddFestival {
      * Sets fields for genre, outdoor, and camping to invisible.
      * Set visible when the appropriate festival type is selected.
      * Sets error text to invisible.
+     * Adds listener to ensure only integers are inserted into the zip field
      */
     @FXML
-    public void initialize(){genre_field.setVisible(false); outdoor_check.setVisible(false); camping_check.setVisible(false); date_error_text.setVisible(false); sql_error_text.setVisible(false);}
+    public void initialize(){
+        genre_field.setVisible(false); outdoor_check.setVisible(false); camping_check.setVisible(false); date_error_text.setVisible(false); sql_error_text.setVisible(false);
+
+        zip_field.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    zip_field.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+    }
 
     /**
      * Checks that fields are filled out properly.
@@ -101,7 +116,13 @@ public class Controller_AddFestival {
         LocalDate endDate = end_date_field.getValue();
         double price = -1;
         if (!price_field.getText().equals("")) {
-            price = Double.parseDouble(price_field.getText());
+            try {
+                price = Double.parseDouble(price_field.getText());
+            }
+            catch (NumberFormatException e){
+                e.printStackTrace();
+                return;
+            }
         }
         String address = address_field.getText();
         String city = city_field.getText();
