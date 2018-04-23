@@ -21,6 +21,7 @@ public class User {
 
 
     ArrayList<Festival> Bookmarks = new ArrayList<>();
+    ArrayList<String> Bookmark_Names = new ArrayList<>();
 
 
     User(String user_name)
@@ -83,6 +84,17 @@ public class User {
         if(!Friend_Names.contains(friend.user_name))
         {
             this.Friend_Names.add(friend.user_name);
+        }
+    }
+
+    public void add_bookmark(Festival bookmark)
+    {
+        System.out.println(this.user_name + ":" + " added: " + bookmark.name + " to Bookmarks!");
+        this.Bookmarks.add(bookmark);
+
+        if(!Bookmark_Names.contains(bookmark.name))
+        {
+            this.Bookmark_Names.add(bookmark.name);
         }
     }
 

@@ -105,6 +105,25 @@ create table Beer(
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
+
+delimiter //
+create procedure delete_friend
+(friend_id varchar(36))
+begin
+delete from Friends where user2 = friend_id;
+end //
+delimiter ;
+
+
+delimiter //
+create procedure delete_bookmark
+  (cur_id varchar(36), fest_id varchar(36))
+  begin
+    delete from bookmarks where userID = cur_id and festID = friend_id;
+  end //
+delimiter ;
+
+
 select * from users;
 
 insert into users(userID, user_name, password, birthdate, is_company)
@@ -115,9 +134,3 @@ delete from users where user_name = 'MinhaMurks';
 insert into location(userID, festId, city, state, streetAddress, zip) VALUES ('6306800b-46c1-11e8-b215-28841f0de34e', null, 'Richmond', 'VA', null, null);
 
 SELECT userID, password FROM Users WHERE user_name = 'MinhazMurks' and password = 'pass';
-
-select * from users;
-
-select * from Friends;
-
-SELECT * FROM Friends;
