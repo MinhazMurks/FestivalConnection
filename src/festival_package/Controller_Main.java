@@ -17,12 +17,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class Controller_Main {
@@ -57,7 +55,7 @@ public class Controller_Main {
     @FXML
     Button add_festival_button;
 
-    ListProperty<String> listProperty = new SimpleListProperty<>();
+    ListProperty<String> listProperty_main = new SimpleListProperty<>();
 
 
 
@@ -130,8 +128,8 @@ public class Controller_Main {
             e.printStackTrace();
         }
 
-        listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
-        search_listview.itemsProperty().bind(listProperty);
+        listProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
+        search_listview.itemsProperty().bind(listProperty_main);
 
 
         search_dropdown.setOnAction(
@@ -161,8 +159,8 @@ public class Controller_Main {
                     }
 
 
-                    listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
-                    search_listview.itemsProperty().bind(listProperty);
+                    listProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
+                    search_listview.itemsProperty().bind(listProperty_main);
                 }
 
         );
@@ -252,8 +250,8 @@ public class Controller_Main {
         Database.refresh_lists();
 
 
-        listProperty.set(FXCollections.observableArrayList(Database.viewed_list));
-        search_listview.itemsProperty().bind(listProperty);
+        listProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
+        search_listview.itemsProperty().bind(listProperty_main);
 
     }
 

@@ -728,6 +728,33 @@ public class Database {
             viewed_list_id.add(resultSet.getString(id_col));
         }
     }
+
+    public static void advanced_search_query(String input) throws SQLException, ParseException
+    {
+        Database.refresh_lists();
+
+        viewed_list.clear();
+        viewed_list_id.clear();
+
+        String name_col = "";
+        String id_col = "";
+
+        String query = "SELECT " + input;
+
+
+
+        Statement statement = connection.createStatement();
+        System.out.print(query);
+        ResultSet resultSet = statement.executeQuery(query);
+
+
+        while(resultSet.next())
+        {
+            viewed_list.add(resultSet.getString(name_col));
+            viewed_list_id.add(resultSet.getString(id_col));
+        }
+    }
+
     public static void reset_view_list(String type)
     {
         viewed_list.clear();
@@ -836,5 +863,10 @@ public class Database {
         refresh_bookmarks();
     }
 
+    public static ResultSet execute_query(String query) throws SQLException
+    {
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(query);
+    }
 
 }
