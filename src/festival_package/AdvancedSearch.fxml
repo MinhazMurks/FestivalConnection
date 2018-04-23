@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.TextArea?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="festival_package.Controller_AdvancedSearch">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -32,7 +33,7 @@
                 <DatePicker fx:id="startDate_field" layoutX="300.0" layoutY="162.0" promptText="Starts on or after" />
             <TextField fx:id="name_field" alignment="CENTER" layoutX="11.0" layoutY="30.0" prefHeight="25.0" prefWidth="442.0" promptText="Festival name" />
             <TextField fx:id="price_field" layoutX="301.0" layoutY="97.0" promptText="Max Price" />
-            <TextField fx:id="providers_field" alignment="TOP_LEFT" layoutX="11.0" layoutY="66.0" prefHeight="319.0" prefWidth="270.0" promptText="Performers/Providers (separated by commas)" />
+            <TextArea fx:id="providers_field"  layoutX="11.0" layoutY="66.0" prefHeight="319.0" prefWidth="270.0" promptText="Performers/Providers (separated by commas)" />
             <ComboBox fx:id="fest_type_dropdown" layoutX="300.0" layoutY="65.0" onAction="#on_fest_type_dropdown" prefWidth="150.0" promptText="Festival Type">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
