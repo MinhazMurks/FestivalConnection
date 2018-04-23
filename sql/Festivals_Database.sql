@@ -104,4 +104,7 @@ create table Beer(
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
-
+create table Login(
+  user_name   varchar(50) references Users(user_name),
+  password    varchar(10) unique
+);
