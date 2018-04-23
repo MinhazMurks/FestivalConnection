@@ -305,17 +305,26 @@ public class Controller_AdvancedSearch {
             case "Art":
                 genre_field.setVisible(true);
                 outdoor_check.setVisible(false);
+                outdoor_check.setSelected(false);
                 camping_check.setVisible(false);
+                camping_check.setSelected(false);
                 break;
             case "Comedy":
+                genre_field.clear();
                 genre_field.setVisible(false);
                 outdoor_check.setVisible(false);
+                outdoor_check.setSelected(false);
                 camping_check.setVisible(false);
+                camping_check.setSelected(false);
                 break;
             case "Beer":
+                genre_field.clear();
                 genre_field.setVisible(false);
                 outdoor_check.setVisible(false);
+                outdoor_check.setSelected(false);
                 camping_check.setVisible(false);
+                camping_check.setSelected(false);
+                break;
         }
     }
 }

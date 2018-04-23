@@ -78,6 +78,9 @@ public class Controller_AddFestival {
     @FXML
     Text sql_error_text;
 
+    @FXML
+    Text price_error_text;
+
     /**
      * Sets fields for genre, outdoor, and camping to invisible.
      * Set visible when the appropriate festival type is selected.
@@ -118,8 +121,11 @@ public class Controller_AddFestival {
         if (!price_field.getText().equals("")) {
             try {
                 price = Double.parseDouble(price_field.getText());
+                price_error_text.setVisible(false);
             }
             catch (NumberFormatException e){
+                price_error_text.setVisible(true);
+
                 e.printStackTrace();
                 return;
             }
@@ -188,17 +194,26 @@ public class Controller_AddFestival {
             case "Art":
                 genre_field.setVisible(true);
                 outdoor_check.setVisible(false);
+                outdoor_check.setSelected(false);
                 camping_check.setVisible(false);
+                camping_check.setSelected(false);
                 break;
             case "Comedy":
+                genre_field.clear();
                 genre_field.setVisible(false);
                 outdoor_check.setVisible(false);
+                outdoor_check.setSelected(false);
                 camping_check.setVisible(false);
+                camping_check.setSelected(false);
                 break;
             case "Beer":
+                genre_field.clear();
                 genre_field.setVisible(false);
                 outdoor_check.setVisible(false);
+                outdoor_check.setSelected(false);
                 camping_check.setVisible(false);
+                camping_check.setSelected(false);
+                break;
         }
     }
 }

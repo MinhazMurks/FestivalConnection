@@ -24,7 +24,8 @@ public class Database {
     public static ArrayList<User> Users = new ArrayList<>();
     public static ArrayList<String> User_Names = new ArrayList<>();
 
-
+    public static ArrayList<String> viewed_friends_names = new ArrayList<>();
+    public static ArrayList<String> viewed_friends_id = new ArrayList<>();
 
     public static ArrayList<String> Locations = new ArrayList<>();
 
@@ -51,7 +52,6 @@ public class Database {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Queries the DB for a given username and returns the guid for that user if found.
@@ -92,7 +92,6 @@ public class Database {
         return false;
 
     }
-
     /**
      * Queries the database for a given username. If any results are returned in resultSet, returns false.
      * @param username
@@ -114,7 +113,6 @@ public class Database {
         }
         return true;
     }
-
     /**
      * Adds a row to both Users and Location. A single UUID is created and used in both tables.
      * @param username
@@ -125,7 +123,8 @@ public class Database {
      * @param address
      * @param zip
      */
-    public static void insertNewUser(String username, String password, String dob, String state, String city, String address, int zip) throws SQLException{
+    public static void insertNewUser(String username, String password, String dob, String state, String city, String address, int zip) throws SQLException
+    {
         String guid = UUID.randomUUID().toString();
         String insertUserSQL = ("INSERT INTO Users VALUES ('" + guid + "', '" + username + "', '" + dob + "', " + 0 + ", '" + password + "');");
         String insertLocationSQL = ("INSERT INTO Location VALUES ('" + guid + "', NULL, '"  +  city + "', '" + state + "', '" + address + "', " + zip + ");");
@@ -138,7 +137,8 @@ public class Database {
         statement.executeUpdate(insertLocationSQL);
     }
 
-    public static void insertNewFestival(String festName, String type, String startDate, String endDate, double price, String address, String city, String state, int zip, List<String> providers, String genre, boolean outdoor, boolean camping) throws SQLException{
+    public static void insertNewFestival(String festName, String type, String startDate, String endDate, double price, String address, String city, String state, int zip, List<String> providers, String genre, boolean outdoor, boolean camping) throws SQLException
+    {
         String guid = UUID.randomUUID().toString();
         String insertFestivalSQL = ("INSERT INTO Festival VALUES ('" + guid + "', '" + type + "', '" + festName + "', '" + cur_user.userID + "', '" + startDate + "', '" + endDate + "', " + price + ");");
         String insertLocationSQL = ("INSERT INTO Location VALUES (NULL" + ", '" + guid + "', '" +  city + "', '" + state + "', '" + address + "', " + zip + ");");
@@ -194,7 +194,8 @@ public class Database {
      * TODO: ADD CONDITION CHECKS FOR INCORRECT OR NONEXISTENT GUID
      * @return The concatenated city and state columns corresponding with current guid
      */
-    public static String getUserLocation() throws SQLException{
+    public static String getUserLocation() throws SQLException
+    {
         String query = ("SELECT city, state " +
                 "FROM Location " +
                 "WHERE userID = '" + cur_user.userID + "';");
@@ -214,7 +215,6 @@ public class Database {
         System.out.println(userLocation);
         return userLocation;
     }
-
     /**
      * Takes in a Fesival's guid and gives back the Fesival's full address
      * in the form "[Street Address], [City], [State] [Zip]"
@@ -223,7 +223,8 @@ public class Database {
      * @return A string of the above form
      * @throws SQLException
      */
-    public static String getFestivalLocation(String guid) throws SQLException{
+    public static String getFestivalLocation(String guid) throws SQLException
+    {
         String query = ("SELECT streetAddress, city, state, zip " +
                 "FROM Location " +
                 "WHERE festID = '" + guid + "';");
@@ -247,7 +248,6 @@ public class Database {
         System.out.println(festLocation);
         return festLocation;
     }
-
     public static void insert_to_table(Statement statement, String table, String value) throws SQLException
     {
 
@@ -454,6 +454,7 @@ public class Database {
     {
         refresh_users();
         refresh_friends();
+        refresh_user_friends();
         refresh_festivals();
         refresh_bookmarks();
     }
@@ -728,33 +729,6 @@ public class Database {
             viewed_list_id.add(resultSet.getString(id_col));
         }
     }
-
-    public static void advanced_search_query(String input) throws SQLException, ParseException
-    {
-        Database.refresh_lists();
-
-        viewed_list.clear();
-        viewed_list_id.clear();
-
-        String name_col = "";
-        String id_col = "";
-
-        String query = "SELECT " + input;
-
-
-
-        Statement statement = connection.createStatement();
-        System.out.print(query);
-        ResultSet resultSet = statement.executeQuery(query);
-
-
-        while(resultSet.next())
-        {
-            viewed_list.add(resultSet.getString(name_col));
-            viewed_list_id.add(resultSet.getString(id_col));
-        }
-    }
-
     public static void reset_view_list(String type)
     {
         viewed_list.clear();
@@ -806,11 +780,12 @@ public class Database {
             }
 
             cur_user = Users.get(Users.indexOf(cur_user));
-
+            refresh_user_friends();
 
         }
     }
-    public static void refresh_bookmarks() throws SQLException {
+    public static void refresh_bookmarks() throws SQLException
+    {
         for (int i = 0; i < Users.size(); i++)
         {
             Users.get(i).Bookmarks.clear();
@@ -850,7 +825,6 @@ public class Database {
 
         refresh_friends();
     }
-
     public static void remove_bookmark(String fest_ID) throws SQLException
     {
         String query = "call delete_bookmark(" + "\'" + cur_user.userID + "\'" + ", \'" + fest_ID + "\');";
@@ -862,11 +836,56 @@ public class Database {
 
         refresh_bookmarks();
     }
-
-    public static ResultSet execute_query(String query) throws SQLException
+    public static void refresh_user_friends()
     {
+        viewed_friends_names.clear();
+        viewed_friends_id.clear();
+
+        for(int i = 0; i < cur_user.Friends.size(); i++)
+        {
+            String user_name = cur_user.Friends.get(i).user_name;
+            String user_id = cur_user.Friends.get(i).userID;
+
+            if(!viewed_friends_names.contains(user_name))
+            {
+                viewed_friends_names.add(user_name);
+            }
+            if(!viewed_list_id.contains(user_id))
+            {
+                viewed_friends_id.add(user_id);
+            }
+
+        }
+    }
+    public static void search_friends(String search_val) throws SQLException
+    {
+        String query = "call search_friends(" + "\'" + cur_user.userID + "\'" + ", \'" +search_val + "\');";
+
+        System.out.println("Query: " + query);
+
+        viewed_friends_names.clear();
+        viewed_friends_id.clear();
+
         Statement statement = connection.createStatement();
-        return statement.executeQuery(query);
+        ResultSet resultSet = statement.executeQuery(query);
+
+
+        while(resultSet.next())
+        {
+            String user_name = resultSet.getString("user_name");
+            String user_id = resultSet.getString("friend_ids");
+
+            if(!viewed_friends_names.contains(user_name))
+            {
+                viewed_friends_names.add(user_name);
+            }
+            if(!viewed_list_id.contains(user_id))
+            {
+                viewed_friends_id.add(user_id);
+            }
+
+
+        }
     }
 
 }
