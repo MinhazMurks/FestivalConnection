@@ -136,3 +136,20 @@ create procedure delete_bookmark
     delete from bookmarks where userID = cur_id and festID = friend_id;
   end //
 delimiter ;
+
+delimiter //
+create procedure search_friends
+  (cur_user_id varchar(36), searched_name varchar(50))
+  begin
+    select user_name, friends.user1 as cur_user, users.userID as friend_ids
+      from users
+        join friends on users.userID = friends.user2
+    where friends.user1 = cur_user_id
+    and user_name like concat('%', searched_name, '%');
+  end //
+delimiter ;
+
+-- The SQL script shown here includes all SQL required to --
+-- create the database. But most of the queries are run   --
+-- from inside our program, including calls to the        --
+-- procedures, select statements deletes etc.             --
