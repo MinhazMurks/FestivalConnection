@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -91,6 +92,9 @@
                <String fx:value="WY" />
             </FXCollections>
          </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ChoiceBox>
       <TextField fx:id="city_field" layoutX="216.0" layoutY="403.0" onAction="#on_create_account_button" prefHeight="51.0" prefWidth="208.0" promptText="City">
          <font>
@@ -100,6 +104,9 @@
          <font>
             <Font size="24.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Text fx:id="retype_password_error_text" fill="RED" layoutX="126.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password must be the same. Re-type your password..." wrappingWidth="297.2000085711479" />
       <Text fx:id="sql_error_text" fill="RED" layoutX="64.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorry, we could not create your account at this time. Try again later...">
