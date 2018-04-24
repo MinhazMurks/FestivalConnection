@@ -97,8 +97,6 @@ create table Providers(
 
 create table Music(
   festID       varchar(36) NOT NULL,
-  type_fest    char(10)     references Festival(fest_type),
-  musicians    varchar(20) references Providers(festID, name),
   genre        varchar(20),
   outdoor      bool,
   camping      bool,
@@ -107,23 +105,17 @@ create table Music(
 
 create table Comedy(
   festID       varchar(36) NOT NULL,
-  type_fest    char(10)     references Festival(fest_type),
-  comedians    varchar(50)  references Providers(festID, name),
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
 create table Art(
   festID       varchar(36) NOT NULL,
-  type_fest    char(10)     references Festival(fest_type),
-  artist       varchar(20) references Providers(festID, name),
   genre        varchar(20),
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
 create table Beer(
   festID       varchar(36) NOT NULL,
-  type_fest    char(10)     references Festival(fest_type),
-  breweries    varchar(50) references Providers(festID, name),
   FOREIGN KEY (festID) REFERENCES Festival(festID)
 );
 
@@ -144,15 +136,3 @@ create procedure delete_bookmark
     delete from bookmarks where userID = cur_id and festID = friend_id;
   end //
 delimiter ;
-
-
-select * from users;
-
-insert into users(userID, user_name, password, birthdate, is_company)
-values (uuid(), 'MinhazMurks', 'pass', '1990-08-17', false);
-
-delete from users where user_name = 'MinhaMurks';
-
-insert into location(userID, festId, city, state, streetAddress, zip) VALUES ('6306800b-46c1-11e8-b215-28841f0de34e', null, 'Richmond', 'VA', null, null);
-
-SELECT userID, password FROM Users WHERE user_name = 'MinhazMurks' and password = 'pass';
