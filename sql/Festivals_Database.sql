@@ -22,6 +22,28 @@ create table Festival(
   price decimal(9,2)
 );
 
+DROP TRIGGER IF EXISTS trg_check_proper_dates;
+CREATE TRIGGER trg_check_proper_dates BEFORE INSERT ON Festival
+FOR EACH ROW
+  BEGIN
+    DECLARE msg VARCHAR(128);
+    IF (NEW.end_date < NEW.start_date) THEN
+      SET msg = 'Festival table error: End Date is before Start Date';
+      SIGNAL SQLSTATE '45000' SET message_text = msg;
+    END IF;
+  END;
+
+DROP TRIGGER IF EXISTS trg_check_proper_price;
+CREATE TRIGGER trg_check_proper_price BEFORE INSERT ON Festival
+FOR EACH ROW
+  BEGIN
+    DECLARE msg VARCHAR(128);
+    IF (NEW.price < 0) THEN
+      SET msg = 'Festival table error: Price is negative';
+      SIGNAL SQLSTATE '45000' SET message_text = msg;
+    END IF;
+  END;
+
 create table Users(
   userID         varchar(36) primary key,
   user_name      varchar(50) unique,
