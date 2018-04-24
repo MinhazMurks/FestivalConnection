@@ -59,6 +59,8 @@ public class Controller_Main {
     @FXML
     Button add_festival_button;
 
+    @FXML
+    Button advanced_button;
     public static ListProperty<String> listProperty_main = new SimpleListProperty<>();
 
 
@@ -108,6 +110,7 @@ public class Controller_Main {
 
         search_dropdown.getItems().addAll(choices);
         search_dropdown.setValue("User");
+        advanced_button.setDisable(true);
         search_dropdown.setButtonCell(new ListCell<String>()
         {
             @Override
@@ -154,6 +157,7 @@ public class Controller_Main {
                         search_field.setText("");
                         Database.set_viewed_list(Database.Users);
                         search_listview.getSelectionModel().clearSelection();
+                        advanced_button.setDisable(true);
                     }
                     else if(search_dropdown.getSelectionModel().getSelectedItem().equals("Festival"))
                     {
@@ -161,6 +165,7 @@ public class Controller_Main {
                         Database.set_viewed_list(Database.Festivals);
                         search_listview.getSelectionModel().clearSelection();
                         //description_pane.setText("Click an entry to see more information");
+                        advanced_button.setDisable(false);
                     }
 
 

@@ -118,6 +118,27 @@ public class Festival {
             result += "\n " + this.location;
         }
 
+        result += "\n Featuring: ";
+
+        if(!this.providers.isEmpty())
+        {
+            for(int i = 0; i < this.providers.size(); i++)
+            {
+                result += "\n" + this.providers.get(i);
+
+                if((i + 1) < this.providers.size())
+                {
+                    result += ", ";
+                }
+                else if(i == 3)
+                {
+                    result += " and more!";
+                    break;
+                }
+            }
+        }
+
+
         result += "\n From: " + start_date + " to " + this.end_date;
         result += "\n Ticket cost: $" + price;
 
