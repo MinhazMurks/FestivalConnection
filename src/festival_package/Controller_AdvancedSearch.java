@@ -102,7 +102,7 @@ public class Controller_AdvancedSearch {
 
         if(state_dropdown.getSelectionModel().getSelectedIndex() != -1){
             columns += ", location.state";
-            tables +=  "JOIN location on festival.festID = providers.festID ";
+            tables +=  " JOIN location on festival.festID = location.festID ";
             if(city_field.getText().trim().length() >  0){
                 columns += "location.city";
             }
@@ -165,9 +165,10 @@ public class Controller_AdvancedSearch {
                 clauses += " WHERE ";
             }
             LocalDate start = startDate_field.getValue();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-            String start_string = start.format(formatter);
-            clauses += " festival.start_date <= " + "'" + start_string + "'";
+            String start_string = start.toString();
+            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+            //String start_string = start.format(formatter);
+            clauses += " festival.start_date >= " + "'" + start_string + "'";
             isEmpty = false;
         }
 
@@ -181,8 +182,9 @@ public class Controller_AdvancedSearch {
                 clauses += " WHERE ";
             }
             LocalDate end = endDate_field.getValue();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-            String end_string = end.format(formatter);
+            String end_string = end.toString();
+            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+            //String end_string = end.format(formatter);
             clauses += " festival.end_date <= " + "'" + end_string + "'";
             isEmpty = false;
         }
@@ -272,11 +274,11 @@ public class Controller_AdvancedSearch {
 
         ResultSet resultSet = Database.execute_query(input);
 
-        if(!resultSet.isBeforeFirst())
+        /**if(!resultSet.isBeforeFirst())
         {
             System.out.println("No results!");
             return;
-        }
+        }**/
 
         Database.viewed_list.clear();
         Database.viewed_list_id.clear();
