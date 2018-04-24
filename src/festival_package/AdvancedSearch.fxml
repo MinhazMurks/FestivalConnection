@@ -2,29 +2,32 @@
 
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<?import javafx.scene.control.TextArea?>
-<AnchorPane fx:id="advancedSearch_anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="festival_package.Controller_AdvancedSearch">
+<AnchorPane fx:id="advancedSearch_anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="festival_package.Controller_AdvancedSearch">
    <children>
       <DatePicker fx:id="endDate_field" layoutX="310.0" layoutY="204.0" promptText="Ends on or before" />
-      <Button fx:id="search_button" layoutX="311.0" layoutY="344.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="45.0" prefWidth="150.0" text="Search">
+      <Button fx:id="search_button" layoutX="311.0" layoutY="375.0" mnemonicParsing="false" onAction="#on_search_button" prefHeight="51.0" prefWidth="174.0" stylesheets="@specific_style.css" text="Search">
          <font>
             <Font size="24.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <DatePicker fx:id="startDate_field" layoutX="310.0" layoutY="172.0" promptText="Starts on or after" />
-      <TextField fx:id="name_field" alignment="CENTER" layoutX="21.0" layoutY="40.0" prefHeight="25.0" prefWidth="442.0" promptText="Festival name" />
-      <TextField fx:id="price_field" layoutX="311.0" layoutY="107.0" promptText="Max Price" />
-      <TextArea fx:id="providers_field" layoutX="11.0" layoutY="66.0" prefHeight="319.0" prefWidth="270.0" promptText="Performers/Providers (separated by commas)" />
-      <ComboBox fx:id="fest_type_dropdown" layoutX="310.0" layoutY="75.0" onAction="#on_fest_type_dropdown" prefWidth="150.0" promptText="Festival Type">
+      <TextField fx:id="name_field" alignment="CENTER" layoutX="21.0" layoutY="22.0" prefHeight="41.0" prefWidth="472.0" promptText="Festival name" />
+      <TextField fx:id="price_field" layoutX="311.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="174.0" promptText="Max Price" />
+      <TextArea fx:id="providers_field" layoutX="21.0" layoutY="89.0" prefHeight="346.0" prefWidth="270.0" promptText="Performers/Providers (separated by commas)" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
+      <ComboBox fx:id="fest_type_dropdown" layoutX="310.0" layoutY="75.0" onAction="#on_fest_type_dropdown" prefHeight="25.0" prefWidth="174.0" promptText="Festival Type" styleClass="combo-box" stylesheets="@specific_style.css">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Music" />
@@ -33,19 +36,25 @@
                <String fx:value="Beer" />
             </FXCollections>
          </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ComboBox>
-      <ComboBox fx:id="price_order_dropdown" layoutX="310.0" layoutY="140.0" prefWidth="150.0" promptText="Price Order">
+      <ComboBox fx:id="price_order_dropdown" layoutX="310.0" layoutY="140.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="174.0" promptText="Price Order" styleClass="combo-box" stylesheets="@specific_style.css">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="High to Low" />
                <String fx:value="Low to High" />
             </FXCollections>
          </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ComboBox>
-      <TextField fx:id="genre_field" layoutX="311.0" layoutY="268.0" promptText="Genre" />
-      <CheckBox fx:id="outdoor_check" layoutX="309.0" layoutY="301.0" mnemonicParsing="false" text="Outdoor" />
-      <CheckBox fx:id="camping_check" layoutX="309.0" layoutY="319.0" mnemonicParsing="false" text="Camping" />
-      <ComboBox fx:id="state_dropdown" layoutX="430.0" layoutY="236.0" onAction="#on_state_dropdown" prefHeight="25.0" prefWidth="70.0" promptText="State">
+      <TextField fx:id="genre_field" layoutX="311.0" layoutY="269.0" prefHeight="25.0" prefWidth="174.0" promptText="Genre" />
+      <CheckBox fx:id="outdoor_check" layoutX="311.0" layoutY="302.0" mnemonicParsing="false" text="Outdoor" />
+      <CheckBox fx:id="camping_check" layoutX="311.0" layoutY="325.0" mnemonicParsing="false" text="Camping" />
+      <ComboBox fx:id="state_dropdown" layoutX="415.0" layoutY="236.0" onAction="#on_state_dropdown" prefHeight="25.0" prefWidth="69.0" promptText="State" stylesheets="@specific_style.css">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="AL" />
@@ -100,7 +109,10 @@
                <String fx:value="WY" />
             </FXCollections>
          </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ComboBox>
-      <TextField fx:id="city_field" layoutX="309.0" layoutY="236.0" prefHeight="25.0" prefWidth="119.0" promptText="City" />
+      <TextField fx:id="city_field" layoutX="311.0" layoutY="236.0" prefHeight="25.0" prefWidth="95.0" promptText="City" />
    </children>
 </AnchorPane>
