@@ -104,7 +104,7 @@ public class Controller_AdvancedSearch {
             columns += ", location.state";
             tables +=  " JOIN location on festival.festID = location.festID ";
             if(city_field.getText().trim().length() >  0){
-                columns += "location.city";
+                columns += ", location.city";
             }
         }
         boolean isEmpty = true;
@@ -293,7 +293,7 @@ public class Controller_AdvancedSearch {
         Controller_Main.listProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
         //search_listview.itemsProperty().bind(listProperty_main);
 
-        search_listview.itemsProperty().bind(Controller_Main.listProperty_main);
+        //search_listview.itemsProperty().bind(Controller_Main.listProperty_main);
 
 
 
