@@ -62,7 +62,6 @@ public class Controller_AdvancedSearch {
     @FXML
     TextArea providers_field;
 
-    public ListView search_listview;
 
     @FXML
     public void initialize(){
@@ -291,9 +290,6 @@ public class Controller_AdvancedSearch {
 
 
         Controller_Main.listProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
-        //search_listview.itemsProperty().bind(listProperty_main);
-
-        search_listview.itemsProperty().bind(Controller_Main.listProperty_main);
 
 
 
@@ -304,10 +300,6 @@ public class Controller_AdvancedSearch {
         city_field.setVisible(true);
     }
 
-    public void init(ListView listView)
-    {
-        search_listview = listView;
-    }
 
     /**
      * sets the visibility of genre, outdoor, and camping based on the value selected in the

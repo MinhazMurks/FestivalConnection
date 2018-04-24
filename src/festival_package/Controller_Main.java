@@ -75,26 +75,6 @@ public class Controller_Main {
 
     }
 
-    public void open_advanced_search(String fxml) throws IOException {
-        Parent pane = FXMLLoader.load(
-                getClass().getResource(fxml));
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        Parent root = (Parent) loader.load();
-        Controller_AdvancedSearch controller = loader.<Controller_AdvancedSearch>getController();
-
-
-        System.out.println(" listview: " + search_listview);
-        controller.init(search_listview);
-
-        Scene scene = new Scene(pane);
-        primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
-        primaryStage.setTitle(Database.fix_title(fxml));
-        primaryStage.show();
-
-    }
-
 
     @FXML
     public void initialize()
@@ -295,7 +275,7 @@ public class Controller_Main {
         search_listview.getSelectionModel().clearSelection();
     }
     public void on_advanced_button(ActionEvent event) throws IOException {
-        open_advanced_search("AdvancedSearch.fxml");
+        changeScene("AdvancedSearch.fxml");
         System.out.println("advanced search");
 
         search_listview.getSelectionModel().clearSelection();
