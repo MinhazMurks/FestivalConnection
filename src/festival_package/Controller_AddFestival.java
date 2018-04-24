@@ -81,6 +81,15 @@ public class Controller_AddFestival {
     @FXML
     Text price_error_text;
 
+    @FXML
+    Text festival_name_invalid_character;
+
+    @FXML
+    Text festival_name_short_character;
+
+    @FXML
+    Text required_fields_empty_text;
+
     /**
      * Sets fields for genre, outdoor, and camping to invisible.
      * Set visible when the appropriate festival type is selected.
@@ -88,7 +97,8 @@ public class Controller_AddFestival {
      * Adds listener to ensure only integers are inserted into the zip field
      */
     @FXML
-    public void initialize(){
+    public void initialize()
+    {
         genre_field.setVisible(false); outdoor_check.setVisible(false); camping_check.setVisible(false); date_error_text.setVisible(false); sql_error_text.setVisible(false);
 
         zip_field.textProperty().addListener(new ChangeListener<String>() {
@@ -113,10 +123,27 @@ public class Controller_AddFestival {
         //Get the stage so we can close the window later
         Stage stage = (Stage) add_festival_anchor.getScene().getWindow();
 
+
         String festName = name_field.getText();
         String type = type_dropdown.getValue();
         LocalDate startDate = start_date_field.getValue();
         LocalDate endDate = end_date_field.getValue();
+
+
+        if(!festName.matches("[a-z0-9_',~?/().-]++"))
+        {
+            festival_name_invalid_character.setVisible(true);
+            return;
+        }
+        if(festName.length() < 3)
+        {
+            festival_name_short_character.setVisible(true);
+            return;
+        }
+
+        festival_name_short_character.setVisible(false);
+        festival_name_invalid_character.setVisible(false);
+
         double price = -1;
         if (!price_field.getText().equals("")) {
             try {
@@ -125,8 +152,6 @@ public class Controller_AddFestival {
             }
             catch (NumberFormatException e){
                 price_error_text.setVisible(true);
-
-                e.printStackTrace();
                 return;
             }
         }
@@ -157,8 +182,12 @@ public class Controller_AddFestival {
                 (genre.equals("")) ||
                 (price < 0) ||
                 (zip < 0)){
+
+            required_fields_empty_text.setVisible(true);
             return;
         }
+
+        required_fields_empty_text.setVisible(false);
         if (endDate.isBefore(startDate)){
             date_error_text.setVisible(true);
             return;

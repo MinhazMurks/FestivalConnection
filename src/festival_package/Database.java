@@ -27,13 +27,8 @@ public class Database {
     public static ArrayList<String> viewed_friends_names = new ArrayList<>();
     public static ArrayList<String> viewed_friends_id = new ArrayList<>();
 
-    public static ArrayList<String> Locations = new ArrayList<>();
-
-    public static ArrayList<String> test_values = new ArrayList<>();
-
     public static ArrayList<String> viewed_list = new ArrayList<>();
     public static ArrayList<String> viewed_list_id = new ArrayList<>();
-
 
     public static User cur_user = null;
 
@@ -135,7 +130,6 @@ public class Database {
         statement.executeUpdate(insertUserSQL);
         statement.executeUpdate(insertLocationSQL);
     }
-
     public static void insertNewFestival(String festName, String type, String startDate, String endDate, double price, String address, String city, String state, int zip, List<String> providers, String genre, boolean outdoor, boolean camping) throws SQLException
     {
         String guid = UUID.randomUUID().toString();
@@ -187,7 +181,6 @@ public class Database {
                 break;
         }
     }
-
     /**
      * Takes the current user_guid and queries the Location table for it.
      * TODO: ADD CONDITION CHECKS FOR INCORRECT OR NONEXISTENT GUID
@@ -886,7 +879,6 @@ public class Database {
 
         }
     }
-
     public static ResultSet execute_query(String query)
             throws SQLException {
         Statement statement = connection.createStatement();

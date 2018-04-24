@@ -27,7 +27,7 @@
             <Font size="24.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="type_dropdown" layoutX="260.0" layoutY="261.0" onAction="#on_type_dropdown" prefHeight="25.0" prefWidth="174.0" promptText="Festival Type" stylesheets="@specific_style.css">
+      <ComboBox fx:id="type_dropdown" layoutX="260.0" layoutY="224.0" onAction="#on_type_dropdown" prefHeight="25.0" prefWidth="174.0" promptText="Festival Type" stylesheets="@specific_style.css">
          <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="Music" />
@@ -40,13 +40,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <DatePicker fx:id="start_date_field" layoutX="27.0" layoutY="326.0" promptText="Start Date" />
-      <DatePicker fx:id="end_date_field" layoutX="260.0" layoutY="326.0" prefHeight="25.0" prefWidth="174.0" promptText="End Date" />
-      <TextField fx:id="price_field" layoutX="27.0" layoutY="261.0" prefHeight="25.0" prefWidth="174.0" promptText="Ticket Price" />
-      <TextField fx:id="genre_field" layoutX="260.0" layoutY="395.0" prefHeight="25.0" prefWidth="174.0" promptText="Genre" />
-      <TextField fx:id="providers_field" alignment="TOP_LEFT" layoutX="27.0" layoutY="437.0" prefHeight="83.0" prefWidth="546.0" promptText="Performer/Provider List (separated by commas)" />
-      <CheckBox fx:id="outdoor_check" layoutX="506.0" layoutY="365.0" mnemonicParsing="false" text="Outdoor" AnchorPane.leftAnchor="506.0" />
-      <CheckBox fx:id="camping_check" layoutX="505.0" layoutY="399.0" mnemonicParsing="false" text="Camping" AnchorPane.leftAnchor="506.0" />
+      <DatePicker fx:id="start_date_field" layoutX="27.0" layoutY="266.0" promptText="Start Date" />
+      <DatePicker fx:id="end_date_field" layoutX="260.0" layoutY="266.0" prefHeight="25.0" prefWidth="174.0" promptText="End Date" />
+      <TextField fx:id="price_field" layoutX="27.0" layoutY="224.0" prefHeight="25.0" prefWidth="174.0" promptText="Ticket Price" />
+      <TextField fx:id="genre_field" layoutX="260.0" layoutY="353.0" prefHeight="25.0" prefWidth="174.0" promptText="Genre" />
+      <TextField fx:id="providers_field" alignment="TOP_LEFT" layoutX="27.0" layoutY="399.0" prefHeight="121.0" prefWidth="546.0" promptText="Performer/Provider List (separated by commas)" />
+      <CheckBox fx:id="outdoor_check" layoutX="473.0" layoutY="228.0" mnemonicParsing="false" text="Outdoor" AnchorPane.leftAnchor="473.0" />
+      <CheckBox fx:id="camping_check" layoutX="472.0" layoutY="270.0" mnemonicParsing="false" text="Camping" AnchorPane.leftAnchor="472.0" />
       <Button fx:id="add_festival_button" layoutX="219.0" layoutY="536.0" mnemonicParsing="false" onAction="#on_add_festival_button" prefHeight="51.0" prefWidth="149.0" stylesheets="@Styles.css" text="Add Festival">
          <font>
             <Font size="24.0" />
@@ -56,9 +56,9 @@
          </cursor>
       </Button>
       <Text fx:id="sql_error_text" fill="RED" layoutX="147.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Could not add new festival at this time. Try again later..." />
-      <Text fx:id="date_error_text" fill="RED" layoutX="27.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date must be before or on end date..." />
-      <TextField fx:id="city_field" layoutX="260.0" layoutY="361.0" prefHeight="25.0" prefWidth="118.0" promptText="City" />
-      <ChoiceBox fx:id="state_dropdown" layoutX="388.0" layoutY="361.0" prefHeight="25.0" prefWidth="47.0" styleClass="combo-box" stylesheets="@specific_style.css">
+      <Text fx:id="date_error_text" fill="RED" layoutX="27.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date must be before or on end date..." />
+      <TextField fx:id="city_field" layoutX="260.0" layoutY="309.0" prefHeight="25.0" prefWidth="118.0" promptText="City" />
+      <ChoiceBox fx:id="state_dropdown" layoutX="390.0" layoutY="309.0" prefHeight="25.0" prefWidth="47.0" styleClass="combo-box" stylesheets="@specific_style.css">
           <items>
               <FXCollections fx:factory="observableArrayList">
                   <String fx:value="AL" />
@@ -117,8 +117,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ChoiceBox>
-      <TextField fx:id="zip_field" layoutX="27.0" layoutY="395.0" prefHeight="25.0" prefWidth="174.0" promptText="Zip" />
-      <TextField fx:id="address_field" layoutX="27.0" layoutY="361.0" prefHeight="25.0" prefWidth="174.0" promptText="Address Line" />
+      <TextField fx:id="zip_field" layoutX="27.0" layoutY="353.0" prefHeight="25.0" prefWidth="174.0" promptText="Zip" />
+      <TextField fx:id="address_field" layoutX="27.0" layoutY="309.0" prefHeight="25.0" prefWidth="174.0" promptText="Address Line" />
       <Text fx:id="price_error_text" fill="RED" layoutX="174.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Incorrect format, please input numbers only..." visible="false" />
+      <Text fx:id="festival_name_invalid_character" fill="RED" layoutX="27.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The festival name has invalid characters..." visible="false" />
+      <Text fx:id="festival_name_short_character" fill="RED" layoutX="300.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="festival name too short..." visible="false" />
+      <Text fx:id="required_fields_empty_text" fill="RED" layoutX="157.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required fields still empty..." visible="false" wrappingWidth="61.814453125" />
    </children>
 </AnchorPane>

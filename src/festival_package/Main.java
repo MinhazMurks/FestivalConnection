@@ -32,6 +32,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
         primaryStage.setTitle("Festival Connection");
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }

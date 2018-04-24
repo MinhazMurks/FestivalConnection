@@ -160,6 +160,7 @@ public class Controller_Login {
         Stage stage = new Stage();
         stage.setScene(new Scene((Pane) loader.load()));
         stage.getIcons().add(new Image("file:src/festival_package/resources/Festival_Logo2.png"));
+        stage.setResizable(false);
         stage.setTitle("Create Account");
 
         Controller_CreateAccount controller = loader.<Controller_CreateAccount>getController();

@@ -73,6 +73,7 @@ public class Controller_Main {
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
         primaryStage.setTitle(Database.fix_title(fxml));
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }
@@ -245,9 +246,9 @@ public class Controller_Main {
     }
 
     public void on_search_button(ActionEvent event) throws SQLException, ParseException {
-        System.out.println("Fuuuuck!");
+        //System.out.println("Fuuuuck!");
 
-        System.out.println("dropdown val: " + search_dropdown.getValue());
+        //System.out.println("dropdown val: " + search_dropdown.getValue());
 
         if(!search_field.getText().isEmpty())
         {

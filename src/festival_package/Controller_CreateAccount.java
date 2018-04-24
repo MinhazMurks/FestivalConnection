@@ -37,6 +37,9 @@ public class Controller_CreateAccount {
     Text username_error_text;
 
     @FXML
+    Text username_invalid_text;
+
+    @FXML
     TextField password_field;
 
     @FXML
@@ -103,6 +106,15 @@ public class Controller_CreateAccount {
         String retype = retype_password_field.getText();
         LocalDate dob = dob_field.getValue();
         String state = emptyString;
+
+        if(!username.matches("[a-z0-9_-]++"))
+        {
+            username_invalid_text.setVisible(true);
+            return;
+        }
+
+        username_invalid_text.setVisible(false);
+
         if (state_dropdown.getValue() != null) {
             state = state_dropdown.getValue();
         }
