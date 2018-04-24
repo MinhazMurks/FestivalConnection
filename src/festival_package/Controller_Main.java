@@ -59,6 +59,8 @@ public class Controller_Main {
     @FXML
     Button add_festival_button;
 
+    @FXML
+    Button advanced_button;
     public static ListProperty<String> listProperty_main = new SimpleListProperty<>();
 
 
@@ -66,26 +68,6 @@ public class Controller_Main {
     public void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(
                 getClass().getResource(fxml));
-
-        Scene scene = new Scene(pane);
-        primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
-        primaryStage.setTitle(Database.fix_title(fxml));
-        primaryStage.show();
-
-    }
-
-    public void open_advanced_search(String fxml) throws IOException {
-        Parent pane = FXMLLoader.load(
-                getClass().getResource(fxml));
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        Parent root = (Parent) loader.load();
-        Controller_AdvancedSearch controller = loader.<Controller_AdvancedSearch>getController();
-
-
-        System.out.println(" listview: " + search_listview);
-        controller.init(search_listview);
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
@@ -128,6 +110,7 @@ public class Controller_Main {
 
         search_dropdown.getItems().addAll(choices);
         search_dropdown.setValue("User");
+        advanced_button.setDisable(true);
         search_dropdown.setButtonCell(new ListCell<String>()
         {
             @Override
@@ -174,6 +157,7 @@ public class Controller_Main {
                         search_field.setText("");
                         Database.set_viewed_list(Database.Users);
                         search_listview.getSelectionModel().clearSelection();
+                        advanced_button.setDisable(true);
                     }
                     else if(search_dropdown.getSelectionModel().getSelectedItem().equals("Festival"))
                     {
@@ -181,6 +165,7 @@ public class Controller_Main {
                         Database.set_viewed_list(Database.Festivals);
                         search_listview.getSelectionModel().clearSelection();
                         //description_pane.setText("Click an entry to see more information");
+                        advanced_button.setDisable(false);
                     }
 
 
@@ -295,7 +280,7 @@ public class Controller_Main {
         search_listview.getSelectionModel().clearSelection();
     }
     public void on_advanced_button(ActionEvent event) throws IOException {
-        open_advanced_search("AdvancedSearch.fxml");
+        changeScene("AdvancedSearch.fxml");
         System.out.println("advanced search");
 
         search_listview.getSelectionModel().clearSelection();

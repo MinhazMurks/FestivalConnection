@@ -627,20 +627,20 @@ public class Database {
 
 
                 if (Festivals.contains(temp)) {
-                    Festivals.get(Festivals.indexOf(temp)).providers.add(resultSet.getString("name"));
+                    Festivals.get(Festivals.indexOf(temp)).providers.add(resultSet.getString("providers.name"));
                     continue;
                 } else if (temp.type.equals("Music")) {
                     temp.genre = resultSet.getString("genre");
                     temp.outdoor = resultSet.getBoolean("outdoor");
                     temp.camping = resultSet.getBoolean("camping");
-                    temp.providers.add(resultSet.getString("name"));
+                    temp.providers.add(resultSet.getString("providers.name"));
                 } else if (temp.type.equals("Comedy")) {
-                    temp.providers.add(resultSet.getString("name"));
+                    temp.providers.add(resultSet.getString("providers.name"));
                 } else if (temp.type.equals("Art")) {
                     temp.genre = resultSet.getString("genre");
-                    temp.providers.add(resultSet.getString("name"));
+                    temp.providers.add(resultSet.getString("providers.name"));
                 } else if (temp.type.equals("Beer")) {
-                    temp.providers.add(resultSet.getString("name"));
+                    temp.providers.add(resultSet.getString("providers.name"));
                 }
 
                 Festivals.add(temp);
