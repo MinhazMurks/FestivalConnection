@@ -80,6 +80,7 @@ public class Controller_Main {
                 getClass().getResource(fxml));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        Parent root = (Parent) loader.load();
         Controller_AdvancedSearch controller = loader.<Controller_AdvancedSearch>getController();
 
 

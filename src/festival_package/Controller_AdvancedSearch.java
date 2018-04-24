@@ -6,6 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Controller_AdvancedSearch {
+
+    @FXML
+    AnchorPane advancedSearch_anchor;
 
     @FXML
     TextField name_field;
@@ -79,7 +84,9 @@ public class Controller_AdvancedSearch {
         });
     }
 
-    public void on_advanced_search_button(ActionEvent event) throws SQLException, ParseException {
+    public void on_search_button(ActionEvent event) throws SQLException, ParseException {
+        //Grab stage for closing
+        Stage stage = (Stage) advancedSearch_anchor.getScene().getWindow();
 
         String columns = "SELECT festival.name, festival.festID, festival.fest_type, festival.start_date, " +
                 "festival.end_date, festival.price";
@@ -281,8 +288,12 @@ public class Controller_AdvancedSearch {
         }
 
 
-        //ClistProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
+        Controller_Main.listProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
         //search_listview.itemsProperty().bind(listProperty_main);
+
+        search_listview.itemsProperty().bind(Controller_Main.listProperty_main);
+
+
 
 
     }
