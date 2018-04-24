@@ -125,5 +125,6 @@
          </font>
       </TextField>
       <Text fx:id="username_invalid_text" fill="RED" layoutX="27.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Name! Please enter alphanumeric keys, &quot;_&quot; or &quot;-&quot;..." visible="false" wrappingWidth="98.224609375" />
+      <Text fx:id="username_permission_text" fill="RED" layoutX="426.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You don't have permission to create this account..." visible="false" wrappingWidth="98.224609375" />
    </children>
 </AnchorPane>

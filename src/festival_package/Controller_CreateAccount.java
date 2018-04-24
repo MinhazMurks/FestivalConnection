@@ -69,6 +69,9 @@ public class Controller_CreateAccount {
     @FXML
     Text sql_error_text;
 
+    @FXML
+    Text username_permission_text;
+
     /**
      * Sets error texts to invisible.
      */
@@ -107,12 +110,19 @@ public class Controller_CreateAccount {
         LocalDate dob = dob_field.getValue();
         String state = emptyString;
 
+
+        if(username.contains("admin"))
+        {
+            username_permission_text.setVisible(true);
+            return;
+        }
+        username_permission_text.setVisible(true);
+
         if(!username.matches("[a-z0-9_-]++"))
         {
             username_invalid_text.setVisible(true);
             return;
         }
-
         username_invalid_text.setVisible(false);
 
         if (state_dropdown.getValue() != null) {

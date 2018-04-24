@@ -15,6 +15,7 @@ public class User {
     LocalDate birth_date;
     String user_location;
     boolean is_company;
+    boolean is_admin;
 
     ArrayList<User> Friends = new ArrayList<>();
     ArrayList<String> Friend_Names = new ArrayList<>();
@@ -31,9 +32,20 @@ public class User {
 
     User(String userID, String user_name, boolean is_company)
     {
+
         this.userID = userID;
         this.user_name = user_name;
         this.is_company = is_company;
+
+        if(user_name.endsWith("_admin"))
+        {
+            is_admin = true;
+        }
+        else
+        {
+            is_admin = false;
+        }
+
     }
 
     User(String userID, String user_name, LocalDate birth_date, String user_location, boolean is_company)
@@ -43,6 +55,15 @@ public class User {
         this.user_location = user_location;
         this.user_name = user_name;
         this.is_company = is_company;
+
+        if(user_name.endsWith("_admin"))
+        {
+            is_admin = true;
+        }
+        else
+        {
+            is_admin = false;
+        }
     }
 
 

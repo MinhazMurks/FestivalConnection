@@ -78,7 +78,7 @@ public class Controller_Login {
 
     private void auto_log_in()
     {
-        username_field.setText("Goldenvoice");
+        username_field.setText("user_admin");
         password_field.setText("pass");
     }
 
@@ -159,7 +159,7 @@ public class Controller_Login {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("create_account_window.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene((Pane) loader.load()));
-        stage.getIcons().add(new Image("file:src/festival_package/resources/Festival_Logo2.png"));
+        stage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
         stage.setResizable(false);
         stage.setTitle("Create Account");
 

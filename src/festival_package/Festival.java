@@ -11,6 +11,12 @@ public class Festival {
     String festID;
     String name;
     String location = "";
+
+    String street_address = "";
+    String city = "";
+    String state = "";
+    String zip = "";
+
     String production_comp = "";
     String type;
     LocalDate start_date;
@@ -118,10 +124,12 @@ public class Festival {
             result += "\n " + this.location;
         }
 
-        result += "\n Featuring: ";
+
 
         if(!this.providers.isEmpty())
         {
+            result += "\n Featuring: ";
+
             for(int i = 0; i < this.providers.size(); i++)
             {
                 result += "\n" + this.providers.get(i);
@@ -140,7 +148,16 @@ public class Festival {
 
 
         result += "\n From: " + start_date + " to " + this.end_date;
-        result += "\n Ticket cost: $" + price;
+        result += "\n Ticket cost: ";
+
+        if(price == 0)
+        {
+            result += "free!";
+        }
+        else
+        {
+            result += "$" + price;
+        }
 
         return result;
     }

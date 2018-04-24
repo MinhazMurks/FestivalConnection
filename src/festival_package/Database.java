@@ -32,6 +32,7 @@ public class Database {
 
     public static User cur_user = null;
 
+
     static private Connection connection;
 
     static {
@@ -180,6 +181,69 @@ public class Database {
                 statement.executeUpdate(insertSubTypeSQL);
                 break;
         }
+    }
+
+    public static void update_festival(String festID, String old_type, String festName, String type, String startDate, String endDate, double price, String address, String city, String state, int zip, List<String> providers, String genre, boolean outdoor, boolean camping) throws SQLException {
+
+        Statement statement = connection.createStatement();
+
+        String fest_query = "UPDATE Festival" + " SET name = '" + festName + "', fest_type = '" + type + "', start_date = '" + startDate + "', end_date = '" + endDate + "', price = '" + price + "' WHERE festID = '" + festID + "';";
+        String location_query = "UPDATE Location" + " SET city = '" + city + "', state = '" + state + "', streetAddress = '" + address + "', zip = '" + zip + "' WHERE festId = '" + festID + "';";
+        String providers_delete_query = "DELETE FROM providers WHERE festID = '" + festID + "'";
+        String delete_subtype_query = "DELETE FROM " + old_type + " WHERE festID = '" + festID + "'";
+
+
+        System.out.println("fest update query: " + fest_query);
+        System.out.println("location update query " + location_query);
+        System.out.println("providers delete query " + providers_delete_query);
+        System.out.println("subtype delete query " + delete_subtype_query);
+
+        statement.executeUpdate(fest_query);
+        statement.executeUpdate(location_query);
+        statement.executeUpdate(providers_delete_query);
+        statement.executeUpdate(delete_subtype_query);
+
+        for(String provider: providers)
+        {
+            String providers_insert_query = "INSERT INTO providers VALUES(" + "'" + festID + "' , '" + provider + "');";
+            System.out.println("Insert providers query: " + providers_insert_query);
+            statement.executeUpdate(providers_insert_query);
+        }
+
+
+        String insertSubTypeSQL = "";
+        switch (type) {
+            case "Music":
+                int out = 0;
+                int camp = 0;
+                if (outdoor) {
+                    out = 1;
+                }
+                if (camping) {
+                    camp = 1;
+                }
+                insertSubTypeSQL = ("INSERT INTO Music VALUES ('" + festID + "', '" + genre + "', " + out + ", " + camp + ");");
+                System.out.println(insertSubTypeSQL);
+                statement.executeUpdate(insertSubTypeSQL);
+                break;
+            case "Art":
+                insertSubTypeSQL = ("INSERT INTO Art VALUES ('" + festID + "', '" + genre + "');");
+                System.out.println(insertSubTypeSQL);
+                statement.executeUpdate(insertSubTypeSQL);
+                break;
+            case "Comedy":
+                insertSubTypeSQL = ("INSERT INTO Comedy VALUES ('" + festID + "');");
+                System.out.println(insertSubTypeSQL);
+                statement.executeUpdate(insertSubTypeSQL);
+                break;
+            case "Beer":
+                insertSubTypeSQL = ("INSERT INTO Beer VALUES ('" + festID + "');");
+                System.out.println(insertSubTypeSQL);
+                statement.executeUpdate(insertSubTypeSQL);
+                break;
+        }
+
+
     }
     /**
      * Takes the current user_guid and queries the Location table for it.
@@ -616,6 +680,12 @@ public class Database {
                         start_date, end_date,
                         resultSet.getFloat("festival.price"));
 
+
+                temp.street_address = resultSet.getString("location.streetAddress");
+                temp.city = resultSet.getString("location.city");
+                temp.state = resultSet.getString("state");
+                temp.zip = resultSet.getString("zip");
+
                 System.out.println("Temp fest: " + temp.toString());
 
 
@@ -879,10 +949,14 @@ public class Database {
 
         }
     }
-    public static ResultSet execute_query(String query)
-            throws SQLException {
+    public static ResultSet execute_query(String query) throws SQLException
+    {
         Statement statement = connection.createStatement();
         return statement.executeQuery(query);
+    }
+    public static boolean is_admin()
+    {
+        return cur_user.is_admin;
     }
 
 }

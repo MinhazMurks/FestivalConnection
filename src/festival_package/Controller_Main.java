@@ -34,6 +34,8 @@ public class Controller_Main {
     //the guid of the logged in User. Used for many queries
 
 
+    public static boolean is_edit = false;
+    public static Festival selected_fest = null;
 
     @FXML
     public ListView search_listview;
@@ -60,7 +62,11 @@ public class Controller_Main {
     Button add_festival_button;
 
     @FXML
+    Button edit_festival_button;
+
+    @FXML
     Button advanced_button;
+
     public static ListProperty<String> listProperty_main = new SimpleListProperty<>();
 
 
@@ -83,7 +89,7 @@ public class Controller_Main {
     public void initialize()
     {
         add_festival_button.setVisible(false);
-        if (Database.cur_user.is_company){
+        if (Database.cur_user.is_company | Database.is_admin()){
             add_festival_button.setVisible(true);
         }
 
@@ -187,11 +193,13 @@ public class Controller_Main {
                     description_pane.setText("Click an entry to see more information");
                     add_bookmark_button.setVisible(false);
                     add_friend_button.setVisible(false);
+                    edit_festival_button.setVisible(false);
                 }
 
                 if(search_dropdown.getSelectionModel().getSelectedItem().equals("User"))
                 {
                     add_bookmark_button.setVisible(false);
+                    edit_festival_button.setVisible(false);
                     try {
 
 
@@ -220,9 +228,17 @@ public class Controller_Main {
                 }
                 else
                 {
-                    add_friend_button.setVisible(false);
 
+
+
+                    add_friend_button.setVisible(false);
+                    if(Database.is_admin())
+                    {
+                        edit_festival_button.setVisible(true);
+                    }
                     try{
+
+                        selected_fest = Database.fest_from_festID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex()));
 
                     if(Database.cur_user.Bookmarks.contains(Database.Festivals.get(search_listview.getSelectionModel().getSelectedIndex())))
                     {
@@ -244,7 +260,6 @@ public class Controller_Main {
         });
 
     }
-
     public void on_search_button(ActionEvent event) throws SQLException, ParseException {
         //System.out.println("Fuuuuck!");
 
@@ -262,7 +277,7 @@ public class Controller_Main {
 
 
         listProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
-        search_listview.itemsProperty().bind(listProperty_main);
+        //search_listview.itemsProperty().bind(listProperty_main);
 
     }
 
@@ -330,11 +345,15 @@ public class Controller_Main {
 
     }
 
-
     public void on_add_festival_button(ActionEvent event) throws IOException{
         changeScene("add_festival_window.fxml");
         System.out.println("adding festival");
     }
 
+    public void on_edit_festival(ActionEvent event)
+    {
+        is_edit = true;
+        add_festival_button.fire();
+    }
 
 }
