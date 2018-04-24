@@ -202,20 +202,20 @@ public class Controller_AdvancedSearch {
             isEmpty = false;
         }
 
-        if(genre_field.getText().trim().length() > 0 && (type.equals("Music") | type.equals("Art"))){
+        if(genre_field.getText().trim().length() > 0 && (type.equals("Music") || type.equals("Art"))){
             if (isEmpty == false) {
                 clauses += " AND ";
             } else {
                 clauses += " WHERE ";
             }
             String genre = genre_field.getText();
-            clauses += " .genre  like  '% " + genre + "%'";
+            clauses +=  type + ".genre  like  '%" + genre + "%'";
 
             if(type.equals("Music"))
             {
-                int outdoor_check_int = outdoor_check.isSelected()? 0:1;
-                int camping_check_int = camping_check.isSelected()? 0:1;
-                clauses += " Music.outdoor = " + Integer.toString(outdoor_check_int) + " AND Music.camping = " + Integer.toString(camping_check_int);
+                int outdoor_check_int = outdoor_check.isSelected()? 1:0;
+                int camping_check_int = camping_check.isSelected()? 1:0;
+                clauses += "AND Music.outdoor = " + Integer.toString(outdoor_check_int) + " AND Music.camping = " + Integer.toString(camping_check_int);
             }
 
             isEmpty = false;
@@ -258,11 +258,11 @@ public class Controller_AdvancedSearch {
 
             if(order_index == 0)
             {
-                clauses += " ORDER BY Festival.price ASC";
+                clauses += " ORDER BY Festival.price DESC";
             }
             else
             {
-                clauses+= " ORDER BY Festival.price DESC";
+                clauses+= " ORDER BY Festival.price ASC";
             }
         }
 
