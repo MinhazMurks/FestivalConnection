@@ -57,6 +57,8 @@ public class Controller_AdvancedSearch {
     @FXML
     TextArea providers_field;
 
+    public ListView search_listview;
+
     @FXML
     public void initialize(){
 
@@ -259,7 +261,7 @@ public class Controller_AdvancedSearch {
 
 
         String input  = columns + tables + clauses + ";";
-        System.out.print(input);
+        System.out.print("Advanced search query: \n: " + input);
 
         ResultSet resultSet = Database.execute_query(input);
 
@@ -278,14 +280,20 @@ public class Controller_AdvancedSearch {
             Database.viewed_list_id.add(resultSet.getString("festival.festID"));
         }
 
-        //Controller_Main.listProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
-        //Controller_Main.search_listview.itemsProperty().bind(Controller_Main.listProperty_main);
+
+        //ClistProperty_main.set(FXCollections.observableArrayList(Database.viewed_list));
+        //search_listview.itemsProperty().bind(listProperty_main);
 
 
     }
 
     public void on_state_dropdown(ActionEvent event){
         city_field.setVisible(true);
+    }
+
+    public void init(ListView listView)
+    {
+        search_listview = listView;
     }
 
     /**

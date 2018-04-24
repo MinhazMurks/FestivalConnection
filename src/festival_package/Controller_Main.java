@@ -25,14 +25,18 @@ import java.util.ArrayList;
 
 public class Controller_Main {
 
+
+
+
     private Stage primaryStage = new Stage();
     private AnchorPane rootPane;
 
     //the guid of the logged in User. Used for many queries
 
 
+
     @FXML
-    ListView search_listview;
+    public ListView search_listview;
 
     @FXML
     ComboBox<String> search_dropdown = new ComboBox<>();
@@ -55,7 +59,7 @@ public class Controller_Main {
     @FXML
     Button add_festival_button;
 
-    ListProperty<String> listProperty_main = new SimpleListProperty<>();
+    public static ListProperty<String> listProperty_main = new SimpleListProperty<>();
 
 
 
@@ -70,6 +74,26 @@ public class Controller_Main {
         primaryStage.show();
 
     }
+
+    public void open_advanced_search(String fxml) throws IOException {
+        Parent pane = FXMLLoader.load(
+                getClass().getResource(fxml));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        Controller_AdvancedSearch controller = loader.<Controller_AdvancedSearch>getController();
+
+
+        System.out.println(" listview: " + search_listview);
+        controller.init(search_listview);
+
+        Scene scene = new Scene(pane);
+        primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
+        primaryStage.setTitle(Database.fix_title(fxml));
+        primaryStage.show();
+
+    }
+
 
     @FXML
     public void initialize()
@@ -270,7 +294,7 @@ public class Controller_Main {
         search_listview.getSelectionModel().clearSelection();
     }
     public void on_advanced_button(ActionEvent event) throws IOException {
-        changeScene("AdvancedSearch.fxml");
+        open_advanced_search("AdvancedSearch.fxml");
         System.out.println("advanced search");
 
         search_listview.getSelectionModel().clearSelection();
@@ -324,4 +348,6 @@ public class Controller_Main {
         changeScene("add_festival_window.fxml");
         System.out.println("adding festival");
     }
+
+
 }
