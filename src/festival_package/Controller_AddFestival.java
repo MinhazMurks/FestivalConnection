@@ -258,9 +258,10 @@ public class Controller_AddFestival {
 
         for(int i = 0; i < providerList.size(); i++)
         {
-            if(providerList.get(i).trim().length() >= 20)
+            if(providerList.get(i).trim().length() >= 50)
             {
-                provider_error_text.setText("Too many characters on provider number " + i + 1);
+                int num_prov = i + 1;
+                provider_error_text.setText("Too many characters on provider number " + num_prov + " (Max 50)");
                 provider_error_text.setVisible(true);
                 return;
             }
