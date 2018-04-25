@@ -287,6 +287,21 @@ public class Controller_AddFestival {
             return;
         }
 
+        if ((festName.contains("'")) ||
+                (address.contains("'")) ||
+                (city.contains("'")) ||
+                (state.contains("'")) ||
+                (genre.contains("'"))){
+
+
+            festName = festName.replace("'", "`");
+            address = address.replace("'", "`");
+            city = city.replace("'", "`");
+            state = state.replace("'", "`");
+            genre = genre.replace("'", "`");
+
+        }
+
         required_fields_empty_text.setVisible(false);
         if (endDate.isBefore(startDate)){
             date_error_text.setVisible(true);

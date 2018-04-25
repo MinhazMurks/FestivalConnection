@@ -155,6 +155,20 @@ public class Controller_CreateAccount {
         }
         empty_fields_error_text.setVisible(false);
 
+
+        if ((username.contains("'")) ||
+                (password.contains("'")) ||
+                (retype.contains("'")) ||
+                (city.contains("'")) ||
+                (address.contains("'"))){
+
+            username = username.replace("'", "`");
+            password = password.replace("'", "`");
+            retype = retype.replace("'", "`");
+            city = city.replace("'", "`");
+            address = address.replace("'", "`");
+        }
+
         if (!password.equals(retype)){
             retype_password_error_text.setVisible(true);
             return;
