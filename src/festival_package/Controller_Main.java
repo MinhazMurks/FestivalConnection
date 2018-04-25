@@ -268,6 +268,11 @@ public class Controller_Main {
 
         //System.out.println("dropdown val: " + search_dropdown.getValue());
 
+        if(search_field.getText().contains("'"))
+        {
+            search_field.setText(search_field.getText().replace("'", "`"));
+        }
+
         if(!search_field.getText().isEmpty())
         {
             Database.name_search(search_field.getText(), search_dropdown.getValue());

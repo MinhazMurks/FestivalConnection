@@ -86,6 +86,19 @@ public class Controller_AdvancedSearch {
 
     public void on_search_button(ActionEvent event) throws SQLException, ParseException {
         //Grab stage for closing
+
+
+        if(genre_field.getText().contains("'") ||
+                city_field.getText().contains("'") ||
+                providers_field.getText().contains("'") ||
+                name_field.getText().contains("'"))
+        {
+            genre_field.setText(genre_field.getText().replace("'", "`"));
+            city_field.setText(city_field.getText().replace("'", "`"));
+            providers_field.setText(providers_field.getText().replace("'", "`"));
+            name_field.setText(name_field.getText().replace("'", "`"));
+        }
+
         Stage stage = (Stage) advancedSearch_anchor.getScene().getWindow();
 
         String columns = "SELECT festival.name, festival.festID, festival.fest_type, festival.start_date, " +
