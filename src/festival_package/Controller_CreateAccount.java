@@ -72,6 +72,9 @@ public class Controller_CreateAccount {
     @FXML
     Text username_permission_text;
 
+    @FXML
+    Text empty_fields_error_text;
+
     /**
      * Sets error texts to invisible.
      */
@@ -111,12 +114,13 @@ public class Controller_CreateAccount {
         String state = emptyString;
 
 
-        if(username.contains("admin"))
+        if(username.contains("_admin"))
         {
+            System.out.println("username: " + username);
             username_permission_text.setVisible(true);
             return;
         }
-        username_permission_text.setVisible(true);
+        username_permission_text.setVisible(false);
 
         if(!username.matches("[A-Za-z0-9_-]++"))
         {
@@ -146,8 +150,10 @@ public class Controller_CreateAccount {
                 (city.equals(emptyString)) ||
                 (address.equals(emptyString)) ||
                 (zip < 0)) {
+            empty_fields_error_text.setVisible(true);
             return;
         }
+        empty_fields_error_text.setVisible(false);
 
         if (!password.equals(retype)){
             retype_password_error_text.setVisible(true);
