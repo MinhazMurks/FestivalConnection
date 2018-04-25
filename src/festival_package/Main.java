@@ -29,8 +29,9 @@ public class Main extends Application {
 
         root.getStylesheets().add("festival_package/Styles.css");
 
+
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
+        primaryStage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("new_logo_small_circle.png")));
         primaryStage.setTitle("Festival Connection");
         primaryStage.setResizable(false);
         primaryStage.show();

@@ -123,5 +123,6 @@
       <Text fx:id="festival_name_invalid_character" fill="RED" layoutX="27.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The festival name has invalid characters..." visible="false" />
       <Text fx:id="festival_name_short_character" fill="RED" layoutX="300.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="festival name too short..." visible="false" />
       <Text fx:id="required_fields_empty_text" fill="RED" layoutX="157.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required fields still empty..." visible="false" wrappingWidth="61.814453125" />
+      <Text fx:id="provider_error_text" fill="RED" layoutX="154.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Too many characters on provider number" visible="false" />
    </children>
 </AnchorPane>

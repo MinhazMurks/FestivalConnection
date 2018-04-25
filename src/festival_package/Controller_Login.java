@@ -73,7 +73,7 @@ public class Controller_Login {
                 }
         );
 
-        this.auto_log_in();
+        //this.auto_log_in();
     }
 
     private void auto_log_in()
@@ -146,7 +146,7 @@ public class Controller_Login {
 
         Stage stage = new Stage();
         stage.setScene(new Scene((Pane) loader.load()));
-        stage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
+        stage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("new_logo_small_circle.png")));
         stage.setTitle("Festival Connection - Welcome " + Database.cur_user.user_name);
 
         stage.show();
@@ -159,7 +159,7 @@ public class Controller_Login {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("create_account_window.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene((Pane) loader.load()));
-        stage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
+        stage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("new_logo_small_circle.png")));
         stage.setResizable(false);
         stage.setTitle("Create Account");
 

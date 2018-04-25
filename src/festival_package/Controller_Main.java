@@ -71,13 +71,14 @@ public class Controller_Main {
 
 
 
-    public void changeScene(String fxml) throws IOException {
+    public void changeScene(String fxml) throws IOException
+    {
         Parent pane = FXMLLoader.load(
                 getClass().getResource(fxml));
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("file:src/festival_package/resources/new_logo_small_circle.png"));
+        primaryStage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("new_logo_small_circle.png")));
         primaryStage.setTitle(Database.fix_title(fxml));
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -165,6 +166,7 @@ public class Controller_Main {
                         Database.set_viewed_list(Database.Users);
                         search_listview.getSelectionModel().clearSelection();
                         advanced_button.setDisable(true);
+                        edit_festival_button.setVisible(false);
                     }
                     else if(search_dropdown.getSelectionModel().getSelectedItem().equals("Festival"))
                     {
@@ -193,6 +195,7 @@ public class Controller_Main {
                     description_pane.setText("Click an entry to see more information");
                     add_bookmark_button.setVisible(false);
                     add_friend_button.setVisible(false);
+
                     edit_festival_button.setVisible(false);
                 }
 
@@ -232,7 +235,7 @@ public class Controller_Main {
 
 
                     add_friend_button.setVisible(false);
-                    if(Database.is_admin())
+                    if(Database.is_admin() && search_listview.getSelectionModel().getSelectedIndex() != -1)
                     {
                         edit_festival_button.setVisible(true);
                     }

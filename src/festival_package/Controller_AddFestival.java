@@ -92,6 +92,9 @@ public class Controller_AddFestival {
     @FXML
     Text required_fields_empty_text;
 
+    @FXML
+    Text provider_error_text;
+
 
     /**
      * Sets fields for genre, outdoor, and camping to invisible.
@@ -255,9 +258,16 @@ public class Controller_AddFestival {
 
         for(int i = 0; i < providerList.size(); i++)
         {
+            if(providerList.get(i).trim().length() >= 20)
+            {
+                provider_error_text.setText("Too many characters on provider number " + i + 1);
+                provider_error_text.setVisible(true);
+                return;
+            }
             providerList.set(i, providerList.get(i).trim());
         }
 
+        provider_error_text.setVisible(false);
         String genre = genre_field.getText();
 
         boolean outdoor = outdoor_check.isSelected();
