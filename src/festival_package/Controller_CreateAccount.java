@@ -118,7 +118,7 @@ public class Controller_CreateAccount {
         }
         username_permission_text.setVisible(true);
 
-        if(!username.matches("[a-z0-9_-]++"))
+        if(!username.matches("[A-Za-z0-9_-]++"))
         {
             username_invalid_text.setVisible(true);
             return;
