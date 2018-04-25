@@ -275,16 +275,30 @@ public class Controller_AddFestival {
         boolean camping = camping_check.isSelected();
 
         //Perform checks
-        if ((festName.equals("")) ||
-                (address.equals("")) ||
-                (city.equals("")) ||
-                (state.equals("")) ||
-                (genre.equals("")) ||
-                (price < 0) ||
-                (zip < 0)){
+        if (!((type.equals("Comedy")) || (type.equals("Beer")))){
+            if ((festName.equals("")) ||
+                    (address.equals("")) ||
+                    (city.equals("")) ||
+                    (state.equals("")) ||
+                    (genre.equals("")) ||
+                    (price < 0) ||
+                    (zip < 0)){
 
-            required_fields_empty_text.setVisible(true);
-            return;
+                required_fields_empty_text.setVisible(true);
+                return;
+            }
+        }
+        else{
+            if ((festName.equals("")) ||
+                    (address.equals("")) ||
+                    (city.equals("")) ||
+                    (state.equals("")) ||
+                    (price < 0) ||
+                    (zip < 0)) {
+
+                required_fields_empty_text.setVisible(true);
+                return;
+            }
         }
 
         required_fields_empty_text.setVisible(false);
