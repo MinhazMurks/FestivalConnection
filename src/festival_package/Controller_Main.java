@@ -118,6 +118,7 @@ public class Controller_Main {
 
         search_dropdown.getItems().addAll(choices);
         search_dropdown.setValue("User");
+        add_festival_button.setDisable(true);
         advanced_button.setDisable(true);
         search_dropdown.setButtonCell(new ListCell<String>()
         {
@@ -167,6 +168,7 @@ public class Controller_Main {
                         search_listview.getSelectionModel().clearSelection();
                         advanced_button.setDisable(true);
                         edit_festival_button.setVisible(false);
+                        add_festival_button.setDisable(true);
                     }
                     else if(search_dropdown.getSelectionModel().getSelectedItem().equals("Festival"))
                     {
@@ -175,6 +177,7 @@ public class Controller_Main {
                         search_listview.getSelectionModel().clearSelection();
                         //description_pane.setText("Click an entry to see more information");
                         advanced_button.setDisable(false);
+                        add_festival_button.setDisable(false);
                     }
 
 
@@ -263,7 +266,8 @@ public class Controller_Main {
         });
 
     }
-    public void on_search_button(ActionEvent event) throws SQLException, ParseException {
+    public void on_search_button(ActionEvent event) throws SQLException, ParseException
+    {
         //System.out.println("Fuuuuck!");
 
         //System.out.println("dropdown val: " + search_dropdown.getValue());
@@ -288,7 +292,6 @@ public class Controller_Main {
         //search_listview.itemsProperty().bind(listProperty_main);
 
     }
-
     public void on_friend_button(ActionEvent event) throws IOException
     {
         changeScene("Bookmarks_and_Friends.fxml");
@@ -303,14 +306,15 @@ public class Controller_Main {
 
         search_listview.getSelectionModel().clearSelection();
     }
-    public void on_advanced_button(ActionEvent event) throws IOException {
+    public void on_advanced_button(ActionEvent event) throws IOException
+    {
         changeScene("AdvancedSearch.fxml");
         System.out.println("advanced search");
 
         search_listview.getSelectionModel().clearSelection();
     }
-
-    public void add_friend_button(ActionEvent event) {
+    public void add_friend_button(ActionEvent event)
+    {
 
         User selected_user = Database.user_from_userID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex()));
 
@@ -331,7 +335,6 @@ public class Controller_Main {
             System.out.println("Already Friends!");
         }
     }
-
     public void add_bookmark_button(ActionEvent event)
     {
         Festival selected_festival = Database.fest_from_festID(Database.viewed_list_id.get(search_listview.getSelectionModel().getSelectedIndex()));
@@ -352,12 +355,11 @@ public class Controller_Main {
         }
 
     }
-
-    public void on_add_festival_button(ActionEvent event) throws IOException{
+    public void on_add_festival_button(ActionEvent event) throws IOException
+    {
         changeScene("add_festival_window.fxml");
         System.out.println("adding festival");
     }
-
     public void on_edit_festival(ActionEvent event)
     {
         is_edit = true;
